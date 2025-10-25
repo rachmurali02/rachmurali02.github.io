@@ -1,3 +1,6 @@
-theme: jekyll-theme-minimal
 title: Beyond the loss
 description: Join me in my ML forays!
+theme: minima
+author: Rachana Murali Narayanan
+markdown: kramdown
+paginate: 5
