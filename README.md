@@ -1,2 +1,1 @@
-# rachmurali02.github.io
-Beyond the loss
+# Beyond the Loss
