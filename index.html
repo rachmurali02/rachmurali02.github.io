@@ -6,17 +6,30 @@
   <title>Weekly ML Chronicles</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3291/3291695.png" />
+  <script>
+    // Simple dark mode toggle
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    }
+    // Load saved preference
+    if (localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-500">
 
   <!-- Navbar -->
-  <header class="bg-white shadow-sm sticky top-0 z-50">
+  <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
     <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-indigo-600">Weekly ML Chronicles 🧠</h1>
+      <h1 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">Weekly ML Chronicles 🧠</h1>
       <nav class="space-x-6 text-sm">
-        <a href="#posts" class="hover:text-indigo-600">Posts</a>
-        <a href="#about" class="hover:text-indigo-600">About</a>
-        <a href="https://github.com/yourusername/my-ml-blog" class="hover:text-indigo-600">GitHub</a>
+        <a href="#posts" class="hover:text-indigo-600 dark:hover:text-indigo-400">Posts</a>
+        <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400">About</a>
+        <a href="https://github.com/rachmurali02/rachmurali02.github.io" class="hover:text-indigo-600 dark:hover:text-indigo-400">GitHub</a>
+        <button onclick="toggleTheme()" class="px-2 py-1 border rounded text-xs text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition">🌗</button>
       </nav>
     </div>
   </header>
@@ -27,54 +40,57 @@
          alt="Machine Learning Illustration" 
          class="mx-auto w-64 rounded-2xl shadow-md mb-8" />
     <h2 class="text-3xl font-bold mb-3">Exploring ML, one week at a time</h2>
-    <p class="text-gray-600 text-lg">Hands-on experiments, learnings, and reflections on AI, LLMs, and the data world — every Friday.</p>
+    <p class="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+      Hands-on experiments, learnings, and reflections on AI, LLMs, and the data world — every Friday.
+    </p>
   </section>
 
   <!-- Blog Posts Grid -->
   <section id="posts" class="max-w-5xl mx-auto py-12 px-4 grid md:grid-cols-3 gap-8">
     <!-- Example Post 1 -->
     <a href="./_posts/2025-10-24-week1-getting-started-with-rag.html" 
-       class="block bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+       class="block bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
       <img src="https://cdn.dribbble.com/userupload/8369945/file/original-8dbb7fa7e5a8ab4d9e041ddcb7a590c2.png" 
            alt="RAG concept" 
            class="rounded-lg mb-4 w-full object-cover h-40">
       <h3 class="text-lg font-semibold mb-2">Week 1 — Getting Started with RAG</h3>
-      <p class="text-gray-600 text-sm">Learn how retrieval-augmented generation connects LLMs with external data for better factuality.</p>
+      <p class="text-gray-600 dark:text-gray-300 text-sm">Learn how retrieval-augmented generation connects LLMs with external data for better factuality.</p>
     </a>
 
     <!-- Example Post 2 -->
     <a href="./_posts/2025-10-31-week2-vector-databases.html" 
-       class="block bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+       class="block bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
       <img src="https://cdn.dribbble.com/userupload/7976450/file/original-028e2c98eecaf6ec52b8a4a0a775ffb3.png" 
            alt="Vector databases" 
            class="rounded-lg mb-4 w-full object-cover h-40">
       <h3 class="text-lg font-semibold mb-2">Week 2 — Vector Databases</h3>
-      <p class="text-gray-600 text-sm">A look into FAISS, ChromaDB, and Pinecone — and how embeddings are stored and retrieved efficiently.</p>
+      <p class="text-gray-600 dark:text-gray-300 text-sm">A look into FAISS, ChromaDB, and Pinecone — and how embeddings are stored and retrieved efficiently.</p>
     </a>
 
     <!-- Example Post 3 -->
     <a href="./_posts/2025-11-07-week3-evaluating-llms.html" 
-       class="block bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+       class="block bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
       <img src="https://cdn.dribbble.com/userupload/9304517/file/original-b70d69b01123e9a26d937ed3b256f720.png" 
            alt="LLM evaluation" 
            class="rounded-lg mb-4 w-full object-cover h-40">
       <h3 class="text-lg font-semibold mb-2">Week 3 — Evaluating LLMs</h3>
-      <p class="text-gray-600 text-sm">Exploring perplexity, factuality, and human-eval metrics to measure large language model performance.</p>
+      <p class="text-gray-600 dark:text-gray-300 text-sm">Exploring perplexity, factuality, and human-eval metrics to measure large language model performance.</p>
     </a>
   </section>
 
   <!-- About -->
   <section id="about" class="max-w-3xl mx-auto text-center py-12 px-4">
     <h3 class="text-2xl font-bold mb-4">👋 About</h3>
-    <p class="text-gray-600 leading-relaxed">
-      I'm Rachana — a software engineer exploring how ML and AI shape the future of technology.
+    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+      I'm <strong>Rachana Murali Narayanan</strong> — a software engineer exploring how ML and AI shape the future of technology.
       This blog is my sandbox for learning, sharing insights, and experimenting with the latest in machine learning.
     </p>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-100 py-6 mt-12 text-center text-sm text-gray-500">
-    © 2025 Rachana Murali Narayanan · Built with ❤️ on GitHub Pages
+  <footer class="bg-gray-100 dark:bg-gray-800 py-6 mt-12 text-center text-sm text-gray-500 dark:text-gray-400">
+    © 2025 Rachana Murali Narayanan · Built with ❤️ on 
+    <a href="https://rachmurali02.github.io" class="text-indigo-600 dark:text-indigo-400 hover:underline">GitHub Pages</a>
   </footer>
 
 </body>
