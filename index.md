@@ -25,18 +25,6 @@ A weekly chronicle of experiments, learnings, and reflections in **machine learn
   <p style="color:#555;font-size:0.9rem;">Learn how retrieval-augmented generation connects LLMs with external data for better factuality.</p>
 </a>
 
-<a href="{{ '/_posts/2025-10-31-week2-vector-databases.html' | relative_url }}" style="text-decoration:none;color:inherit;border:1px solid #ddd;border-radius:10px;padding:1rem;transition:all .2s ease-in-out;">
-  <img src="https://cdn.dribbble.com/userupload/7976450/file/original-028e2c98eecaf6ec52b8a4a0a775ffb3.png" width="100%" style="border-radius:8px;">
-  <h3>Week 2 — Vector Databases</h3>
-  <p style="color:#555;font-size:0.9rem;">Exploring FAISS, ChromaDB, and Pinecone — and how embeddings are stored and retrieved efficiently.</p>
-</a>
-
-<a href="{{ '/_posts/2025-11-07-week3-evaluating-llms.html' | relative_url }}" style="text-decoration:none;color:inherit;border:1px solid #ddd;border-radius:10px;padding:1rem;transition:all .2s ease-in-out;">
-  <img src="https://cdn.dribbble.com/userupload/9304517/file/original-b70d69b01123e9a26d937ed3b256f720.png" width="100%" style="border-radius:8px;">
-  <h3>Week 3 — Evaluating LLMs</h3>
-  <p style="color:#555;font-size:0.9rem;">Looking at perplexity, factuality, and human-eval metrics to measure large language model performance.</p>
-</a>
-
 </div>
 
 ---
