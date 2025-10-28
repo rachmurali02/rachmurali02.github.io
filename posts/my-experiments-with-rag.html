@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Experiments with RAG | Beyond the Loss 🧠</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { font-family: 'Inter', sans-serif; transition: color 0.3s ease, background-color 0.3s ease; }
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1, #d946ef);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    article h2 { font-size: 2rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem; }
+    article h3 { font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+    article p { margin-bottom: 1.5rem; line-height: 1.8; }
+    article ul, article ol { margin-bottom: 1.5rem; margin-left: 1.5rem; }
+    article li { margin-bottom: 0.5rem; line-height: 1.8; }
+    article code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
+    .dark article code { background: #1e293b; }
+    article pre { background: #f8fafc; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
+    .dark article pre { background: #0f172a; border-color: #334155; }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+
+  <!-- Navbar -->
+  <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 dark:bg-slate-900/80 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a href="index.html" class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-600 flex items-center justify-center text-white font-bold text-xl">
+            🧠
+          </div>
+          <span class="text-2xl font-bold tracking-tight">Beyond the Loss</span>
+        </a>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Home</a>
+          <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Weekly Posts</a>
+          <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">About</a>
+          
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" aria-label="Toggle dark mode"
+            class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 2zM4.22 4.22a.75.75 0 011.06 0l1.06 1.06a.75.75 0 11-1.06 1.06L4.22 5.28a.75.75 0 010-1.06zm11.56 0a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zM10 16a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 16z" />
+            </svg>
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 0010.586 10.586z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="pt-32 pb-12 px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-950">
+    <div class="max-w-4xl mx-auto">
+      <a href="index.html" class="inline-flex items-center text-indigo-300 hover:text-indigo-200 mb-8 group">
+        <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Home
+      </a>
+      
+      <div class="flex items-center space-x-3 mb-6">
+        <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full text-sm font-semibold">ML Research</span>
+        <span class="text-slate-400 text-sm">Oct 25, 2025</span>
+        <span class="text-slate-400 text-sm">• 12 min read</span>
+      </div>
+      
+      <h1 class="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+        My Experiments with RAG
+      </h1>
+      
+      <p class="text-xl text-slate-300 leading-relaxed">
+        Retrieval-Augmented Generation (RAG) is shaping the new frontier of grounded language models. Here's what I learned implementing it from scratch.
+      </p>
+    </div>
+  </header>
+
+  <!-- Article Content -->
+  <main class="max-w-4xl mx-auto px-6 lg:px-8 py-16">
+    <article class="prose prose-lg dark:prose-invert">
+      
+      <div class="rounded-2xl overflow-hidden mb-12 border border-slate-200 dark:border-slate-800">
+        <img src="https://cdn.dribbble.com/userupload/9033792/file/original-54e5a91e8d5a4f0ebc1c7989e7d81a22.png" alt="RAG Architecture" class="w-full">
+      </div>
+
+      <p class="text-slate-600 dark:text-slate-300">
+        Over the past few weeks, I've been diving deep into Retrieval-Augmented Generation (RAG) systems. What started as curiosity about how modern AI systems ground their responses in factual knowledge turned into a hands-on journey through embeddings, vector databases, and prompt engineering.
+      </p>
+
+      <h2 class="text-slate-900 dark:text-slate-100">Why RAG Matters</h2>
+      <p class="text-slate-600 dark:text-slate-300">
+        Large language models are incredible, but they have a fundamental problem: they can only "know" what was in their training data. Ask them about recent events, private documents, or specialized knowledge bases, and they'll either hallucinate or admit ignorance.
+      </p>
+
+      <p class="text-slate-600 dark:text-slate-300">
+        RAG solves this by combining the language understanding capabilities of LLMs with the precision of information retrieval. The idea is elegantly simple:
+      </p>
+
+      <ol class="text-slate-600 dark:text-slate-300">
+        <li>When a user asks a question, search through your knowledge base for relevant information</li>
+        <li>Retrieve the most relevant chunks of text</li>
+        <li>Pass those chunks to the LLM along with the user's question</li>
+        <li>Let the LLM synthesize a grounded, accurate response</li>
+      </ol>
+
+      <h2 class="text-slate-900 dark:text-slate-100">Building the Pipeline</h2>
+      
+      <h3 class="text-slate-900 dark:text-slate-100">Step 1: Document Processing</h3>
+      <p class="text-slate-600 dark:text-slate-300">
+        First, I needed to break down documents into manageable chunks. Too small, and you lose context. Too large, and retrieval becomes noisy. I settled on 512-token chunks with 50-token overlap to maintain semantic continuity.
+      </p>
+
+      <pre class="text-slate-800 dark:text-slate-200"><code>def chunk_document(text, chunk_size=512, overlap=50):
+    tokens = tokenizer.encode(text)
+    chunks = []
+    
+    for i in range(0, len(tokens), chunk_size - overlap):
+        chunk = tokens[i:i + chunk_size]
+        chunks.append(tokenizer.decode(chunk))
+    
+    return chunks</code></pre>
+
+      <h3 class="text-slate-900 dark:text-slate-100">Step 2: Creating Embeddings</h3>
+      <p class="text-slate-600 dark:text-slate-300">
+        Each chunk needs to be converted into a dense vector representation. I experimented with several embedding models:
+      </p>
+
+      <ul class="text-slate-600 dark:text-slate-300">
+        <li><strong>OpenAI's text-embedding-3-large</strong> — Best quality, but expensive at scale</li>
+        <li><strong>Sentence-BERT</strong> — Great balance of quality and speed</li>
+        <li><strong>Instructor embeddings</strong> — Interesting for domain-specific tasks</li>
+      </ul>
+
+      <p class="text-slate-600 dark:text-slate-300">
+        The embedding quality directly impacts retrieval accuracy. I found that domain-specific fine-tuning of embeddings improved results by 15-20% for specialized knowledge bases.
+      </p>
+
+      <h3 class="text-slate-900 dark:text-slate-100">Step 3: Vector Storage & Search</h3>
+      <p class="text-slate-600 dark:text-slate-300">
+        I tested three vector databases: FAISS, Pinecone, and Weaviate. For my experiments, FAISS offered the best local performance, while Pinecone excelled for production deployments.
+      </p>
+
+      <p class="text-slate-600 dark:text-slate-300">
+        The retrieval strategy matters enormously. Simple cosine similarity worked well, but hybrid search (combining dense vectors with sparse BM25) gave consistently better results.
+      </p>
+
+      <h2 class="text-slate-900 dark:text-slate-100">The Challenges I Hit</h2>
+
+      <div class="bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-6 rounded-r-xl my-8">
+        <h4 class="text-rose-900 dark:text-rose-300 font-bold mb-2">Challenge #1: Context Window Limits</h4>
+        <p class="text-rose-800 dark:text-rose-200 mb-0">
+          Even with retrieval, you can't pass infinite context to an LLM. I had to implement smart re-ranking and compression strategies to fit the most relevant information within token limits.
+        </p>
+      </div>
+
+      <div class="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-6 rounded-r-xl my-8">
+        <h4 class="text-amber-900 dark:text-amber-300 font-bold mb-2">Challenge #2: Evaluation</h4>
+        <p class="text-amber-800 dark:text-amber-200 mb-0">
+          How do you know if your RAG system is working well? I built a test suite with ground-truth Q&A pairs and tracked retrieval precision, answer accuracy, and hallucination rates.
+        </p>
+      </div>
+
+      <div class="bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-500 p-6 rounded-r-xl my-8">
+        <h4 class="text-blue-900 dark:text-blue-300 font-bold mb-2">Challenge #3: Latency</h4>
+        <p class="text-blue-800 dark:text-blue-200 mb-0">
+          Real-time retrieval and generation adds latency. I optimized by caching embeddings, using approximate nearest neighbor search, and streaming LLM responses.
+        </p>
+      </div>
+
+      <h2 class="text-slate-900 dark:text-slate-100">Key Takeaways</h2>
+
+      <p class="text-slate-600 dark:text-slate-300">
+        After building several RAG systems, here's what I learned:
+      </p>
+
+      <ul class="text-slate-600 dark:text-slate-300">
+        <li><strong>Chunk size matters more than you think.</strong> Experiment with your specific domain.</li>
+        <li><strong>Hybrid search outperforms pure semantic search.</strong> Combine dense and sparse retrieval.</li>
+        <li><strong>Re-ranking is essential.</strong> Don't just take the top-k results; use a cross-encoder to re-rank them.</li>
+        <li><strong>Prompt engineering is critical.</strong> How you frame the retrieved context affects output quality dramatically.</li>
+        <li><strong>Measure everything.</strong> Build comprehensive evaluation pipelines from day one.</li>
+      </ul>
+
+      <h2 class="text-slate-900 dark:text-slate-100">What's Next</h2>
+
+      <p class="text-slate-600 dark:text-slate-300">
+        I'm currently exploring multi-hop reasoning in RAG systems — where the model needs to retrieve and synthesize information across multiple documents to answer complex questions. Early results are promising, but it's a challenging problem.
+      </p>
+
+      <p class="text-slate-600 dark:text-slate-300">
+        I'm also interested in how RAG can be combined with fine-tuning. Can we create systems that both retrieve external knowledge and leverage specialized in-model knowledge? That's the experiment for next week.
+      </p>
+
+      <div class="bg-gradient-to-br from-indigo-50 to-fuchsia-50 dark:from-indigo-950/30 dark:to-fuchsia-950/30 rounded-2xl p-8 my-12 border border-indigo-200 dark:border-indigo-800">
+        <p class="text-slate-700 dark:text-slate-300 text-lg italic mb-4">
+          "The future of AI isn't just larger models — it's smarter systems that know when to retrieve, when to reason, and when to admit uncertainty."
+        </p>
+        <p class="text-slate-600 dark:text-slate-400 text-sm">— My closing thoughts on RAG</p>
+      </div>
+
+      <h2 class="text-slate-900 dark:text-slate-100">Resources & Further Reading</h2>
+
+      <ul class="text-slate-600 dark:text-slate-300">
+        <li>Lewis et al. (2020) - "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"</li>
+        <li>LangChain RAG Documentation</li>
+        <li>Pinecone's RAG Tutorial Series</li>
+        <li>My GitHub repository with full implementation (coming soon!)</li>
+      </ul>
+
+    </article>
+
+    <!-- Author Section -->
+    <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
+      <div class="flex items-center space-x-4">
+        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 to-fuchsia-600 flex items-center justify-center text-white font-bold text-2xl">
+          🧠
+        </div>
+        <div>
+          <h4 class="font-bold text-lg text-slate-900 dark:text-slate-100">Beyond the Loss</h4>
+          <p class="text-slate-600 dark:text-slate-400">Sharing weekly experiments and insights from the frontier of machine learning.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter CTA -->
+    <div class="mt-16 bg-gradient-to-br from-indigo-600 to-fuchsia-600 rounded-2xl p-10 text-center text-white">
+      <h3 class="text-3xl font-bold mb-3">Enjoyed this post?</h3>
+      <p class="text-lg mb-6 opacity-90">Subscribe to get weekly ML insights delivered to your inbox.</p>
+      <form class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+        <input type="email" placeholder="your@email.com"
+          class="flex-1 px-6 py-3 rounded-lg bg-white/10 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" />
+        <button class="px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-all">
+          Subscribe
+        </button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-300 mt-32 dark:bg-slate-950 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto px-6 py-16 text-center">
+      <h4 class="text-white text-2xl font-bold mb-4">Beyond the Loss 🧠</h4>
+      <p class="text-slate-400 mb-4">Exploring machine learning through hands-on experiments, reflections, and curiosity.</p>
+      <p class="text-slate-500 text-sm">© 2025 Beyond the Loss. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+
+    function updateThemeIcons() {
+      if (document.documentElement.classList.contains('dark')) {
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      } else {
+        lightIcon.classList.add('hidden');
+        darkIcon.classList.remove('hidden');
+      }
+    }
+    updateThemeIcons();
+
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.theme = isDark ? 'dark' : 'light';
+      updateThemeIcons();
+    });
+  </script>
+
+</body>
+</html>
