@@ -1,0 +1,296 @@
+import React, { useState, useEffect } from 'react';
+import { FileText, Scissors, BarChart3, Sliders } from 'lucide-react';
+
+const ChunkingDemo = () => {
+  const [sampleText, setSampleText] = useState(`Retrieval-Augmented Generation (RAG) is a powerful technique that combines the strengths of large language models with external knowledge retrieval. The process involves several key steps that work together to produce accurate, grounded responses.
+
+First, documents are processed and split into manageable chunks. This chunking strategy is crucial for effective retrieval. If chunks are too small, they may lack sufficient context. If they're too large, retrieval becomes noisy and less precise.
+
+Next, each chunk is converted into a dense vector representation using an embedding model. These embeddings capture the semantic meaning of the text, allowing for similarity-based search. Popular embedding models include OpenAI's text-embedding models, Sentence-BERT, and specialized domain models.
+
+The embeddings are then stored in a vector database, which enables fast similarity search. When a user query comes in, it's also embedded, and the system retrieves the most similar chunks from the database.
+
+Finally, the retrieved chunks are passed to a language model along with the user's question. The model uses this context to generate a response that's grounded in the retrieved information, reducing hallucinations and improving accuracy.`);
+
+  const [chunkSize, setChunkSize] = useState(100);
+  const [overlap, setOverlap] = useState(20);
+  const [strategy, setStrategy] = useState('fixed');
+  const [chunks, setChunks] = useState([]);
+
+  const strategies = [
+    { id: 'fixed', name: 'Fixed Size', desc: 'Split by character count' },
+    { id: 'sentence', name: 'Sentence-Based', desc: 'Split by sentences' },
+    { id: 'sliding', name: 'Sliding Window', desc: 'Fixed size with overlap' },
+    { id: 'paragraph', name: 'Paragraph', desc: 'Split by paragraphs' }
+  ];
+
+  const chunkFixedSize = (text, size) => {
+    const chunks = [];
+    for (let i = 0; i < text.length; i += size) {
+      chunks.push({
+        text: text.slice(i, i + size),
+        start: i,
+        end: Math.min(i + size, text.length)
+      });
+    }
+    return chunks;
+  };
+
+  const chunkBySentence = (text) => {
+    const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+    return sentences.map((sent, idx) => ({
+      text: sent.trim(),
+      start: text.indexOf(sent),
+      end: text.indexOf(sent) + sent.length
+    }));
+  };
+
+  const chunkSlidingWindow = (text, size, overlap) => {
+    const chunks = [];
+    const step = size - overlap;
+    for (let i = 0; i < text.length; i += step) {
+      chunks.push({
+        text: text.slice(i, i + size),
+        start: i,
+        end: Math.min(i + size, text.length)
+      });
+      if (i + size >= text.length) break;
+    }
+    return chunks;
+  };
+
+  const chunkByParagraph = (text) => {
+    const paragraphs = text.split('\n\n').filter(p => p.trim());
+    let position = 0;
+    return paragraphs.map(para => {
+      const start = position;
+      const end = start + para.length;
+      position = end + 2; // account for \n\n
+      return {
+        text: para.trim(),
+        start,
+        end
+      };
+    });
+  };
+
+  useEffect(() => {
+    let newChunks = [];
+    switch (strategy) {
+      case 'fixed':
+        newChunks = chunkFixedSize(sampleText, chunkSize);
+        break;
+      case 'sentence':
+        newChunks = chunkBySentence(sampleText);
+        break;
+      case 'sliding':
+        newChunks = chunkSlidingWindow(sampleText, chunkSize, overlap);
+        break;
+      case 'paragraph':
+        newChunks = chunkByParagraph(sampleText);
+        break;
+    }
+    setChunks(newChunks);
+  }, [sampleText, chunkSize, overlap, strategy]);
+
+  const calculateStats = () => {
+    if (chunks.length === 0) return null;
+    const lengths = chunks.map(c => c.text.length);
+    return {
+      count: chunks.length,
+      avgLength: Math.round(lengths.reduce((a, b) => a + b, 0) / lengths.length),
+      minLength: Math.min(...lengths),
+      maxLength: Math.max(...lengths)
+    };
+  };
+
+  const stats = calculateStats();
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-2">
+            <Scissors className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
+            <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+              RAG Chunking Strategies
+            </h1>
+          </div>
+          <p className="text-slate-600 dark:text-slate-300">
+            Experiment with different text chunking approaches for RAG systems
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Control Panel */}
+          <div className="lg:col-span-1 space-y-6">
+            {/* Strategy Selection */}
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <Sliders className="w-5 h-5" />
+                Strategy
+              </h2>
+              <div className="space-y-2">
+                {strategies.map(s => (
+                  <button
+                    key={s.id}
+                    onClick={() => setStrategy(s.id)}
+                    className={`w-full text-left p-3 rounded-lg transition-all ${
+                      strategy === s.id
+                        ? 'bg-indigo-600 text-white shadow-md'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
+                    }`}
+                  >
+                    <div className="font-semibold">{s.name}</div>
+                    <div className={`text-sm ${strategy === s.id ? 'text-indigo-100' : 'text-slate-500 dark:text-slate-400'}`}>
+                      {s.desc}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Parameters */}
+            {(strategy === 'fixed' || strategy === 'sliding') && (
+              <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
+                  Parameters
+                </h2>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      Chunk Size: {chunkSize} chars
+                    </label>
+                    <input
+                      type="range"
+                      min="50"
+                      max="500"
+                      step="10"
+                      value={chunkSize}
+                      onChange={(e) => setChunkSize(Number(e.target.value))}
+                      className="w-full"
+                    />
+                  </div>
+                  {strategy === 'sliding' && (
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        Overlap: {overlap} chars
+                      </label>
+                      <input
+                        type="range"
+                        min="0"
+                        max={Math.floor(chunkSize / 2)}
+                        step="5"
+                        value={overlap}
+                        onChange={(e) => setOverlap(Number(e.target.value))}
+                        className="w-full"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Statistics */}
+            {stats && (
+              <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5" />
+                  Statistics
+                </h2>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-600 dark:text-slate-400">Total Chunks:</span>
+                    <span className="font-bold text-indigo-600 dark:text-indigo-400">{stats.count}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-600 dark:text-slate-400">Avg Length:</span>
+                    <span className="font-bold text-slate-900 dark:text-white">{stats.avgLength}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-600 dark:text-slate-400">Min Length:</span>
+                    <span className="font-bold text-slate-900 dark:text-white">{stats.minLength}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-600 dark:text-slate-400">Max Length:</span>
+                    <span className="font-bold text-slate-900 dark:text-white">{stats.maxLength}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Input Text */}
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <FileText className="w-5 h-5" />
+                Input Text
+              </h2>
+              <textarea
+                value={sampleText}
+                onChange={(e) => setSampleText(e.target.value)}
+                className="w-full h-48 p-4 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white font-mono text-sm resize-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                placeholder="Enter your text here..."
+              />
+            </div>
+
+            {/* Chunks Display */}
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
+                Chunks ({chunks.length})
+              </h2>
+              <div className="space-y-4 max-h-[600px] overflow-y-auto">
+                {chunks.map((chunk, idx) => (
+                  <div
+                    key={idx}
+                    className="p-4 bg-gradient-to-r from-indigo-50 to-fuchsia-50 dark:from-indigo-950/30 dark:to-fuchsia-950/30 rounded-lg border-l-4 border-indigo-600"
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-bold text-indigo-600 dark:text-indigo-400">
+                        Chunk {idx + 1}
+                      </span>
+                      <span className="text-sm text-slate-500 dark:text-slate-400">
+                        {chunk.text.length} chars
+                      </span>
+                    </div>
+                    <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                      {chunk.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Key Insights */}
+        <div className="mt-8 bg-gradient-to-r from-indigo-600 to-fuchsia-600 rounded-xl p-8 text-white">
+          <h2 className="text-2xl font-bold mb-4">Key Insights</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <h3 className="font-semibold mb-2">Fixed Size</h3>
+              <p className="text-indigo-100 text-sm">Simple and predictable, but may split sentences awkwardly</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Sentence-Based</h3>
+              <p className="text-indigo-100 text-sm">Preserves semantic boundaries, but variable chunk sizes</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Sliding Window</h3>
+              <p className="text-indigo-100 text-sm">Overlap helps maintain context across boundaries</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Paragraph</h3>
+              <p className="text-indigo-100 text-sm">Natural semantic units, but highly variable sizes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ChunkingDemo;
