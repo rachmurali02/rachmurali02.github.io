@@ -217,57 +217,63 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12 xl:gap-16">
 
         <!-- Card 1 -->
-        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden">
-          <div class="image-overlay h-56">
-            <img src="assets/images/chocolate_chunks.png" alt="Interpretability" class="w-full h-full object-cover">
-          </div>
-          <div class="p-8">
-            <span class="px-3 py-1 bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300 rounded-full text-xs font-semibold">Interpretability</span>
-            <h3 class="text-xl font-bold mt-3 mb-3 leading-tight hover:text-indigo-600 dark:hover:text-fuchsia-400">
-              <a href="posts/chunking_experiments.html">Chunking Experiments</a>
-            </h3>
-            <p class="text-slate-600 dark:text-slate-300 mb-6">
-              What are different chunking sizes we can experiment with? Lets interact with it!
-            </p>
-            <span class="text-sm text-slate-500 dark:text-slate-400">6 min read</span>
-          </div>
-        </article>
+<!-- Recent Posts -->
+<section>
+  <h2 class="text-3xl font-bold mb-12">Recent Posts</h2>
+  <div id="posts-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-12 xl:gap-16">
 
-        <!-- Card 2 -->
-        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden">
-          <div class="image-overlay h-56">
-            <img src="https://cdn.dribbble.com/userupload/9027893/file/original-132c69c406a8c9daea64bbd9d40dc43a.png" alt="Vector Databases" class="w-full h-full object-cover">
-          </div>
-          <div class="p-8">
-            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300 rounded-full text-xs font-semibold">Vector DBs</span>
-            <h3 class="text-xl font-bold mt-3 mb-3 leading-tight hover:text-indigo-600 dark:hover:text-fuchsia-400">
-              <a href="posts/building_embedding_search_system.html">Building an Embedding Search System</a>
-            </h3>
-            <p class="text-slate-600 dark:text-slate-300 mb-6">
-              Step-by-step guide on building semantic search with FAISS and OpenAI embeddings.
-            </p>
-            <span class="text-sm text-slate-500 dark:text-slate-400">8 min read</span>
-          </div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden">
-          <div class="image-overlay h-56">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600" alt="Model Compression" class="w-full h-full object-cover">
-          </div>
-          <div class="p-8">
-            <span class="px-3 py-1 bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900 dark:text-fuchsia-300 rounded-full text-xs font-semibold">Optimization</span>
-            <h3 class="text-xl font-bold mt-3 mb-3 leading-tight hover:text-indigo-600 dark:hover:text-fuchsia-400">
-              <a href="posts/quantization_pruning_model_lean.html">Quantization & Pruning: Making Models Lean</a>
-            </h3>
-            <p class="text-slate-600 dark:text-slate-300 mb-6">
-              A practical approach to reduce model size and inference time without major accuracy trade-offs.
-            </p>
-            <span class="text-sm text-slate-500 dark:text-slate-400">9 min read</span>
-          </div>
-        </article>
+    <!-- Card 1 - Chunking Experiments -->
+    <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden" data-date="2025-11-01">
+      <div class="image-overlay h-56">
+        <img src="assets/images/chocolate_chunks.png" alt="Interpretability" class="w-full h-full object-cover">
       </div>
-    </section>
+      <div class="p-8">
+        <span class="px-3 py-1 bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300 rounded-full text-xs font-semibold">Interpretability</span>
+        <h3 class="text-xl font-bold mt-3 mb-3 leading-tight hover:text-indigo-600 dark:hover:text-fuchsia-400">
+          <a href="posts/chunking_experiments.html">Chunking Experiments</a>
+        </h3>
+        <p class="text-slate-600 dark:text-slate-300 mb-6">
+          What are different chunking sizes we can experiment with? Lets interact with it!
+        </p>
+        <span class="text-sm text-slate-500 dark:text-slate-400">Nov 1, 2025 • 6 min read</span>
+      </div>
+    </article>
+
+    <!-- Card 2 - Embedding Search -->
+    <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden" data-date="2025-10-28">
+      <div class="image-overlay h-56">
+        <img src="https://cdn.dribbble.com/userupload/9027893/file/original-132c69c406a8c9daea64bbd9d40dc43a.png" alt="Vector Databases" class="w-full h-full object-cover">
+      </div>
+      <div class="p-8">
+        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300 rounded-full text-xs font-semibold">Vector DBs</span>
+        <h3 class="text-xl font-bold mt-3 mb-3 leading-tight hover:text-indigo-600 dark:hover:text-fuchsia-400">
+          <a href="posts/building_embedding_search_system.html">Building an Embedding Search System</a>
+        </h3>
+        <p class="text-slate-600 dark:text-slate-300 mb-6">
+          Step-by-step guide on building semantic search with FAISS and OpenAI embeddings.
+        </p>
+        <span class="text-sm text-slate-500 dark:text-slate-400">Oct 28, 2025 • 8 min read</span>
+      </div>
+    </article>
+
+    <!-- Card 3 - Quantization & Pruning -->
+    <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden" data-date="2025-10-20">
+      <div class="image-overlay h-56">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600" alt="Model Compression" class="w-full h-full object-cover">
+      </div>
+      <div class="p-8">
+        <span class="px-3 py-1 bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900 dark:text-fuchsia-300 rounded-full text-xs font-semibold">Optimization</span>
+        <h3 class="text-xl font-bold mt-3 mb-3 leading-tight hover:text-indigo-600 dark:hover:text-fuchsia-400">
+          <a href="posts/quantization_pruning_model_lean.html">Quantization & Pruning: Making Models Lean</a>
+        </h3>
+        <p class="text-slate-600 dark:text-slate-300 mb-6">
+          A practical approach to reduce model size and inference time without major accuracy trade-offs.
+        </p>
+        <span class="text-sm text-slate-500 dark:text-slate-400">Oct 20, 2025 • 9 min read</span>
+      </div>
+    </article>
+  </div>
+</section>
 
     <!-- Newsletter -->
     <section class="mt-32 bg-gradient-to-br from-indigo-600 to-fuchsia-600 rounded-3xl p-12 text-center text-white" id="about">
@@ -382,6 +388,25 @@
         }, 500);
       });
     });
+function sortPostsByDate() {
+  const container = document.getElementById('posts-container');
+  if (!container) return; // Exit if container doesn't exist
+  
+  const articles = Array.from(container.querySelectorAll('article[data-date]'));
+  
+  // Sort by date (newest first)
+  articles.sort((a, b) => {
+    const dateA = new Date(a.getAttribute('data-date'));
+    const dateB = new Date(b.getAttribute('data-date'));
+    return dateB - dateA; // Descending order (newest first)
+  });
+  
+  // Re-append in sorted order
+  articles.forEach(article => container.appendChild(article));
+}
+
+// Sort on page load
+document.addEventListener('DOMContentLoaded', sortPostsByDate);
   </script>
 
 </body>
