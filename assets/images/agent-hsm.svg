@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-label="A security chip with a shield, approving one agent action and refusing another">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#d946ef"/>
+    </linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="1" fill="#6366f1" fill-opacity="0.25"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#dots)"/>
+
+  <!-- incoming requests -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">
+    <rect x="40" y="135" width="200" height="44" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="140" y="162" fill="#cbd5e1" text-anchor="middle">pay $15 → coffee</text>
+    <rect x="40" y="271" width="200" height="44" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="140" y="298" fill="#cbd5e1" text-anchor="middle">pay $80 → ???</text>
+  </g>
+  <path d="M240 157 H 300" stroke="#64748b" stroke-width="2" stroke-dasharray="5 5"/>
+  <path d="M240 293 H 300" stroke="#64748b" stroke-width="2" stroke-dasharray="5 5"/>
+
+  <!-- chip pins -->
+  <g stroke="#94a3b8" stroke-width="6" stroke-linecap="round">
+    <path d="M340 135 v-20 M370 135 v-20 M400 135 v-20 M430 135 v-20 M460 135 v-20"/>
+    <path d="M340 315 v20 M370 315 v20 M400 315 v20 M430 315 v20 M460 315 v20"/>
+    <path d="M310 165 h-20 M310 195 h-20 M310 225 h-20 M310 255 h-20 M310 285 h-20"/>
+    <path d="M490 165 h20 M490 195 h20 M490 225 h20 M490 255 h20 M490 285 h20"/>
+  </g>
+  <!-- chip body -->
+  <rect x="310" y="135" width="180" height="180" rx="18" fill="url(#chip)"/>
+  <rect x="326" y="151" width="148" height="148" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.35"/>
+  <!-- shield -->
+  <path d="M400 172 l44 16 v34 c0 30 -20 50 -44 60 c-24 -10 -44 -30 -44 -60 v-34 z" fill="#ffffff" fill-opacity="0.95"/>
+  <path d="M382 224 l13 13 l25 -27" fill="none" stroke="#7c3aed" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- outcomes -->
+  <path d="M510 157 H 560" stroke="#34d399" stroke-width="2.5"/>
+  <path d="M510 293 H 560" stroke="#f87171" stroke-width="2.5"/>
+  <g font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="17">
+    <rect x="560" y="135" width="200" height="44" rx="10" fill="#064e3b" stroke="#34d399"/>
+    <text x="660" y="163" fill="#6ee7b7" text-anchor="middle">✓ signed</text>
+    <rect x="560" y="271" width="200" height="44" rx="10" fill="#450a0a" stroke="#f87171"/>
+    <text x="660" y="299" fill="#fca5a5" text-anchor="middle">✕ refused</text>
+  </g>
+  <text x="400" y="395" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#a5b4fc" text-anchor="middle" letter-spacing="3">THE RULES LIVE INSIDE THE CHIP</text>
+</svg>

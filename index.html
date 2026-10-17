@@ -174,6 +174,17 @@
             </svg>
             <span class="text-sm font-medium text-slate-700 dark:text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">Amazon</span>
           </div>
+
+          <!-- Microsoft Logo -->
+          <div class="group flex items-center gap-3 px-6 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-900 transition-all">
+            <svg class="w-12 h-12" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
+              <rect x="12" y="1" width="10" height="10" fill="#7FBA00"/>
+              <rect x="1" y="12" width="10" height="10" fill="#00A4EF"/>
+              <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
+            </svg>
+            <span class="text-sm font-medium text-slate-700 dark:text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">Microsoft</span>
+          </div>
         </div>
       </div>
     </section>
@@ -214,26 +225,43 @@
     <!-- Recent Posts -->
     <section>
       <h2 class="text-3xl font-bold mb-12">Recent Posts</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12 xl:gap-16">
+      <div class="grid md:grid-cols-2 gap-12 xl:gap-16">
 
         <!-- Card 1 -->
         <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden">
           <div class="image-overlay h-56">
-            <img src="assets/images/chocolate_chunks.png" alt="Interpretability" class="w-full h-full object-cover">
+            <img src="assets/images/news-digest-card.png" alt="The Morning Column news digest" class="w-full h-full object-cover object-top">
           </div>
           <div class="p-8">
-            <span class="px-3 py-1 bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300 rounded-full text-xs font-semibold">Interpretability</span>
+            <span class="px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300 rounded-full text-xs font-semibold">Personalization</span>
             <h3 class="text-xl font-bold mt-3 mb-3 leading-tight hover:text-indigo-600 dark:hover:text-fuchsia-400">
-              <a href="posts/chunking_experiments.html">Chunking Experiments</a>
+              <a href="posts/news-aggregator.html">Building My Own Morning Newspaper</a>
             </h3>
             <p class="text-slate-600 dark:text-slate-300 mb-6">
-              What are different chunking sizes we can experiment with? Lets interact with it!
+              A daily news digest from free publications that follows developing stories, learns from a thumbs up or down, and costs nothing to run.
             </p>
-            <span class="text-sm text-slate-500 dark:text-slate-400">6 min read</span>
+            <span class="text-sm text-slate-500 dark:text-slate-400">8 min read</span>
           </div>
         </article>
 
         <!-- Card 2 -->
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden">
+          <div class="image-overlay h-56">
+            <img src="assets/images/agent-hsm.svg" alt="Device security for AI agents" class="w-full h-full object-cover">
+          </div>
+          <div class="p-8">
+            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300 rounded-full text-xs font-semibold">Device Security</span>
+            <h3 class="text-xl font-bold mt-3 mb-3 leading-tight hover:text-indigo-600 dark:hover:text-fuchsia-400">
+              <a href="posts/agent-device-security.html">A Security Chip That Says No to AI Agents</a>
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 mb-6">
+              A Rust HSM on a $5 board that enforces an agent's spending rules inside the chip. It blocked 8 of 8 attacks where the conventional setup blocked 1.
+            </p>
+            <span class="text-sm text-slate-500 dark:text-slate-400">10 min read</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
         <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden">
           <div class="image-overlay h-56">
             <img src="https://cdn.dribbble.com/userupload/9027893/file/original-132c69c406a8c9daea64bbd9d40dc43a.png" alt="Vector Databases" class="w-full h-full object-cover">
@@ -250,7 +278,7 @@
           </div>
         </article>
 
-        <!-- Card 3 -->
+        <!-- Card 4 -->
         <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 card-hover overflow-hidden">
           <div class="image-overlay h-56">
             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600" alt="Model Compression" class="w-full h-full object-cover">
