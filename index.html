@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beyond the Loss 🧠 | Weekly ML Chronicles</title>
+  <title>Side Quests 🧭 | Experiments with Things I Find Interesting</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { darkMode: 'class' };
@@ -87,13 +87,13 @@
         <a href="/" class="flex items-center space-x-3">
           <button id="theme-toggle" aria-label="Toggle dark mode"
             class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-600 flex items-center justify-center text-white font-bold text-xl hover:scale-110 transition-transform cursor-pointer">
-            🧠
+            🧭
           </button>
-          <span class="text-2xl font-bold tracking-tight">Beyond the Loss</span>
+          <span class="text-2xl font-bold tracking-tight">Side Quests</span>
         </a>
         <div class="hidden md:flex items-center space-x-8">
           <a href="index.html" class="font-semibold hover:text-indigo-600 dark:hover:text-fuchsia-400">Home</a>
-          <a href="#posts" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Weekly Posts</a>
+          <a href="#posts" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Posts</a>
           <a href="#about" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">About</a>
 
           <button id="subscribe-btn-nav" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-500 dark:hover:bg-fuchsia-500 transition-colors">
@@ -110,14 +110,14 @@
       <div class="max-w-3xl">
         <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-8">
           <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
-          <span class="text-sm font-medium text-indigo-300">Exploring ML, one week at a time</span>
+          <span class="text-sm font-medium text-indigo-300">Following my curiosity, one project at a time</span>
         </div>
-        <h1 class="text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-          Beyond the Loss:
-          <span class="gradient-text block">Weekly ML Chronicles</span>
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          Side Quests:
+          <span class="gradient-text block">Experiments in Curiosity</span>
         </h1>
         <p class="text-xl text-slate-300 leading-relaxed mb-8">
-          Thoughts, experiments, and learnings from the evolving world of machine learning — from interpretability to generative AI, one gradient step at a time.
+          My experiments with things I find interesting, from security chips to news digests to whatever catches my eye next. Built for fun, written up for anyone who wants to follow along.
         </p>
         <div class="flex flex-wrap gap-4">
           <a href="#posts" class="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold hover:bg-slate-100 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700">
@@ -203,14 +203,14 @@
     <section class="mb-24" id="posts">
       <div class="flex items-center space-x-4 mb-12">
         <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent dark:via-slate-700"></div>
-        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">This Week's Highlight</h2>
+        <h2 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Featured</h2>
         <div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent dark:via-slate-700"></div>
       </div>
 
       <article class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 card-hover">
         <div class="grid lg:grid-cols-2">
           <div class="image-overlay min-h-[400px]">
-            <img src="assets/images/rag-intro.png" alt="ML Art" class="w-full h-full object-cover">
+            <img src="assets/images/rag-intro.png" alt="My Experiments with RAG" class="w-full h-full object-cover">
           </div>
           <div class="p-12 flex flex-col justify-center bg-white dark:bg-slate-900">
             <div class="flex items-center space-x-3 mb-6">
@@ -275,7 +275,7 @@
     <!-- Newsletter -->
     <section class="mt-32 bg-gradient-to-br from-indigo-600 to-fuchsia-600 rounded-3xl p-12 text-center text-white" id="about">
       <h3 class="text-4xl font-bold mb-4">Stay in the Loop</h3>
-      <p class="text-lg mb-8 opacity-90">Get weekly insights from the frontier of machine learning — straight to your inbox.</p>
+      <p class="text-lg mb-8 opacity-90">Get new side quests straight to your inbox.</p>
       <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 justify-center">
         <input type="email" id="email-input" placeholder="your@email.com" required
           class="flex-1 px-6 py-4 rounded-xl bg-white/10 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" />
@@ -283,16 +283,16 @@
           Subscribe
         </button>
       </form>
-      <p class="text-sm text-indigo-100 mt-4">Join 2,000+ ML enthusiasts</p>
+      <p class="text-sm text-indigo-100 mt-4">Join 2,000+ curious readers</p>
     </section>
   </main>
 
   <!-- Footer -->
   <footer class="bg-slate-900 text-slate-300 mt-32 dark:bg-slate-950 dark:text-slate-400">
     <div class="max-w-7xl mx-auto px-6 py-16 text-center">
-      <h4 class="text-white text-2xl font-bold mb-4">Beyond the Loss 🧠</h4>
-      <p class="text-slate-400 mb-4">Exploring machine learning through hands-on experiments, reflections, and curiosity.</p>
-      <p class="text-slate-500 text-sm">© 2025 Beyond the Loss. All rights reserved.</p>
+      <h4 class="text-white text-2xl font-bold mb-4">Side Quests 🧭</h4>
+      <p class="text-slate-400 mb-4">Hands-on experiments with things I find interesting.</p>
+      <p class="text-slate-500 text-sm">© 2025 Side Quests. All rights reserved.</p>
     </div>
   </footer>
 
@@ -352,7 +352,7 @@
           },
           body: JSON.stringify({
             email: email,
-            _subject: 'New Newsletter Subscription - Beyond the Loss'
+            _subject: 'New Newsletter Subscription - Side Quests'
           })
         });
         
