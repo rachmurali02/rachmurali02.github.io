@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Side Quests 🧭 | Rachana Murali Narayanan</title>
+  <title>Side Quests | Rachana Murali Narayanan</title>
   <meta name="description" content="Rachana Murali Narayanan's experiments with things she finds interesting." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     try {
       if (localStorage.theme === 'dark' ||
@@ -19,250 +16,182 @@
 
   <style>
     :root {
-      --bg: #f7f0e6;
-      --surface: #fffaf3;
-      --ink: #1b1512;
-      --muted: #6b5d53;
-      --line: #e3d5c4;
-      --terracotta: #c4502c;
-      --terracotta-deep: #a63f20;
-      --marigold: #e9a83a;
-      --leaf: #2f5d3a;
-      --on-accent: #fffaf3;
-      --display: 'Fraunces', Georgia, serif;
-      --body: 'Inter', system-ui, -apple-system, sans-serif;
+      --bg: #ffffff;
+      --ink: #000000;
+      --muted: #6e6e6e;
+      --rule: #000000;
+      --hair: #d4d4d4;
+      --red: #e2231a;
+      --on-red: #ffffff;
+      --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
     html.dark {
-      --bg: #15110f;
-      --surface: #1f1916;
-      --ink: #f5ece0;
-      --muted: #b5a596;
-      --line: #3a2f29;
-      --terracotta: #e0693f;
-      --terracotta-deep: #c4502c;
-      --marigold: #f0b54f;
-      --leaf: #6fa67c;
+      --bg: #0b0b0b;
+      --ink: #ffffff;
+      --muted: #9a9a9a;
+      --rule: #ffffff;
+      --hair: #333333;
+      --red: #ff3b30;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; overflow-x: clip; }
+    html { overflow-x: clip; }
     body {
       background: var(--bg);
       color: var(--ink);
-      font-family: var(--body);
-      line-height: 1.6;
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      overflow-x: clip;
-      transition: background-color .3s ease, color .3s ease;
     }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-    /* Nav */
-    nav {
-      position: sticky; top: 0; z-index: 50;
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
+    /* 12-column grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
     }
-    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-    .brand { font-family: var(--display); font-weight: 700; font-size: 1.5rem; letter-spacing: -.02em; display: flex; align-items: center; gap: .5rem; }
-    .brand em { color: var(--terracotta); font-style: italic; }
-    .nav-links { display: flex; align-items: center; gap: 28px; font-size: .95rem; font-weight: 500; }
-    .nav-links a:not(.btn) { color: var(--muted); }
-    .nav-links a:not(.btn):hover { color: var(--terracotta); }
-    .icon-btn {
-      width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--line);
-      background: var(--surface); color: var(--ink); cursor: pointer; display: grid; place-items: center;
+    .label {
+      font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
     }
-    .icon-btn:hover { border-color: var(--terracotta); color: var(--terracotta); }
-    .icon-btn svg { width: 18px; height: 18px; }
-    .icon-btn .sun { display: none; }
-    html.dark .icon-btn .sun { display: block; }
-    html.dark .icon-btn .moon { display: none; }
-    .btn {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: .95rem;
-      background: var(--terracotta); color: var(--on-accent); border: 2px solid var(--terracotta);
-      cursor: pointer; transition: transform .2s ease, background .2s ease;
+    .red { color: var(--red); }
+
+    /* Header */
+    header.top { border-top: 12px solid var(--red); }
+    header.top .grid { align-items: baseline; padding-top: 20px; padding-bottom: 20px; }
+    .wordmark { grid-column: 1 / 5; font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+    .top nav { grid-column: 5 / 13; display: flex; justify-content: flex-end; gap: 32px; font-size: 14px; font-weight: 500; }
+    .top nav a:hover, .top nav button:hover { color: var(--red); }
+    .top nav button {
+      font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0;
     }
-    .btn:hover { transform: translateY(-2px); background: var(--terracotta-deep); border-color: var(--terracotta-deep); }
-    .btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
-    .btn.ghost:hover { background: var(--ink); color: var(--bg); }
 
     /* Hero */
-    .hero { padding: 64px 0 48px; }
-    .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
-    .kicker {
-      display: inline-flex; gap: 10px; align-items: center;
-      font-size: .8rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--leaf);
-      margin-bottom: 20px;
+    .hero .grid { padding-top: 72px; padding-bottom: 96px; row-gap: 40px; }
+    .hero h1 {
+      grid-column: 1 / 8;
+      font-size: clamp(56px, 9vw, 128px); font-weight: 700; line-height: .92; letter-spacing: -.045em;
     }
-    .kicker::before { content: ''; width: 32px; height: 2px; background: currentColor; }
-    .name {
-      font-family: var(--display); font-weight: 800; line-height: .9; letter-spacing: -.04em;
-      font-size: clamp(3.6rem, 10vw, 8.5rem);
-    }
-    .name .outline {
-      display: block; font-style: italic; font-weight: 600; color: transparent;
-      -webkit-text-stroke: 2px var(--terracotta); font-size: .55em; letter-spacing: -.02em; margin-top: .15em;
-    }
-    .lede { font-size: 1.2rem; color: var(--muted); max-width: 34ch; margin: 28px 0 32px; }
-    .lede strong { color: var(--ink); font-weight: 600; }
-    .cta { display: flex; flex-wrap: wrap; gap: 14px; }
-
-    .portrait { position: relative; justify-self: center; width: min(100%, 420px); }
-    .portrait .sun-disc {
-      position: absolute; width: 62%; aspect-ratio: 1; border-radius: 50%;
-      background: var(--marigold); top: -6%; right: -10%; z-index: 0;
-    }
-    .portrait .leaf {
-      position: absolute; width: 38%; aspect-ratio: 1; left: -12%; bottom: 8%; z-index: 0;
-      background: var(--leaf); border-radius: 0 100% 0 100%; transform: rotate(-12deg);
-    }
-    .portrait .frame {
-      position: relative; z-index: 1; overflow: hidden;
-      border-radius: 999px 999px 28px 28px; aspect-ratio: 3 / 4;
-      border: 6px solid var(--surface); box-shadow: 0 30px 60px -20px rgba(27,21,18,.45);
-    }
-    .portrait .frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
-    .badge {
-      position: absolute; z-index: 2; width: 132px; height: 132px; left: -40px; top: 18%;
-      background: var(--ink); color: var(--bg); border-radius: 50%; display: grid; place-items: center;
-    }
-    .badge svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 18s linear infinite; }
-    .badge .compass { font-size: 2.2rem; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Ticker */
-    .ticker {
-      background: var(--terracotta); color: var(--on-accent); overflow: hidden;
-      border-block: 2px solid var(--ink); transform: rotate(-1.2deg); margin: 40px -20px 0;
-    }
-    .ticker .track { display: flex; width: max-content; animation: scroll 28s linear infinite; }
-    .ticker span {
-      font-family: var(--display); font-style: italic; font-weight: 600; font-size: 1.6rem;
-      padding: 14px 0; white-space: nowrap;
-    }
-    .ticker span::after { content: '✦'; margin: 0 28px; color: var(--marigold); font-style: normal; }
-    @keyframes scroll { to { transform: translateX(-50%); } }
+    .hero .photo { grid-column: 9 / 13; grid-row: 1 / 3; }
+    .hero .photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 20%; }
+    .hero .photo figcaption { margin-top: 10px; font-size: 12px; color: var(--muted); }
+    .hero .intro { grid-column: 1 / 6; align-self: end; }
+    .hero .intro p { font-size: 22px; line-height: 1.35; letter-spacing: -.01em; }
+    .hero .intro .label { margin-bottom: 16px; }
 
     /* Sections */
-    section { padding: 96px 0; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
-    .eyebrow { font-size: .8rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 8px; }
-    h2 { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1; letter-spacing: -.03em; }
-    h2 em { color: var(--terracotta); }
-    .section-note { color: var(--muted); max-width: 36ch; }
+    section { border-top: 2px solid var(--rule); }
+    section > .grid { padding-top: 24px; padding-bottom: 96px; }
+    .sec-label { grid-column: 1 / 4; }
+    .sec-label .num { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -.04em; color: var(--red); }
+    .sec-label .label { margin-top: 12px; }
+    .sec-body { grid-column: 4 / 13; }
 
-    /* Tracklist (posts) */
-    .tracks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-    .track-card {
-      background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
-      display: flex; flex-direction: column; transition: transform .3s ease, box-shadow .3s ease;
+    /* Index of quests */
+    .index { list-style: none; }
+    .index li { border-top: 1px solid var(--hair); }
+    .index li:first-child { border-top: 1px solid var(--rule); }
+    .index li:last-child { border-bottom: 1px solid var(--hair); }
+    .index a {
+      display: grid; grid-template-columns: 48px minmax(0, 1fr) 200px; column-gap: 24px;
+      padding: 24px 0; align-items: start;
     }
-    .track-card:hover { transform: translateY(-6px) rotate(-.4deg); box-shadow: 0 24px 48px -24px rgba(27,21,18,.4); }
-    .cover { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--ink); }
-    .cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-    .track-card:hover .cover img { transform: scale(1.06); }
-    .cover .no {
-      position: absolute; top: 14px; left: 14px; background: var(--bg); color: var(--ink);
-      font-family: var(--display); font-weight: 800; font-size: .95rem; padding: 4px 12px; border-radius: 999px;
-    }
-    .track-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-    .tag { align-self: flex-start; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
-    .tag.t1 { background: color-mix(in srgb, var(--marigold) 25%, transparent); color: var(--ink); }
-    .tag.t2 { background: color-mix(in srgb, var(--leaf) 22%, transparent); color: var(--ink); }
-    .tag.t3 { background: color-mix(in srgb, var(--terracotta) 20%, transparent); color: var(--ink); }
-    .track-body h3 { font-family: var(--display); font-weight: 700; font-size: 1.45rem; line-height: 1.15; letter-spacing: -.01em; }
-    .track-card:hover h3 { color: var(--terracotta); }
-    .track-body p { color: var(--muted); font-size: .97rem; }
-    .meta { margin-top: auto; padding-top: 10px; display: flex; justify-content: space-between; font-size: .85rem; color: var(--muted); border-top: 1px dashed var(--line); }
-    .meta .play { color: var(--terracotta); font-weight: 600; }
+    .index .n { font-size: 14px; font-weight: 700; padding-top: 6px; }
+    .index h3 { font-size: 30px; font-weight: 700; line-height: 1.1; letter-spacing: -.025em; }
+    .index p { margin-top: 10px; color: var(--muted); max-width: 52ch; }
+    .index .meta { margin-top: 14px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+    .index .meta span + span::before { content: '/'; margin: 0 8px; color: var(--muted); }
+    .index .thumb { width: 200px; aspect-ratio: 4 / 3; overflow: hidden; background: var(--hair); }
+    .index .thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: filter .2s ease; }
+    .index a:hover h3 { color: var(--red); }
+    .index a:hover .thumb img { filter: none; }
 
     /* Journey */
-    .journey { background: var(--surface); border-block: 1px solid var(--line); }
-    .logos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
-    .logo-cell {
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-      padding: 32px 12px; background: var(--bg); border-right: 1px solid var(--line); transition: background .25s ease;
-    }
+    .logos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+    .logo-cell { padding: 20px 16px 20px 0; border-right: 1px solid var(--hair); display: flex; flex-direction: column; gap: 20px; }
+    .logo-cell + .logo-cell { padding-left: 16px; }
     .logo-cell:last-child { border-right: 0; }
-    .logo-cell:hover { background: var(--surface); }
-    .logo-cell .mark { height: 60px; display: flex; align-items: center; justify-content: center; }
-    .logo-cell span { font-weight: 600; font-size: .92rem; }
-    .logo-cell .ink { color: var(--ink); }
+    .logo-cell .mark { height: 56px; display: flex; align-items: center; }
+    .logo-cell .mono { color: var(--ink); }
+    .logo-cell span { font-size: 14px; font-weight: 700; }
 
     /* Subscribe */
-    .subscribe .panel {
-      position: relative; overflow: hidden; border-radius: 32px; padding: 64px 48px;
-      background: var(--leaf); color: #fffaf3; text-align: center;
-    }
-    html.dark .subscribe .panel { background: #23432b; }
-    .subscribe .panel::before, .subscribe .panel::after { content: ''; position: absolute; border-radius: 50%; }
-    .subscribe .panel::before { width: 260px; height: 260px; background: var(--marigold); opacity: .9; top: -120px; right: -60px; }
-    .subscribe .panel::after { width: 180px; height: 180px; background: var(--terracotta); bottom: -90px; left: -40px; }
-    .subscribe h2 { color: #fffaf3; position: relative; }
-    .subscribe h2 em { color: var(--marigold); }
-    .subscribe p { position: relative; opacity: .9; margin: 14px auto 28px; max-width: 42ch; font-size: 1.1rem; }
-    .subscribe form { position: relative; display: flex; gap: 12px; max-width: 520px; margin: 0 auto; }
+    .subscribe { background: var(--red); color: var(--on-red); border-top: 0; }
+    .subscribe .sec-label .num { color: var(--on-red); }
+    .subscribe h2 { font-size: clamp(40px, 5vw, 64px); font-weight: 700; line-height: 1; letter-spacing: -.035em; }
+    .subscribe p { margin-top: 16px; font-size: 18px; }
+    .subscribe form { margin-top: 40px; display: flex; gap: 24px; align-items: end; max-width: 640px; }
     .subscribe input {
-      flex: 1; min-width: 0; padding: 14px 20px; border-radius: 999px; border: 2px solid rgba(255,250,243,.5);
-      background: rgba(255,250,243,.12); color: #fffaf3; font: inherit;
+      flex: 1; min-width: 0; font: inherit; font-size: 22px; color: var(--on-red);
+      background: transparent; border: 0; border-bottom: 2px solid var(--on-red); padding: 8px 0; border-radius: 0;
     }
-    .subscribe input::placeholder { color: rgba(255,250,243,.75); }
-    .subscribe input:focus { outline: none; border-color: var(--marigold); }
-    .subscribe .btn { background: #fffaf3; color: #1b1512; border-color: #fffaf3; }
-    .subscribe .btn:hover { background: var(--marigold); border-color: var(--marigold); }
-    .subscribe small { position: relative; display: block; margin-top: 16px; opacity: .8; }
+    .subscribe input::placeholder { color: rgba(255,255,255,.7); }
+    .subscribe input:focus { outline: none; }
+    .subscribe button {
+      font: inherit; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+      background: var(--on-red); color: #000; border: 0; padding: 14px 28px; cursor: pointer; border-radius: 0;
+    }
+    .subscribe button:hover { background: #000; color: #fff; }
+    .subscribe small { display: block; margin-top: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
 
-    footer { padding: 48px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
-    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-    footer .brand { color: var(--ink); font-size: 1.25rem; }
-    footer .links { display: flex; gap: 20px; }
-    footer .links a:hover { color: var(--terracotta); }
+    footer { border-top: 2px solid var(--rule); }
+    footer .grid { padding-top: 20px; padding-bottom: 40px; font-size: 14px; }
+    footer .wordmark { grid-column: 1 / 4; font-size: 14px; }
+    footer .links { grid-column: 4 / 10; display: flex; gap: 32px; }
+    footer .links a:hover { color: var(--red); }
+    footer .copy { grid-column: 10 / 13; text-align: right; color: var(--muted); }
 
     /* Notification */
     .notification {
-      position: fixed; top: 92px; right: 20px; z-index: 100; display: flex; align-items: center; gap: 12px;
-      background: var(--surface); color: var(--ink); border: 1px solid var(--line);
-      padding: 16px 22px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,.2);
-      transform: translateX(calc(100% + 40px)); transition: transform .3s ease;
+      position: fixed; top: 24px; right: 24px; z-index: 100; max-width: 320px;
+      background: var(--ink); color: var(--bg); padding: 16px 20px; border-left: 6px solid var(--red);
+      transform: translateX(calc(100% + 48px)); transition: transform .3s ease;
     }
     .notification.show { transform: translateX(0); }
-    .notification svg { width: 24px; height: 24px; color: var(--leaf); flex-shrink: 0; }
-    .notification p { font-size: .88rem; color: var(--muted); }
-    .notification p:first-child { font-weight: 600; color: var(--ink); font-size: 1rem; }
+    .notification strong { display: block; }
+    .notification span { font-size: 14px; opacity: .8; }
 
-    @media (max-width: 960px) {
-      .hero .wrap { grid-template-columns: 1fr; gap: 48px; }
-      .portrait { width: min(100%, 360px); }
-      .tracks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 900px) {
+      .grid { padding: 0 24px; }
+      .hero h1 { grid-column: 1 / -1; }
+      .hero .photo { grid-column: 1 / 8; grid-row: auto; }
+      .hero .intro { grid-column: 1 / -1; }
+      .sec-label { grid-column: 1 / -1; margin-bottom: 32px; display: flex; align-items: baseline; gap: 16px; }
+      .sec-label .label { margin-top: 0; }
+      .sec-body { grid-column: 1 / -1; }
       .logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .logo-cell { border-bottom: 1px solid var(--line); }
+      .logo-cell { border-bottom: 1px solid var(--hair); padding-left: 16px; }
+      .logo-cell:nth-child(3n + 1) { padding-left: 0; }
       .logo-cell:nth-child(3n) { border-right: 0; }
     }
     @media (max-width: 640px) {
-      .wrap { padding: 0 16px; }
-      .nav-links a:not(.btn) { display: none; }
-      .nav-links { gap: 10px; }
-      .nav-links .btn { padding: 10px 16px; }
-      .hero { padding-top: 40px; }
-      .badge { width: 104px; height: 104px; left: -14px; }
-      .badge .compass { font-size: 1.7rem; }
-      .ticker span { font-size: 1.25rem; }
-      section { padding: 72px 0; }
-      .tracks { grid-template-columns: 1fr; }
+      .grid { padding: 0 16px; column-gap: 16px; }
+      .wordmark { grid-column: 1 / 7; }
+      .top nav { grid-column: 7 / 13; gap: 16px; }
+      .top nav .hide-sm { display: none; }
+      .hero .grid { padding-top: 40px; padding-bottom: 64px; }
+      .hero .photo { grid-column: 1 / -1; }
+      .hero .photo img { aspect-ratio: 4 / 5; }
+      .hero .intro p { font-size: 19px; }
+      section > .grid { padding-bottom: 64px; }
+      .index a { grid-template-columns: 32px minmax(0, 1fr); }
+      .index .thumb { grid-column: 2; width: 100%; margin-top: 16px; }
+      .index h3 { font-size: 24px; }
       .logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .logo-cell:nth-child(3n) { border-right: 1px solid var(--line); }
+      .logo-cell, .logo-cell:nth-child(3n + 1) { padding-left: 16px; }
+      .logo-cell:nth-child(3n) { border-right: 1px solid var(--hair); }
+      .logo-cell:nth-child(2n + 1) { padding-left: 0; }
       .logo-cell:nth-child(2n) { border-right: 0; }
-      .logo-cell:last-child { grid-column: 1 / -1; }
-      .subscribe .panel { padding: 48px 20px; border-radius: 24px; }
-      .subscribe form { flex-direction: column; }
+      .subscribe form { flex-direction: column; align-items: stretch; }
+      footer .wordmark, footer .links, footer .copy { grid-column: 1 / -1; text-align: left; }
+      footer .links { margin: 12px 0; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .badge svg.ring, .ticker .track { animation: none; }
       * { transition: none !important; }
     }
   </style>
@@ -270,205 +199,156 @@
 
 <body>
 
-  <!-- Subscription Notification -->
   <div id="subscription-notification" class="notification" role="status">
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-    <div>
-      <p>Successfully subscribed!</p>
-      <p>Check your email for confirmation.</p>
-    </div>
+    <strong>Subscribed.</strong>
+    <span>Check your email for confirmation.</span>
   </div>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="wrap">
-      <a href="/" class="brand">🧭 Side <em>Quests</em></a>
-      <div class="nav-links">
-        <a href="#quests">Quests</a>
-        <a href="#journey">Journey</a>
-        <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">
-          <svg class="moon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" clip-rule="evenodd"/></svg>
-          <svg class="sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        </button>
-        <a href="#subscribe" class="btn subscribe-link">Subscribe</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <header class="hero">
-    <div class="wrap">
-      <div>
-        <p class="kicker">Builder · Tinkerer · Side-quester</p>
-        <h1 class="name">
-          Rachana
-          <span class="outline">Murali Narayanan</span>
-        </h1>
-        <p class="lede">
-          Welcome to <strong>Side Quests</strong>: my experiments with things I find interesting, from security chips to news digests to whatever catches my eye next.
-        </p>
-        <div class="cta">
-          <a href="#quests" class="btn">Explore the quests
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4-4 4m4-4H3"/></svg>
-          </a>
-          <a href="#subscribe" class="btn ghost subscribe-link">Join the newsletter</a>
-        </div>
-      </div>
-
-      <div class="portrait">
-        <div class="sun-disc" aria-hidden="true"></div>
-        <div class="leaf" aria-hidden="true"></div>
-        <div class="frame">
-          <img src="assets/images/rachana.jpg" alt="Rachana Murali Narayanan smiling outdoors" width="750" height="1000">
-        </div>
-        <div class="badge" aria-hidden="true">
-          <svg class="ring" viewBox="0 0 132 132">
-            <defs><path id="circle" d="M66,66 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>
-            <text font-family="Inter, sans-serif" font-size="12.5" font-weight="700" letter-spacing="3.2" fill="currentColor">
-              <textPath href="#circle">SIDE QUESTS ✦ SIDE QUESTS ✦</textPath>
-            </text>
-          </svg>
-          <span class="compass">🧭</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="ticker" aria-hidden="true">
-      <div class="track">
-        <span>Hardware security in Rust</span><span>Personal news digests</span><span>Retrieval-augmented generation</span><span>Guardrails for AI agents</span><span>Things I find interesting</span>
-        <span>Hardware security in Rust</span><span>Personal news digests</span><span>Retrieval-augmented generation</span><span>Guardrails for AI agents</span><span>Things I find interesting</span>
-      </div>
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="#quests" class="hide-sm">Quests</a>
+        <a href="#journey" class="hide-sm">Journey</a>
+        <a href="#subscribe" class="subscribe-link">Subscribe</a>
+        <button id="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+      </nav>
     </div>
   </header>
 
+  <div class="hero">
+    <div class="grid">
+      <h1>Rachana<br>Murali<br>Narayanan</h1>
+      <figure class="photo">
+        <img src="assets/images/rachana.jpg" alt="Rachana Murali Narayanan" width="750" height="1000">
+      </figure>
+      <div class="intro">
+        <p class="label red">Side Quests</p>
+        <p>My experiments with things I find interesting, from security chips to news digests to whatever catches my eye next.</p>
+      </div>
+    </div>
+  </div>
+
   <main>
 
-    <!-- Quests -->
     <section id="quests">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">The tracklist</p>
-            <h2>Latest <em>quests</em></h2>
-          </div>
-          <p class="section-note">Each one started as "I wonder if…" and ended with something that works.</p>
+      <div class="grid">
+        <div class="sec-label">
+          <div class="num">01</div>
+          <p class="label">Quests</p>
         </div>
-
-        <div class="tracks">
-          <a class="track-card" href="posts/news-aggregator.html">
-            <div class="cover">
-              <img src="assets/images/news-digest-card.png" alt="The Morning Column news digest" style="object-position: top">
-              <span class="no">No. 01</span>
-            </div>
-            <div class="track-body">
-              <span class="tag t1">Personalization</span>
-              <h3>Building My Own Morning Newspaper</h3>
-              <p>A daily news digest from free publications that follows developing stories, learns from a thumbs up or down, and costs nothing to run.</p>
-              <div class="meta"><span>Oct 17, 2026 · 8 min</span><span class="play">Read →</span></div>
-            </div>
-          </a>
-
-          <a class="track-card" href="posts/agent-device-security.html">
-            <div class="cover">
-              <img src="assets/images/agent-hsm.svg" alt="Device security for AI agents">
-              <span class="no">No. 02</span>
-            </div>
-            <div class="track-body">
-              <span class="tag t2">Device Security</span>
-              <h3>A Security Chip That Says No to AI Agents</h3>
-              <p>A Rust HSM on a $5 board that enforces an agent's spending rules inside the chip. It blocked 8 of 8 attacks where the conventional setup blocked 1.</p>
-              <div class="meta"><span>Oct 16, 2026 · 10 min</span><span class="play">Read →</span></div>
-            </div>
-          </a>
-
-          <a class="track-card" href="posts/my-experiments-with-rag.html">
-            <div class="cover">
-              <img src="assets/images/rag-intro.png" alt="My Experiments with RAG" style="object-position: 20% center">
-              <span class="no">No. 03</span>
-            </div>
-            <div class="track-body">
-              <span class="tag t3">ML Research</span>
-              <h3>My Experiments with RAG</h3>
-              <p>Retrieval-Augmented Generation is shaping the new frontier of grounded language models. Here's what I learned implementing it from scratch.</p>
-              <div class="meta"><span>Oct 25, 2025 · 12 min</span><span class="play">Read →</span></div>
-            </div>
-          </a>
+        <div class="sec-body">
+          <ol class="index">
+            <li>
+              <a href="posts/news-aggregator.html">
+                <span class="n">01</span>
+                <div>
+                  <h3>Building My Own Morning Newspaper</h3>
+                  <p>A daily news digest from free publications that follows developing stories, learns from a thumbs up or down, and costs nothing to run.</p>
+                  <p class="meta"><span class="red">Personalization</span><span>Oct 17, 2026</span><span>8 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/news-digest-card.png" alt="" style="object-position: top"></div>
+              </a>
+            </li>
+            <li>
+              <a href="posts/agent-device-security.html">
+                <span class="n">02</span>
+                <div>
+                  <h3>A Security Chip That Says No to AI Agents</h3>
+                  <p>A Rust HSM on a $5 board that enforces an agent's spending rules inside the chip. It blocked 8 of 8 attacks where the conventional setup blocked 1.</p>
+                  <p class="meta"><span class="red">Device Security</span><span>Oct 16, 2026</span><span>10 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/agent-hsm.svg" alt=""></div>
+              </a>
+            </li>
+            <li>
+              <a href="posts/my-experiments-with-rag.html">
+                <span class="n">03</span>
+                <div>
+                  <h3>My Experiments with RAG</h3>
+                  <p>Retrieval-Augmented Generation is shaping the new frontier of grounded language models. Here's what I learned implementing it from scratch.</p>
+                  <p class="meta"><span class="red">ML Research</span><span>Oct 25, 2025</span><span>12 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/rag-intro.png" alt="" style="object-position: 20% center"></div>
+              </a>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
 
-    <!-- Journey -->
-    <section id="journey" class="journey">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Journey &amp; experience</p>
-            <h2>Where I've <em>been</em></h2>
-          </div>
+    <section id="journey">
+      <div class="grid">
+        <div class="sec-label">
+          <div class="num">02</div>
+          <p class="label">Journey &amp; Experience</p>
         </div>
-
-        <div class="logos">
-          <div class="logo-cell">
-            <div class="mark">
-              <svg width="56" height="56" viewBox="0 0 200 200" aria-hidden="true">
-                <rect width="200" height="200" rx="16" fill="#C41230"/>
-                <text x="100" y="115" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="-2">CMU</text>
-                <text x="100" y="145" font-family="Georgia, serif" font-size="14" fill="white" text-anchor="middle" letter-spacing="1">CARNEGIE MELLON</text>
-              </svg>
+        <div class="sec-body">
+          <div class="logos">
+            <div class="logo-cell">
+              <div class="mark">
+                <svg width="52" height="52" viewBox="0 0 200 200" aria-hidden="true">
+                  <rect width="200" height="200" fill="#C41230"/>
+                  <text x="100" y="115" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="-2">CMU</text>
+                  <text x="100" y="145" font-family="Georgia, serif" font-size="14" fill="white" text-anchor="middle" letter-spacing="1">CARNEGIE MELLON</text>
+                </svg>
+              </div>
+              <span>Carnegie Mellon</span>
             </div>
-            <span>Carnegie Mellon</span>
-          </div>
-          <div class="logo-cell">
-            <div class="mark ink">
-              <svg width="120" height="22" viewBox="0 0 160 28" aria-hidden="true">
-                <text x="80" y="22" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="10" fill="currentColor" text-anchor="middle">TESLA</text>
-              </svg>
+            <div class="logo-cell">
+              <div class="mark mono">
+                <svg width="104" height="20" viewBox="0 0 160 28" aria-hidden="true">
+                  <text x="0" y="22" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="10" fill="currentColor">TESLA</text>
+                </svg>
+              </div>
+              <span>Tesla</span>
             </div>
-            <span>Tesla</span>
-          </div>
-          <div class="logo-cell">
-            <div class="mark">
-              <svg width="56" height="56" viewBox="0 0 200 200" aria-hidden="true">
-                <circle cx="100" cy="100" r="100" fill="#E32526"/>
-                <text x="100" y="132" font-family="Arial, sans-serif" font-size="90" font-weight="bold" fill="white" text-anchor="middle">F5</text>
-              </svg>
+            <div class="logo-cell">
+              <div class="mark">
+                <svg width="52" height="52" viewBox="0 0 200 200" aria-hidden="true">
+                  <circle cx="100" cy="100" r="100" fill="#E32526"/>
+                  <text x="100" y="132" font-family="Arial, sans-serif" font-size="90" font-weight="bold" fill="white" text-anchor="middle">F5</text>
+                </svg>
+              </div>
+              <span>F5 Networks</span>
             </div>
-            <span>F5 Networks</span>
-          </div>
-          <div class="logo-cell">
-            <div class="mark ink">
-              <svg width="100" height="40" viewBox="0 0 150 60" aria-hidden="true">
-                <text x="5" y="35" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="currentColor" letter-spacing="2">amazon</text>
-                <path d="M130 42c-15 11-37 17-55 17-26 0-49-10-67-26-1.4-1.3-.2-3 1.5-2 19 11 43 18 67 18 16.5 0 35-3.4 51-10.5 2.5-1 4.7 1.7 2.2 3.6z" fill="#FF9900"/>
-                <path d="M137 36c-1.9-2.4-12.6-1.1-17.5-.6-.1 0-.3-.2-.1-.4 8.6-6 22.6-4.3 24.2-2.3 1.6 2-.4 16.2-8.5 23-.2.2-.5.1-.4-.2 1.8-4.5 5.9-14.7 4-17.1z" fill="#FF9900"/>
-              </svg>
+            <div class="logo-cell">
+              <div class="mark mono">
+                <svg width="96" height="38" viewBox="0 0 150 60" aria-hidden="true">
+                  <text x="5" y="35" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="currentColor" letter-spacing="2">amazon</text>
+                  <path d="M130 42c-15 11-37 17-55 17-26 0-49-10-67-26-1.4-1.3-.2-3 1.5-2 19 11 43 18 67 18 16.5 0 35-3.4 51-10.5 2.5-1 4.7 1.7 2.2 3.6z" fill="#FF9900"/>
+                  <path d="M137 36c-1.9-2.4-12.6-1.1-17.5-.6-.1 0-.3-.2-.1-.4 8.6-6 22.6-4.3 24.2-2.3 1.6 2-.4 16.2-8.5 23-.2.2-.5.1-.4-.2 1.8-4.5 5.9-14.7 4-17.1z" fill="#FF9900"/>
+                </svg>
+              </div>
+              <span>Amazon</span>
             </div>
-            <span>Amazon</span>
-          </div>
-          <div class="logo-cell">
-            <div class="mark">
-              <svg width="48" height="48" viewBox="0 0 23 23" aria-hidden="true">
-                <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
-                <rect x="12" y="1" width="10" height="10" fill="#7FBA00"/>
-                <rect x="1" y="12" width="10" height="10" fill="#00A4EF"/>
-                <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
-              </svg>
+            <div class="logo-cell">
+              <div class="mark">
+                <svg width="44" height="44" viewBox="0 0 23 23" aria-hidden="true">
+                  <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
+                  <rect x="12" y="1" width="10" height="10" fill="#7FBA00"/>
+                  <rect x="1" y="12" width="10" height="10" fill="#00A4EF"/>
+                  <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
+                </svg>
+              </div>
+              <span>Microsoft</span>
             </div>
-            <span>Microsoft</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Subscribe -->
     <section id="subscribe" class="subscribe">
-      <div class="wrap">
-        <div class="panel">
-          <h2>Come along on the <em>next quest</em></h2>
-          <p>Get new side quests straight to your inbox.</p>
+      <div class="grid">
+        <div class="sec-label">
+          <div class="num">03</div>
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2>Get the next quest<br>in your inbox.</h2>
           <form id="newsletter-form">
             <input type="email" id="email-input" placeholder="your@email.com" aria-label="Email address" required />
-            <button type="submit" class="btn">Subscribe</button>
+            <button type="submit">Subscribe</button>
           </form>
           <small>Join 2,000+ curious readers</small>
         </div>
@@ -477,22 +357,28 @@
   </main>
 
   <footer>
-    <div class="wrap">
-      <span class="brand">🧭 Side <em>Quests</em></span>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
       <div class="links">
         <a href="https://github.com/rachmurali02">GitHub</a>
         <a href="#quests">Quests</a>
         <a href="#subscribe">Newsletter</a>
       </div>
-      <span>© 2026 Rachana Murali Narayanan</span>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
     </div>
   </footer>
 
   <script>
     // Dark mode toggle
-    document.getElementById('theme-toggle').addEventListener('click', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      themeToggle.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
       const isDark = document.documentElement.classList.toggle('dark');
       try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
     });
 
     // Newsletter subscription handling
@@ -537,7 +423,7 @@
       }
     });
 
-    // Subscribe links scroll to the newsletter and focus the email field
+    // Subscribe link scrolls to the newsletter and focuses the email field
     document.querySelectorAll('.subscribe-link').forEach(link => {
       link.addEventListener('click', () => setTimeout(() => emailInput.focus({ preventScroll: true }), 500));
     });
