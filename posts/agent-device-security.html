@@ -7,7 +7,7 @@
   <meta name="description" content="AI agents are starting to sign payments, messages and installs on our behalf. I built a hardware security module in Rust that checks the agent&#x27;s rules itself, so a hacked computer can&#x27;t talk it into misusing a key." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
+    if (window.tailwind) tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
     document.documentElement.classList.add('js');
     try {
       if (localStorage.theme === 'dark' ||
@@ -29,7 +29,7 @@
         <a href="/#quests" class="hide-sm">Quests</a>
         <a href="/#journey" class="hide-sm">Journey</a>
         <a href="/#subscribe">Subscribe</a>
-        <button id="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
       </nav>
     </div>
   </header>
@@ -184,7 +184,9 @@ HSM checks, in order:  allowed kind? → under the per-payment limit? →
   <script>
     const themeToggle = document.getElementById('theme-toggle');
     function syncToggle() {
-      themeToggle.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
     }
     syncToggle();
     themeToggle.addEventListener('click', () => {

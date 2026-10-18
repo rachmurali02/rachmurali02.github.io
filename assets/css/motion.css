@@ -47,6 +47,13 @@ html.js [data-rule].in::before { transform: scaleX(1); }
 }
 .top nav a:hover, footer .links a:hover, .back:hover { background-size: 100% 1px; }
 
+/* Compass emoji doubles as the dark mode switch and turns when it's used */
+.theme-emoji { font-size: 20px; line-height: 1; }
+.theme-emoji span { display: inline-block; transition: transform .6s var(--ease-draw); }
+.theme-emoji:hover span { transform: rotate(-20deg); }
+html.dark .theme-emoji span { transform: rotate(180deg); }
+html.dark .theme-emoji:hover span { transform: rotate(160deg); }
+
 @keyframes draw { from { transform: scaleX(0); } }
 @keyframes rise { from { transform: translateY(105%); } }
 @keyframes wipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }

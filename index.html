@@ -217,7 +217,7 @@
         <a href="#quests" class="hide-sm">Quests</a>
         <a href="#journey" class="hide-sm">Journey</a>
         <a href="#subscribe" class="subscribe-link">Subscribe</a>
-        <button id="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
       </nav>
     </div>
   </header>
@@ -379,7 +379,9 @@
     // Dark mode toggle
     const themeToggle = document.getElementById('theme-toggle');
     function syncToggle() {
-      themeToggle.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
     }
     syncToggle();
     themeToggle.addEventListener('click', () => {

@@ -7,7 +7,7 @@
   <meta name="description" content="Retrieval-Augmented Generation (RAG) is shaping the new frontier of grounded language models. Here&#x27;s what I learned implementing it from scratch." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
+    if (window.tailwind) tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
     document.documentElement.classList.add('js');
     try {
       if (localStorage.theme === 'dark' ||
@@ -29,7 +29,7 @@
         <a href="/#quests" class="hide-sm">Quests</a>
         <a href="/#journey" class="hide-sm">Journey</a>
         <a href="/#subscribe">Subscribe</a>
-        <button id="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
       </nav>
     </div>
   </header>
@@ -213,7 +213,9 @@
   <script>
     const themeToggle = document.getElementById('theme-toggle');
     function syncToggle() {
-      themeToggle.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
     }
     syncToggle();
     themeToggle.addEventListener('click', () => {
