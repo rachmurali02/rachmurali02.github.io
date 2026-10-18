@@ -140,7 +140,7 @@ main > .grid { border-top: 1px solid var(--hair); padding-top: 48px; padding-bot
 footer { border-top: 2px solid var(--rule); }
 footer .grid { padding-top: 20px; padding-bottom: 40px; font-size: 14px; }
 footer .wordmark { grid-column: 1 / 4; font-size: 14px; }
-footer .links { grid-column: 4 / 10; display: flex; gap: 32px; }
+footer .links { grid-column: 4 / 10; display: flex; flex-wrap: wrap; gap: 8px 32px; }
 footer .links a:hover { color: var(--red); }
 footer .copy { grid-column: 10 / 13; text-align: right; color: var(--muted); }
 
