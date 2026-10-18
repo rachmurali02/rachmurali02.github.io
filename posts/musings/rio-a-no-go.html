@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rio a no go? | Side Quests</title>
+  <meta name="description" content="The recent massive outbreak of the Zika Virus has haunted many, startled a few and yet to affect some. Declared a global emergency by the World…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Olympics</p>
+        <p class="label"><time datetime="2016-02-02">Feb 2, 2016</time></p>
+        <p class="label muted">3 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Rio a no go?</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>The recent massive outbreak of the Zika Virus has haunted many, startled a few and yet to affect some. Declared a global emergency by the World Health Organization, this is yet another epidemic caused by our fellow mosquito pests, <em>Aedes aegypti</em> to be precise. Along with threats to seizures and coordination issues, the close forged link to <em>Microcephaly</em> poses a challenge to the holistic development of the baby. The symptoms of having abnormally small heads signifying slow differentiation and growth of the brain brings out other socio-economic problems too.</p>
+        <p>Just days away from Rio 2016, the much awaited Olympic event of the year, this massive blow to Latin American countries has been a frequent topic in the news. This premonition of a disastrous infection, spreading across Latin Americans and billions of spectators is something to ponder about. But firstly, will we really have the numbers we expected, at the games? The unexpected outbreak of such a ghastly disease not only affects the current generation, but also causes mutations through recessive alleles in future generations as well. A connected detonating bomb that has no fixed time as to when it will blow up recapitulates the scenario of a Zika Virus infection!</p>
+        <p>The implications of this epidemic stretch from anatomical to economical deficits. Amidst a Brazilian recession period, the nation still struggles to stay within the liberal budget of 1.9 billion dollars. Along with a conflict between private and public sector funds, an overall net saving is about 10%. Exclusive of benefits the tourism and communication sectors will make, the net profit incentive seems to be less. Nevertheless, financial investments from eager entrepreneurs will fuel in post games too. By usual trends this should create job opportunities and bring down levels of poverty. Though on the contrary the <em>Aedes </em>royalty may create troubled waters for its economy.</p>
+        <p>Conversely, these few months leading up to the games could witness a historical breakthrough in medical science and technology. The much popular engineered gene drive system using CRISPR and nuclease cas9 may develop for the long run, but effective methods of proper hygiene and sanitation in Guanabara Bay may curb the course of infection quickly. The pathogen may be eradicated though well known forms of contact tracing and quarantining. But on rational denominations, this completely lies at the hands of government and sport authorities to multi-task between preventing transmission and governing crime and robbery during this time. An overwhelming plethora of tasks does lie ahead of them, but this could open new doors for intriguing history textbooks for future generations and gain prominence for a growing nation.Will this be yet another Moscow Olympics 1980 that saw 65 nations boycott due to the Soviet invasion of Afghanistan or will fans see another Bolt across the finish line of a 100m dash?</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2016/02/rio-no-go.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

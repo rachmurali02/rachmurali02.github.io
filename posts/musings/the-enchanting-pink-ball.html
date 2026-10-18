@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The enchanting pink ball | Side Quests</title>
+  <meta name="description" content="The Border Gavaskar trophy is always a passionate match up. Since I first began watching cricket, it has etched itself into the fabric of my version…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Cricket</p>
+        <p class="label"><time datetime="2024-12-04">Dec 4, 2024</time></p>
+        <p class="label muted">2 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>The enchanting pink ball</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>The Border Gavaskar trophy is always a passionate match up.</p>
+        <p>Since I first began watching cricket, it has etched itself into the fabric of my version of cricket, weaving tales of resilience and unforgettable moments. From Hussey and Clarke's 200+ run parternships to the rhythmic bullets hurled by Mitch Johnson, it's always been exciting to see India being tested in conditions they were less familiar with. The past couple years has witnessed a very starkly different approach from both sides: a more flamboyant flourish from India and a duller sombre cadence from Australia.</p>
+        <p>It's been an era when the bats are an extension of the Indian will to conquer foreign landscapes. The Indian openers face the bouncing orb with fearless defiance, not cautious hesitation. They have embarked on historical conquests at coveted venues that have not seen another victor including the famous run chase at the Gabba, and the Bumrah led victory last week in Perth. Yes, we saw India register their lowest score last series, but we saw a young side fight fire with fire and it was a wicked turnaround that no Australian would have fathomed. It's almost like the unchallenged beasts of cricket prowling the savannas of Test arenas are now being cornered by the new kids on the block. Is this the end to a golden generation of Australian cricketers? Are we going to finish what Tendular started out to do as a solitary warrior in 1998? Is the quiet dominance of Dravid and Laxman morphing itself into a fearless and bold brigade?</p>
+        <p>India no longer plays to survive, but to dominate, and the Border-Gavaskar Trophy is where we metaphorically see this rivalry as the story of India, no longer prey, learning to hunt, growing its pack, and taking the fight to the lion's den. When Adelaide rolls around, shadows of that ominous pink ball will continue to whisper, and try to lure our men treacherously at the drivable 5th stump, but this India looks ready. With Rahul's steady resolve, Kohli's resurgent form, Jaiswal's run fest, Pant's exciting T20 tactics, Rana's blows, and a bruised but unbroken Indian line up, the pink ball itself seems destined to carve its luminous trajectory into yet another chapter of India's formidable cricketing mosaic.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2024/12/the-enchanting-pink-ball.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stones and throws | Side Quests</title>
+  <meta name="description" content="He flicks. It drowns. He scrambles to dig up another pebble. The five-year-old in him is furious. He needs it to bounce — at least once. Intuitively…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Vignette</p>
+        <p class="label"><time datetime="2025-04-14">Apr 14, 2025</time></p>
+        <p class="label muted">2 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Stones and throws</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p><strong>He flicks. It drowns.</strong></p>
+        <p>He scrambles to dig up another pebble. The five-year-old in him is furious. He <em>needs</em> it to bounce — at least once.</p>
+        <p>Intuitively, or more formally, the gyroscopic effect, nudges him towards a flatter one as opposed to a stubby one because he knows he can stabilize it. 'Yes Newton, what starts in motion, stays in motion'.</p>
+        <p>He tosses it up casually, almost like the opportune ways India lost 14 international cricket tosses in a row. There is an air of nonchalance, but he's calmingly reassured this time that he picked the right one. It plummets into the water, meeting the same fate as its predecessor. He looks like a portmanteau of confused and puzzled or as urban dictionary would coin it, 'confuzzled'. Muscle memory <strong>left the chat</strong>.</p>
+        <p>His friend flicks. For some reason, they never try at the same time. even though it's a large body of water with many lanes for a skipping stones olympic event. They cheer each other with gasps, <em>'woots'</em>, and a few sarcastic jeers keeping their spirits high. The friend scores a golden. Probably not even close to his childhood record, but he is elated because he is a top scorer amongst a couple corporate boys. The friend looks ready to dive to retrieve his winning pebble like a trophy.</p>
+        <p>Now, our protagonist feels the pressure to outperform. He dials in. He locks in. He is more calculated and realizes that technique beats the stone shape. He opts for a low submarine whip- a classic. It stays low, but it's fast. It glides close to the surface, and skips, <em>one, two, three, and..</em></p>
+        <p>It's not victory. It's a tie. He picks another pebble, for another try at the unachievable fourth skip that evening? But, no, he just hurls it as far as he can instead. He's moved on. It's a new game - Distance.</p>
+        <p>They’re cheering again — with gasps and '<em>woots'</em> — resetting the scoreboard for a brand new competitive quirk.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2025/04/stones-and-throws.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

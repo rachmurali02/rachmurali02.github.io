@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#f4f1ea"/>
+  <rect width="400" height="10" fill="#e2231a"/>
+  <text x="28" y="78" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">&quot;Hey Siri, Take</tspan><tspan x="28" dy="38">me home&quot;</tspan></text>
+  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
+  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">ESSAY</text>
+  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2024</text>
+</svg>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My trip to the R.T.O ( Regional Transport Office ) | Side Quests</title>
+  <meta name="description" content="It was a bright, dusty morning filled with honking cars, clinking bicycles and women calling out people to buy their flowers. In Madurai, this was a…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Humour</p>
+        <p class="label"><time datetime="2016-12-12">Dec 12, 2016</time></p>
+        <p class="label muted">4 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>My trip to the R.T.O ( Regional Transport Office )</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>It was a bright, dusty morning filled with honking cars, clinking bicycles and women calling out people to buy their flowers. In Madurai, this was a lazy day where residents could go about their quotidian chores, and that meant I could wake up and start to rock my swing at home. But, my cheeky dad did not leave me to my simple satisfaction.</p>
+        <p>He surreptitiously plotted a plan to get me out of the house. Instead of heading to the dentist, I was forced to tag along with my dad to the R.T.O, where he would sort out his never ending formalities of securing a workable license. While I was eager to get my braces off, little did I realize that I had much more in stock at the Regional Transport Office. With all the hustle and bustle of cars moving haphazardly, I was intrigued by the way in which this place was referred to. As I heard about the authority it holds, I tried to erase the strident effect of the R.T.O acronym. But, I could never completely set my mind to rest as I was aware of the number of road accidents that occur on an hourly basis.</p>
+        <p>The gates are open. The rusted iron of the gate has been hastily painted with thick white paint. Dried patches of it stick to the surrounding walls and create a horrific sight of white and cream so much that it looks like people have spilt <em>Haldi doodh </em>on it. (turmeric milk) The security guard is the most resourceful guy I have seen. He is not there. I am presuming he is on his aimless stroll to the coffee stall nearby. As I walk in to the premises, heaps of sand rush in and out of my slippers. Tiny rocks pierced my skin, but the rush of people pushes me further in. I am more concerned about breaking my bones in that peak hour crash.</p>
+        <p>We were told to climb up an uneven staircase, that had a human size step width. Patiently, my dad climbed the roundabout staircase, not sighing or grumbling one bit. We set foot on a fragile piece of flooring. The sight is unforgettable. The supposedly white grills of plastic, that filter the atrocities of office life, is a scarring memory that I would like to wash away immediately. Ancient books, that tie very closely to antique pieces preserved from the Big Bang, are plates for the men to enjoy their boondi, murukku, tea and coffee. The plastic filter outside acts like a mesh and traps all dust particles on its porous membranes. In the confusion and chaos, I became immune to the soaring decibels.</p>
+        <p>The man at the front desk crunches intermittently and tells us to head back down. Well the chaos may have subsided, but there was an authoritarian rule awaiting us. There were long benches,that unstably and tumultuously cradled from one leg to another. My dad was ordered to keep his form underneath and turned the other way. Cramming on to one of those benches was the only option in that claustrophobic environment. The little man was given a plastic chair and a rocking table to conduct his interrogation. A complete despot... If any document was missing, that tyrant put men on a race across town to bring them, photocopy them or even issue them anew! Not only did he have a repugnant air to his persona, but he was the only one that had the fan running above him! While we dripped of sweat, he remained under the protection of apparently cool air.</p>
+        <p>Irrespective of whether my dad got his driving license or not (HE DID), for the umpteenth time on renewal, the dirt, odor, blinded meshes, piles of paper and intimidating fans attacked my senses. For one of the first times, I was glad to be scaling my teeth with my dentist!!</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2016/12/my-trip-to-rto.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

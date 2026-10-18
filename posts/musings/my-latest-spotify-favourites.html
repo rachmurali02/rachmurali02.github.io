@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My latest Spotify favourites | Side Quests</title>
+  <meta name="description" content="Spotifying all day.. Thokoloshi by Ehrling / This vibey dynamic beat does not have a dull moment. &quot;Thokoloshi&quot; originating from South Africa…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Music</p>
+        <p class="label"><time datetime="2024-04-06">Apr 6, 2024</time></p>
+        <p class="label muted">2 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>My latest Spotify favourites</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p><strong> Spotifying all day..</strong></p>
+        <p><strong>Thokoloshi by Ehrling </strong></p>
+        <p>This vibey dynamic beat does not have a dull moment. "Thokoloshi" originating from South Africa etymologically refers to a water spirit. The chorus is sung by a few soft young voices, echoing the "dwarf" sentiment of "Thokoloshi". The background score amplifies the difference between the softer voices, and the instrumentation remarkably well too. The rhythm exudes playfulness, mirroring the michief even in its chords. Despite malevolent connotations often drawn with the title, this tune is undeniably lighthearted, and chirpy.</p>
+        <p><strong>Good as hell (feat. Ariana Grande) by Lizzo`</strong></p>
+        <p class="verse">"<em>So girl if he dont love you anymore, </em><br>
+<em>Then walk your fine ass out the door"</em></p>
+        <p>One of my favourite anthems on self love that I recently revisited. I think the remix with Ariana Grande adds alot more weight to girls supporting each other in crisis. I relate alot to a hair toss because of how confident and aloof it seems at the same time. There are frequent interludes of "Feelin good as hell" echoed through the song, self affirming, and uplifting at the same time. The little giggle between Lizzo and Ariana gives the song such a natural endearing finish.</p>
+        <p><strong>True Stories by AP Dhillon and Shinda Kahlon</strong></p>
+        <p>There is frivolity and constant bounce, but I dont think a Spotify listening session is complete without a Punjabi banger. He is bejewelled in rubies, she is decked from head to toe in Dior, and its a series of brands name-dropped to reflect a glamorous lifestyle. The main problem that he leaves us with is that he is in different places, so its hard for him to pick a "facetime call". Its ludicrous when you realize this is just a timezone issue. Its flippant, its a short burst of lilting punjabi slang, and it leaves you constantly hitting the replay button.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2024/04/my-latest-spotify-favourites.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

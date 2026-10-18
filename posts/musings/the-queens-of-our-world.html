@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Queens of our world | Side Quests</title>
+  <meta name="description" content="At the age of 7, my parents welcomed me into the world of &quot;Amar Chitra Kathas&quot;, comic books of Indian regional epics and mythological tales. I still…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Film</p>
+        <p class="label"><time datetime="2019-02-03">Feb 3, 2019</time></p>
+        <p class="label muted">2 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>The Queens of our world</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>At the age of 7, my parents welcomed me into the world of "Amar Chitra Kathas", comic books of Indian regional epics and mythological tales. I still fondly remember flipping and re-flipping through my tattered comic of "Rani Lakshmibai: Queen of Jhansi". True to the "amar"(undying) quality of its kathas (stories), the comic immortalized the story of the courageous Queen's life.</p>
+        <p>She had permeated my thoughts to such an extent that when I thought of freedom-fighters or revolutionaries, I always thought of her. She was unique, individualistic, valorous at war, and had the perspicacity to understand the vulnerability of the nation's socio-political environment in years to come. Be it our history favourites, Nana Sahib, Peshwa of the Maratha Empire, or Tantia Tope, one of the prominent generals in the Indian War of Independence, Manu, as the Queen was fondly called, was a step ahead in preserving the Indian civilization.</p>
+        <p>As I watched "Manikarnika" yesterday, memories of the Amar Chitra Katha cover warped my mind. I remembered the cover flaming with the potrait of a fearless woman, riding a horse, revolutionizing the meaning of "swordsmanship" and bravery. It was no longer an art or a concept limited to manhood, but it was worn proudly by a woman of substance like her. The comic had concretized the admirable other-worldy passion of the Queen, and the movie had expectations to live up to.</p>
+        <p>The historical setting of Jhansi, and the clarion calls to save a dying civilization set the stage for Kangana Ranaut to blaze the screen with her fervour. Kangana, often known for her critically acclaimed film, "Queen" has always been one of my favourites because of her significant roles in an industry that otherwise suffocates with male-dominated movies. She arrested her presence in every shot, and transitioned into scenes with avid elegance. Her dialogues were replete with childish innocence to break the shackles that tethered the country, and generosity towards reconciling with her enemies.</p>
+        <p>Kangana stands as a symbol of women empowerment. She continues to stand up against nepotism tyrants and other social injustices. But, Kangana represents just one of the Rani Lakshmibais of our generation. Kangana, Michelle Obama, Indira Nooyi and Malala Yusoufzai are few gritty women breaking stereotypes in their fields. Their sacrifices and steely determination will continue to inspire young women like me.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2019/02/the-queens-of-our-world.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>
