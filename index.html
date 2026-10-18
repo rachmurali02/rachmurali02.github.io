@@ -6,6 +6,7 @@
   <title>Side Quests | Rachana Murali Narayanan</title>
   <meta name="description" content="Rachana Murali Narayanan's experiments with things she finds interesting." />
   <script>
+    document.documentElement.classList.add('js');
     try {
       if (localStorage.theme === 'dark' ||
           (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -14,6 +15,7 @@
     } catch (e) {}
   </script>
 
+  <link rel="stylesheet" href="assets/css/motion.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -86,6 +88,10 @@
 
     /* Sections */
     section { border-top: 2px solid var(--rule); }
+    .index h3 { transition: color .25s ease, transform .45s var(--ease-out); }
+    .index a:hover h3 { transform: translateX(8px); }
+    .index .n { transition: color .25s ease; }
+    .index a:hover .n { color: var(--red); }
     section > .grid { padding-top: 24px; padding-bottom: 96px; }
     .sec-label { grid-column: 1 / 4; }
     .sec-label .num { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -.04em; color: var(--red); }
@@ -218,11 +224,11 @@
 
   <div class="hero">
     <div class="grid">
-      <h1>Rachana<br>Murali<br>Narayanan</h1>
-      <figure class="photo">
+      <h1><span class="line" style="--i:0"><span>Rachana</span></span><span class="line" style="--i:1"><span>Murali</span></span><span class="line" style="--i:2"><span>Narayanan</span></span></h1>
+      <figure class="photo wipe">
         <img src="assets/images/rachana.jpg" alt="Rachana Murali Narayanan" width="750" height="1000">
       </figure>
-      <div class="intro">
+      <div class="intro enter" style="--d:.75s">
         <p class="label red">Side Quests</p>
         <p>My experiments with things I find interesting, from security chips to news digests to whatever catches my eye next.</p>
       </div>
@@ -231,15 +237,15 @@
 
   <main>
 
-    <section id="quests">
+    <section id="quests" data-rule>
       <div class="grid">
-        <div class="sec-label">
+        <div class="sec-label" data-reveal>
           <div class="num">01</div>
           <p class="label">Quests</p>
         </div>
         <div class="sec-body">
           <ol class="index">
-            <li>
+            <li data-reveal style="--d:0.0s">
               <a href="posts/news-aggregator.html">
                 <span class="n">01</span>
                 <div>
@@ -250,7 +256,7 @@
                 <div class="thumb"><img src="assets/images/news-digest-card.png" alt="" style="object-position: top"></div>
               </a>
             </li>
-            <li>
+            <li data-reveal style="--d:0.1s">
               <a href="posts/agent-device-security.html">
                 <span class="n">02</span>
                 <div>
@@ -261,7 +267,7 @@
                 <div class="thumb"><img src="assets/images/agent-hsm.svg" alt=""></div>
               </a>
             </li>
-            <li>
+            <li data-reveal style="--d:0.2s">
               <a href="posts/my-experiments-with-rag.html">
                 <span class="n">03</span>
                 <div>
@@ -277,15 +283,15 @@
       </div>
     </section>
 
-    <section id="journey">
+    <section id="journey" data-rule>
       <div class="grid">
-        <div class="sec-label">
+        <div class="sec-label" data-reveal>
           <div class="num">02</div>
           <p class="label">Journey &amp; Experience</p>
         </div>
         <div class="sec-body">
           <div class="logos">
-            <div class="logo-cell">
+            <div class="logo-cell" data-reveal style="--d:0.00s">
               <div class="mark">
                 <svg width="52" height="52" viewBox="0 0 200 200" aria-hidden="true">
                   <rect width="200" height="200" fill="#C41230"/>
@@ -295,7 +301,7 @@
               </div>
               <span>Carnegie Mellon</span>
             </div>
-            <div class="logo-cell">
+            <div class="logo-cell" data-reveal style="--d:0.08s">
               <div class="mark mono">
                 <svg width="104" height="20" viewBox="0 0 160 28" aria-hidden="true">
                   <text x="0" y="22" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="10" fill="currentColor">TESLA</text>
@@ -303,7 +309,7 @@
               </div>
               <span>Tesla</span>
             </div>
-            <div class="logo-cell">
+            <div class="logo-cell" data-reveal style="--d:0.16s">
               <div class="mark">
                 <svg width="52" height="52" viewBox="0 0 200 200" aria-hidden="true">
                   <circle cx="100" cy="100" r="100" fill="#E32526"/>
@@ -312,7 +318,7 @@
               </div>
               <span>F5 Networks</span>
             </div>
-            <div class="logo-cell">
+            <div class="logo-cell" data-reveal style="--d:0.24s">
               <div class="mark mono">
                 <svg width="96" height="38" viewBox="0 0 150 60" aria-hidden="true">
                   <text x="5" y="35" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="currentColor" letter-spacing="2">amazon</text>
@@ -322,7 +328,7 @@
               </div>
               <span>Amazon</span>
             </div>
-            <div class="logo-cell">
+            <div class="logo-cell" data-reveal style="--d:0.32s">
               <div class="mark">
                 <svg width="44" height="44" viewBox="0 0 23 23" aria-hidden="true">
                   <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
@@ -340,13 +346,13 @@
 
     <section id="subscribe" class="subscribe">
       <div class="grid">
-        <div class="sec-label">
+        <div class="sec-label" data-reveal>
           <div class="num">03</div>
           <p class="label">Newsletter</p>
         </div>
         <div class="sec-body">
-          <h2>Get the next quest<br>in your inbox.</h2>
-          <form id="newsletter-form">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <form id="newsletter-form" data-reveal style="--d:.12s">
             <input type="email" id="email-input" placeholder="your@email.com" aria-label="Email address" required />
             <button type="submit">Subscribe</button>
           </form>
@@ -368,6 +374,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/motion.js" defer></script>
   <script>
     // Dark mode toggle
     const themeToggle = document.getElementById('theme-toggle');

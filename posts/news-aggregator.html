@@ -1,115 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Building My Own Morning Newspaper | Side Quests 🧭</title>
+  <title>Building My Own Morning Newspaper | Side Quests</title>
+  <meta name="description" content="A personalised news digest that reads free publications, ranks what matters to me, follows developing stories, learns from a thumbs up or down, and lands in my inbox at 7am. It costs nothing to run." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { darkMode: 'class' };
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
   </script>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    * { font-family: 'Inter', sans-serif; transition: color 0.3s ease, background-color 0.3s ease; }
-    .gradient-text {
-      background: linear-gradient(135deg, #6366f1, #d946ef);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    article h2 { font-size: 2rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem; }
-    article h3 { font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
-    article p { margin-bottom: 1.5rem; line-height: 1.8; }
-    article ul, article ol { margin-bottom: 1.5rem; margin-left: 1.5rem; }
-    article li { margin-bottom: 0.5rem; line-height: 1.8; }
-    article code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
-    .dark article code { background: #1e293b; }
-    article pre { background: #f8fafc; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
-    .dark article pre { background: #0f172a; border-color: #334155; }
-  </style>
+  <link rel="stylesheet" href="../assets/css/post.css" />
+  <link rel="stylesheet" href="../assets/css/motion.css" />
 </head>
 
-<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+<body>
 
-  <!-- Navbar -->
-  <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 dark:bg-slate-900/80 dark:border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <a href="/" class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-600 flex items-center justify-center text-white font-bold text-xl">
-            🧭
-          </div>
-          <span class="text-2xl font-bold tracking-tight">Side Quests</span>
-        </a>
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Home</a>
-          <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Posts</a>
-          <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">About</a>
-          
-          <!-- Theme Toggle -->
-          <button id="theme-toggle" aria-label="Toggle dark mode"
-            class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 2zM4.22 4.22a.75.75 0 011.06 0l1.06 1.06a.75.75 0 11-1.06 1.06L4.22 5.28a.75.75 0 010-1.06zm11.56 0a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zM10 16a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 16z" />
-            </svg>
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 0010.586 10.586z" clip-rule="evenodd" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Article Header -->
-  <header class="pt-32 pb-12 px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-950">
-    <div class="max-w-4xl mx-auto">
-      <a href="/" class="inline-flex items-center text-indigo-300 hover:text-indigo-200 mb-8 group">
-        <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-        Back to Home
-      </a>
-
-      <div class="flex flex-wrap items-center gap-3 mb-6">
-        <span class="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full text-sm font-semibold">Personalization</span>
-        <span class="text-slate-400 text-sm">Oct 17, 2026</span>
-        <span class="text-slate-400 text-sm">• 8 min read</span>
-      </div>
-
-      <h1 class="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-        Building My Own Morning Newspaper
-      </h1>
-
-      <p class="text-xl text-slate-300 leading-relaxed">
-        A personalised news digest that reads free publications, ranks what matters to me, follows developing stories, learns from a thumbs up or down, and lands in my inbox at 7am. It costs nothing to run.
-      </p>
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#quests" class="hide-sm">Quests</a>
+        <a href="/#journey" class="hide-sm">Journey</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+      </nav>
     </div>
   </header>
 
-  <!-- Article Content -->
-  <main class="max-w-4xl mx-auto px-6 lg:px-8 py-16">
-    <article class="prose prose-lg dark:prose-invert">
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/#quests" class="back">← All quests</a>
+        <p class="label red">Personalization</p>
+        <p class="label">Oct 17, 2026</p>
+        <p class="label muted">8 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Building My Own Morning Newspaper</h1>
+        <p class="standfirst">A personalised news digest that reads free publications, ranks what matters to me, follows developing stories, learns from a thumbs up or down, and lands in my inbox at 7am. It costs nothing to run.</p>
+      </div>
+    </div>
+  </div>
 
-      <p class="text-slate-600 dark:text-slate-300">
+  <main>
+    <div class="grid">
+      <article class="post-body enter" style="--d:.5s">
+
+
+      <p>
         I wanted a morning read that felt like a good newspaper: sharp opinion columns and analysis rather than breaking-news churn, on the three things I actually follow (global affairs, science and technology, and real estate). Every app I tried either wanted a subscription, buried the good pieces under paywalls, or optimised for engagement rather than for me. So I built <strong>The Morning Column</strong>.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">What Lands in the Inbox</h2>
+      <h2>What Lands in the Inbox</h2>
 
-      <div class="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-8 items-start mb-8">
-        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 max-h-[640px] overflow-y-auto">
+      <div class="split">
+        <div class="overflow-hidden border max-h-[640px] overflow-y-auto">
           <img src="../assets/images/news-digest-preview.png" alt="Preview of The Morning Column digest email" class="w-full">
         </div>
-        <ul class="text-slate-600 dark:text-slate-300">
+        <ul>
           <li><strong>⏱ The 5-minute briefing.</strong> Five one-line summaries at the top, each linking to its article.</li>
           <li><strong>📈 Developing stories.</strong> Stories that continue coverage from earlier days, with a "Day N" badge, a line on what's new, and a timeline of the earlier pieces.</li>
           <li><strong>🌍 🔬 🏡 Sections.</strong> Two picks each, with a one-line "The gist".</li>
@@ -118,132 +73,110 @@
         </ul>
       </div>
 
-      <h2 class="text-slate-900 dark:text-slate-100">The Pipeline</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>The Pipeline</h2>
+      <p>
         It's a small Python package that runs once a day on GitHub Actions:
       </p>
-      <pre class="text-slate-800 dark:text-slate-200"><code>feedback emails (IMAP) ──► learned preferences ─┐
+      <pre><code>feedback emails (IMAP) ──► learned preferences ─┐
 RSS feeds ──► fetch ──► skip already-sent ──► score (keywords, freshness, opinion boost,
                                               your preferences, developing-story boost)
           ──► developing stories + sections ──► (optional) LLM: briefing, gists, updates, words
           ──► HTML email ──► Gmail SMTP ──► remember what was sent (state.enc)</code></pre>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Ranking Without a Model</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Ranking Without a Model</h2>
+      <p>
         The core ranking is deliberately simple and works with no LLM at all. Each story is matched to a section by keyword hits, then scored by relevance, section weight, freshness (which halves after a day) and a boost for opinion pieces, so columns float above straight news:
       </p>
-      <pre class="text-slate-800 dark:text-slate-200"><code>relevance = base + hits.get(s.section, 0)
+      <pre><code>relevance = base + hits.get(s.section, 0)
 weight = sections[s.section].get("weight", 1.0)
 freshness = 1.0 / (1.0 + age_h / 24)  # halves after a day
 s.score = relevance * weight * freshness * (opinion_boost if s.opinion else 1.0)</code></pre>
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         Picking the top stories per section also prefers a mix of publications, so one prolific feed can't take over a section.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Following a Story Across Days</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Following a Story Across Days</h2>
+      <p>
         The part I'm happiest with is developing stories. Each headline is reduced to its distinctive words (four letters or more, minus a stopword list), and today's headlines are compared with everything sent in the last 21 days. Two headlines belong to the same thread if they share at least two distinctive words, covering at least 40% of the shorter one:
       </p>
-      <pre class="text-slate-800 dark:text-slate-200"><code>def similar(a: set[str], b: set[str]) -> bool:
+      <pre><code>def similar(a: set[str], b: set[str]) -> bool:
     shared = a & b
     return len(shared) >= 2 and len(shared) / max(min(len(a), len(b)), 1) >= 0.4</code></pre>
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         A match joins the most recent matching thread, so the timeline stays coherent, and continuing stories get a score boost. It's crude next to embeddings, but it's transparent, needs no API, and it's surprisingly good at catching "the same story, a day later".
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Learning From a Thumbs Up</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Learning From a Thumbs Up</h2>
+      <p>
         There's no server, so how does a static email learn what I like? Each 👍 / 👎 link is a <code>mailto:</code> that opens a pre-filled email to myself with a tag and the story's ID in the subject. I hit send. The next morning's run reads those emails over IMAP and nudges three kinds of weight:
       </p>
-      <ul class="text-slate-600 dark:text-slate-300">
+      <ul>
         <li><strong>Section</strong> weights move by 0.15 per vote, clamped to 0.5–2.0.</li>
         <li><strong>Publication</strong> weights move by 0.1, clamped to 0.6–1.6.</li>
         <li><strong>Topic words</strong> from the headline gain or lose affinity, capped so one vote can't swing a story too far.</li>
       </ul>
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         The clamps matter: without them, a few enthusiastic votes in a week would turn the digest into a single-topic feed.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Free All the Way Down</h2>
-      <ul class="text-slate-600 dark:text-slate-300">
+      <h2>Free All the Way Down</h2>
+      <ul>
         <li><strong>Sources without paywalls:</strong> The Guardian, The Independent, The Conversation, Al Jazeera, NPR, ProPublica, Ars Technica, Quanta Magazine, Rest of World and Calculated Risk. A <code>blocked_domains</code> list drops links to paywalled sites even when a free feed points to them.</li>
         <li><strong>Free models, optional:</strong> with an OpenRouter key, a free model writes the briefing, gists, developing-story updates and word picks, falling back through a list of other free models. Without one, everything still works on keyword ranking.</li>
         <li><strong>Free compute:</strong> a GitHub Actions cron at 11:07 UTC, about 7am in New York.</li>
       </ul>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Private Data in a Public Repo</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Private Data in a Public Repo</h2>
+      <p>
         The repo is public, but reading habits are personal. SMTP login, recipient and API keys live in <code>credentials.enc</code>, encrypted with Fernet (AES + HMAC). The digest's memory (stories sent, learned preferences, processed feedback, used words) is encrypted with the same key and saved to a separate <code>digest-state</code> branch after each run. The only secret in GitHub is the one decryption key.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">What I Took Away</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>What I Took Away</h2>
+      <p>
         The simplest pieces carried the most weight. Keyword scoring with a freshness decay, word-overlap threading and a bounded feedback loop add up to something that feels personal, and the LLM is a layer on top rather than the foundation. If the free model is down, I still get my paper.
       </p>
-      <p class="text-slate-600 dark:text-slate-300">
-        The code is on GitHub: <a href="https://github.com/rachmurali02/news-aggregator" class="text-indigo-600 dark:text-fuchsia-400 font-semibold hover:underline">rachmurali02/news-aggregator</a>.
+      <p>
+        The code is on GitHub: <a href="https://github.com/rachmurali02/news-aggregator">rachmurali02/news-aggregator</a>.
       </p>
+      </article>
+    </div>
 
-    </article>
-
-    <!-- Author Section -->
-    <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
-      <div class="flex items-center space-x-4">
-        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 to-fuchsia-600 flex items-center justify-center text-white font-bold text-2xl">
-          🧭
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
         </div>
-        <div>
-          <h4 class="font-bold text-lg text-slate-900 dark:text-slate-100">Side Quests</h4>
-          <p class="text-slate-600 dark:text-slate-400">Hands-on experiments with things I find interesting.</p>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
         </div>
       </div>
-    </div>
-
-    <!-- Newsletter CTA -->
-    <div class="mt-16 bg-gradient-to-br from-indigo-600 to-fuchsia-600 rounded-2xl p-10 text-center text-white">
-      <h3 class="text-3xl font-bold mb-3">Enjoyed this post?</h3>
-      <p class="text-lg mb-6 opacity-90">Subscribe to get new side quests delivered to your inbox.</p>
-      <form class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-        <input type="email" placeholder="your@email.com"
-          class="flex-1 px-6 py-3 rounded-lg bg-white/10 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" />
-        <button class="px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-all">
-          Subscribe
-        </button>
-      </form>
-    </div>
-
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-300 mt-32 dark:bg-slate-950 dark:text-slate-400">
-    <div class="max-w-7xl mx-auto px-6 py-16 text-center">
-      <h4 class="text-white text-2xl font-bold mb-4">Side Quests 🧭</h4>
-      <p class="text-slate-400 mb-4">Hands-on experiments with things I find interesting.</p>
-      <p class="text-slate-500 text-sm">© 2025 Side Quests. All rights reserved.</p>
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#quests">Quests</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
     </div>
   </footer>
 
+  <script src="../assets/js/motion.js" defer></script>
   <script>
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
-
-    function updateThemeIcons() {
-      if (document.documentElement.classList.contains('dark')) {
-        darkIcon.classList.add('hidden');
-        lightIcon.classList.remove('hidden');
-      } else {
-        lightIcon.classList.add('hidden');
-        darkIcon.classList.remove('hidden');
-      }
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      themeToggle.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
     }
-    updateThemeIcons();
-
-    themeToggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      const isDark = document.documentElement.classList.contains('dark');
-      localStorage.theme = isDark ? 'dark' : 'light';
-      updateThemeIcons();
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
     });
   </script>
 

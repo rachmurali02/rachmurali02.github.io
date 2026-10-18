@@ -1,140 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Deep Dive into Text Chunking Strategies | Side Quests 🧭</title>
+  <title>Deep Dive into Text Chunking Strategies | Side Quests</title>
+  <meta name="description" content="Chunking is the unsung hero of RAG systems. After weeks of experimentation, here&#x27;s what I learned about splitting text the right way." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { darkMode: 'class' };
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
   </script>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    * { font-family: 'Inter', sans-serif; transition: color 0.3s ease, background-color 0.3s ease; }
-    .gradient-text {
-      background: linear-gradient(135deg, #6366f1, #d946ef);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    article h2 { font-size: 2rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem; }
-    article h3 { font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
-    article p { margin-bottom: 1.5rem; line-height: 1.8; }
-    article ul, article ol { margin-bottom: 1.5rem; margin-left: 1.5rem; }
-    article li { margin-bottom: 0.5rem; line-height: 1.8; }
-    article code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
-    .dark article code { background: #1e293b; }
-    article pre { background: #f8fafc; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
-    .dark article pre { background: #0f172a; border-color: #334155; }
-  </style>
+  <link rel="stylesheet" href="../assets/css/post.css" />
+  <link rel="stylesheet" href="../assets/css/motion.css" />
 </head>
 
-<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+<body>
 
-  <!-- Navbar -->
-  <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 dark:bg-slate-900/80 dark:border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <a href="/" class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-600 flex items-center justify-center text-white font-bold text-xl">
-            🧭
-          </div>
-          <span class="text-2xl font-bold tracking-tight">Side Quests</span>
-        </a>
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Home</a>
-          <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Posts</a>
-          <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">About</a>
-          
-          <!-- Theme Toggle -->
-          <button id="theme-toggle" aria-label="Toggle dark mode"
-            class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 2zM4.22 4.22a.75.75 0 011.06 0l1.06 1.06a.75.75 0 11-1.06 1.06L4.22 5.28a.75.75 0 010-1.06zm11.56 0a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zM10 16a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 16z" />
-            </svg>
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 0010.586 10.586z" clip-rule="evenodd" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Article Header -->
-  <header class="pt-32 pb-12 px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-950">
-    <div class="max-w-4xl mx-auto">
-      <a href="/" class="inline-flex items-center text-indigo-300 hover:text-indigo-200 mb-8 group">
-        <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-        Back to Home
-      </a>
-      
-      <div class="flex items-center space-x-3 mb-6">
-        <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded-full text-sm font-semibold">ML Research</span>
-        <span class="text-slate-400 text-sm">Nov 1, 2025</span>
-        <span class="text-slate-400 text-sm">• 14 min read</span>
-      </div>
-      
-      <h1 class="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-        Deep Dive into Text Chunking Strategies
-      </h1>
-      
-      <p class="text-xl text-slate-300 leading-relaxed">
-        Chunking is the unsung hero of RAG systems. After weeks of experimentation, here's what I learned about splitting text the right way.
-      </p>
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#quests" class="hide-sm">Quests</a>
+        <a href="/#journey" class="hide-sm">Journey</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+      </nav>
     </div>
   </header>
 
-  <!-- Article Content -->
-  <main class="max-w-4xl mx-auto px-6 lg:px-8 py-16">
-    <article class="prose prose-lg dark:prose-invert">
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/#quests" class="back">← All quests</a>
+        <p class="label red">ML Research</p>
+        <p class="label">Nov 1, 2025</p>
+        <p class="label muted">14 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Deep Dive into Text Chunking Strategies</h1>
+        <p class="standfirst">Chunking is the unsung hero of RAG systems. After weeks of experimentation, here's what I learned about splitting text the right way.</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body enter" style="--d:.5s">
+
       
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         Last week, I shared my experiments with RAG systems. This week, I'm zooming in on what turned out to be one of the most critical — yet overlooked — components: text chunking. The way you split documents can make or break your entire retrieval pipeline.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Why Chunking is Harder Than It Looks</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Why Chunking is Harder Than It Looks</h2>
+      <p>
         At first glance, chunking seems trivial. Just split text into pieces, right? But after building several RAG systems, I realized that chunking decisions cascade through your entire pipeline:
       </p>
 
-      <ul class="text-slate-600 dark:text-slate-300">
+      <ul>
         <li><strong>Too small:</strong> Chunks lose context, leading to incomplete or misleading retrievals</li>
         <li><strong>Too large:</strong> Retrieval becomes noisy, and you waste precious context window space</li>
         <li><strong>Poor boundaries:</strong> Splitting mid-sentence or mid-thought breaks semantic coherence</li>
         <li><strong>No overlap:</strong> Important context at chunk boundaries gets lost</li>
       </ul>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         The challenge is that there's no one-size-fits-all solution. The optimal strategy depends on your documents, your queries, and your LLM's context window.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Four Strategies I Tested</h2>
+      <h2>Four Strategies I Tested</h2>
 
-      <h3 class="text-slate-900 dark:text-slate-100">Strategy 1: Fixed-Size Chunking</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>Strategy 1: Fixed-Size Chunking</h3>
+      <p>
         The simplest approach: split text every N characters or tokens. This is what most tutorials start with.
       </p>
 
-      <pre class="text-slate-800 dark:text-slate-200"><code>def chunk_fixed_size(text, chunk_size=512):
+      <pre><code>def chunk_fixed_size(text, chunk_size=512):
     chunks = []
     for i in range(0, len(text), chunk_size):
         chunks.append(text[i:i + chunk_size])
     return chunks</code></pre>
 
-      <div class="bg-emerald-50 dark:bg-emerald-950/30 border-l-4 border-emerald-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-emerald-900 dark:text-emerald-300 font-bold mb-2">✅ Pros</h4>
-        <ul class="text-emerald-800 dark:text-emerald-200 mb-0 space-y-1">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">✅ Pros</h4>
+        <ul class="mb-0 space-y-1">
           <li>Dead simple to implement</li>
           <li>Predictable chunk sizes</li>
           <li>Works well with token limits</li>
@@ -142,9 +97,9 @@
         </ul>
       </div>
 
-      <div class="bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-rose-900 dark:text-rose-300 font-bold mb-2">❌ Cons</h4>
-        <ul class="text-rose-800 dark:text-rose-200 mb-0 space-y-1">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">❌ Cons</h4>
+        <ul class="mb-0 space-y-1">
           <li>Splits mid-sentence, mid-word, mid-thought</li>
           <li>No respect for semantic boundaries</li>
           <li>Can create incoherent fragments</li>
@@ -152,16 +107,16 @@
         </ul>
       </div>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         <strong>My verdict:</strong> Good for quick prototypes, but rarely optimal for production. I saw retrieval quality improve 20-30% just by switching to smarter strategies.
       </p>
 
-      <h3 class="text-slate-900 dark:text-slate-100">Strategy 2: Sentence-Based Chunking</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>Strategy 2: Sentence-Based Chunking</h3>
+      <p>
         Split on sentence boundaries, then group sentences until you hit your target size. This preserves semantic units.
       </p>
 
-      <pre class="text-slate-800 dark:text-slate-200"><code>def chunk_by_sentence(text, target_size=512):
+      <pre><code>def chunk_by_sentence(text, target_size=512):
     sentences = sent_tokenize(text)
     chunks = []
     current_chunk = []
@@ -180,9 +135,9 @@
         chunks.append(' '.join(current_chunk))
     return chunks</code></pre>
 
-      <div class="bg-emerald-50 dark:bg-emerald-950/30 border-l-4 border-emerald-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-emerald-900 dark:text-emerald-300 font-bold mb-2">✅ Pros</h4>
-        <ul class="text-emerald-800 dark:text-emerald-200 mb-0 space-y-1">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">✅ Pros</h4>
+        <ul class="mb-0 space-y-1">
           <li>Respects natural language boundaries</li>
           <li>Each chunk is coherent and readable</li>
           <li>Works well for narrative text</li>
@@ -190,9 +145,9 @@
         </ul>
       </div>
 
-      <div class="bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-rose-900 dark:text-rose-300 font-bold mb-2">❌ Cons</h4>
-        <ul class="text-rose-800 dark:text-rose-200 mb-0 space-y-1">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">❌ Cons</h4>
+        <ul class="mb-0 space-y-1">
           <li>Variable chunk sizes (some very small, some very large)</li>
           <li>Sentence detection isn't perfect (abbreviations, etc.)</li>
           <li>Still loses context at boundaries</li>
@@ -200,16 +155,16 @@
         </ul>
       </div>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         <strong>My verdict:</strong> Solid middle ground. I used this for most of my experiments with narrative documents. The variable chunk sizes can be mitigated with min/max constraints.
       </p>
 
-      <h3 class="text-slate-900 dark:text-slate-100">Strategy 3: Sliding Window with Overlap</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>Strategy 3: Sliding Window with Overlap</h3>
+      <p>
         This is where things get interesting. Instead of clean cuts, we create overlapping windows. Each chunk shares some context with its neighbors.
       </p>
 
-      <pre class="text-slate-800 dark:text-slate-200"><code>def chunk_sliding_window(text, size=512, overlap=50):
+      <pre><code>def chunk_sliding_window(text, size=512, overlap=50):
     chunks = []
     step = size - overlap
     
@@ -221,9 +176,9 @@
     
     return chunks</code></pre>
 
-      <div class="bg-emerald-50 dark:bg-emerald-950/30 border-l-4 border-emerald-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-emerald-900 dark:text-emerald-300 font-bold mb-2">✅ Pros</h4>
-        <ul class="text-emerald-800 dark:text-emerald-200 mb-0 space-y-1">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">✅ Pros</h4>
+        <ul class="mb-0 space-y-1">
           <li>Preserves context across boundaries</li>
           <li>Catches information that spans chunk borders</li>
           <li>More forgiving of arbitrary splits</li>
@@ -231,9 +186,9 @@
         </ul>
       </div>
 
-      <div class="bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-rose-900 dark:text-rose-300 font-bold mb-2">❌ Cons</h4>
-        <ul class="text-rose-800 dark:text-rose-200 mb-0 space-y-1">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">❌ Cons</h4>
+        <ul class="mb-0 space-y-1">
           <li>Increases storage and compute (more chunks)</li>
           <li>Redundant information in the database</li>
           <li>Can retrieve near-duplicate chunks</li>
@@ -241,16 +196,16 @@
         </ul>
       </div>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         <strong>My verdict:</strong> The overlap is crucial for high-quality RAG. I settled on 10-20% overlap as a sweet spot. Yes, it increases costs, but the retrieval quality improvement is worth it.
       </p>
 
-      <h3 class="text-slate-900 dark:text-slate-100">Strategy 4: Semantic/Paragraph Chunking</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>Strategy 4: Semantic/Paragraph Chunking</h3>
+      <p>
         Split on natural document structure: paragraphs, sections, or semantic boundaries. This is my favorite for well-structured documents.
       </p>
 
-      <pre class="text-slate-800 dark:text-slate-200"><code>def chunk_by_paragraph(text):
+      <pre><code>def chunk_by_paragraph(text):
     paragraphs = text.split('\n\n')
     chunks = []
     current_chunk = []
@@ -282,9 +237,9 @@
         chunks.append('\n\n'.join(current_chunk))
     return chunks</code></pre>
 
-      <div class="bg-emerald-50 dark:bg-emerald-950/30 border-l-4 border-emerald-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-emerald-900 dark:text-emerald-300 font-bold mb-2">✅ Pros</h4>
-        <ul class="text-emerald-800 dark:text-emerald-200 mb-0 space-y-1">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">✅ Pros</h4>
+        <ul class="mb-0 space-y-1">
           <li>Respects document structure and hierarchy</li>
           <li>Each chunk is a complete thought or topic</li>
           <li>Best user experience (readable, coherent chunks)</li>
@@ -292,9 +247,9 @@
         </ul>
       </div>
 
-      <div class="bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-rose-900 dark:text-rose-300 font-bold mb-2">❌ Cons</h4>
-        <ul class="text-rose-800 dark:text-rose-200 mb-0 space-y-1">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">❌ Cons</h4>
+        <ul class="mb-0 space-y-1">
           <li>Highly variable chunk sizes</li>
           <li>Some chunks can be very large (requires splitting)</li>
           <li>Depends on document formatting</li>
@@ -302,48 +257,48 @@
         </ul>
       </div>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         <strong>My verdict:</strong> When it works, it's magical. I use this for technical documentation, blog posts, and papers. For messy or unformatted text, fall back to sentence-based chunking.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Real-World Performance Comparison</h2>
+      <h2>Real-World Performance Comparison</h2>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         I tested all four strategies on a corpus of 100 technical documents with 500 test queries. Here's what I found:
       </p>
 
-      <div class="bg-slate-100 dark:bg-slate-900 rounded-xl p-6 my-8 border border-slate-200 dark:border-slate-700">
+      <div class="p-6 my-8 border">
         <table class="w-full text-sm">
           <thead>
-            <tr class="border-b border-slate-300 dark:border-slate-600">
-              <th class="text-left py-3 text-slate-900 dark:text-slate-100">Strategy</th>
-              <th class="text-right py-3 text-slate-900 dark:text-slate-100">Retrieval Precision</th>
-              <th class="text-right py-3 text-slate-900 dark:text-slate-100">Avg Chunk Size</th>
-              <th class="text-right py-3 text-slate-900 dark:text-slate-100">Total Chunks</th>
+            <tr class="border-b">
+              <th class="text-left py-3">Strategy</th>
+              <th class="text-right py-3">Retrieval Precision</th>
+              <th class="text-right py-3">Avg Chunk Size</th>
+              <th class="text-right py-3">Total Chunks</th>
             </tr>
           </thead>
-          <tbody class="text-slate-700 dark:text-slate-300">
-            <tr class="border-b border-slate-200 dark:border-slate-700">
+          <tbody>
+            <tr class="border-b">
               <td class="py-3">Fixed Size</td>
               <td class="text-right">62%</td>
               <td class="text-right">512</td>
               <td class="text-right">1,247</td>
             </tr>
-            <tr class="border-b border-slate-200 dark:border-slate-700">
+            <tr class="border-b">
               <td class="py-3">Sentence-Based</td>
               <td class="text-right">74%</td>
               <td class="text-right">487</td>
               <td class="text-right">1,309</td>
             </tr>
-            <tr class="border-b border-slate-200 dark:border-slate-700">
+            <tr class="border-b">
               <td class="py-3">Sliding Window</td>
               <td class="text-right">79%</td>
               <td class="text-right">512</td>
               <td class="text-right">1,556</td>
             </tr>
             <tr>
-              <td class="py-3 font-bold text-indigo-600 dark:text-indigo-400">Paragraph</td>
-              <td class="text-right font-bold text-indigo-600 dark:text-indigo-400">82%</td>
+              <td class="py-3 font-bold">Paragraph</td>
+              <td class="text-right font-bold">82%</td>
               <td class="text-right">521</td>
               <td class="text-right">1,198</td>
             </tr>
@@ -351,84 +306,83 @@
         </table>
       </div>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         Paragraph chunking won by a significant margin, with 82% retrieval precision. But here's the interesting part: when I combined paragraph chunking with 15% overlap, precision jumped to 86%.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Lessons Learned & Best Practices</h2>
+      <h2>Lessons Learned & Best Practices</h2>
 
-      <div class="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-amber-900 dark:text-amber-300 font-bold mb-2">💡 Start with Document Structure</h4>
-        <p class="text-amber-800 dark:text-amber-200 mb-0">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">💡 Start with Document Structure</h4>
+        <p class="mb-0">
           If your documents have clear structure (paragraphs, sections, headings), use that as your primary chunking signal. Fall back to sentence-based for edge cases.
         </p>
       </div>
 
-      <div class="bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-blue-900 dark:text-blue-300 font-bold mb-2">💡 Overlap is Worth the Cost</h4>
-        <p class="text-blue-800 dark:text-blue-200 mb-0">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">💡 Overlap is Worth the Cost</h4>
+        <p class="mb-0">
           10-20% overlap dramatically improves retrieval quality. Yes, you'll store more chunks, but modern vector databases are cheap. Retrieval quality is expensive.
         </p>
       </div>
 
-      <div class="bg-violet-50 dark:bg-violet-950/30 border-l-4 border-violet-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-violet-900 dark:text-violet-300 font-bold mb-2">💡 Chunk Size Depends on Context</h4>
-        <p class="text-violet-800 dark:text-violet-200 mb-0">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">💡 Chunk Size Depends on Context</h4>
+        <p class="mb-0">
           For GPT-4 with 128k context, I use 512-1024 token chunks. For smaller models, 256-512 is safer. Always measure retrieval quality, not just arbitrary sizes.
         </p>
       </div>
 
-      <div class="bg-emerald-50 dark:bg-emerald-950/30 border-l-4 border-emerald-500 p-6 rounded-r-xl my-8">
-        <h4 class="text-emerald-900 dark:text-emerald-300 font-bold mb-2">💡 Add Metadata to Chunks</h4>
-        <p class="text-emerald-800 dark:text-emerald-200 mb-0">
+      <div class="border-l-4 p-6 my-8">
+        <h4 class="font-bold mb-2">💡 Add Metadata to Chunks</h4>
+        <p class="mb-0">
           Store document title, section headings, and position metadata with each chunk. This helps with re-ranking and lets you filter retrievals.
         </p>
       </div>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Advanced Techniques I'm Exploring</h2>
+      <h2>Advanced Techniques I'm Exploring</h2>
 
-      <h3 class="text-slate-900 dark:text-slate-100">Hierarchical Chunking</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>Hierarchical Chunking</h3>
+      <p>
         Instead of flat chunks, create a hierarchy: document → section → paragraph → sentence. Retrieve at the paragraph level, but include parent section context. Early results show 12% improvement in complex queries.
       </p>
 
-      <h3 class="text-slate-900 dark:text-slate-100">Semantic Chunking with LLMs</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>Semantic Chunking with LLMs</h3>
+      <p>
         Use a small LLM to identify topic boundaries: "Where does the topic change?" This is slower and more expensive, but produces semantically coherent chunks even in unstructured text.
       </p>
 
-      <h3 class="text-slate-900 dark:text-slate-100">Adaptive Chunking</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>Adaptive Chunking</h3>
+      <p>
         Different documents need different strategies. I'm building a classifier that picks the best chunking strategy per document based on structure, content type, and formatting.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Interactive Demo</h2>
+      <h2>Interactive Demo</h2>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         I built an interactive chunking visualizer to explore these strategies hands-on. You can paste your own text and see how different strategies handle it:
       </p>
 
-      <div class="my-8 rounded-2xl overflow-hidden border-2 border-indigo-200 dark:border-indigo-800 shadow-2xl">
+      <div class="my-8 overflow-hidden border-2">
         <iframe 
-          src="../demos/chunking_demo.html" 
-          class="w-full h-[800px]" 
+          src="../demos/chunking_demo.html" class="w-full h-[800px]" 
           frameborder="0"
           title="Interactive Chunking Strategy Demo"
           style="border: none;">
         </iframe>
       </div>
 
-      <p class="text-slate-600 dark:text-slate-300 text-sm italic text-center mb-8">
+      <p class="text-sm text-center mb-8">
         Try adjusting the strategies and parameters above to see how different approaches chunk your text
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Wrapping Up</h2>
+      <h2>Wrapping Up</h2>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         Chunking might seem like a boring preprocessing step, but it's actually one of the highest-leverage optimizations you can make in a RAG system. Here's my recommended approach:
       </p>
 
-      <ol class="text-slate-600 dark:text-slate-300">
+      <ol>
         <li><strong>Start with paragraph/semantic chunking</strong> if your documents have structure</li>
         <li><strong>Add 10-20% overlap</strong> to preserve boundary context</li>
         <li><strong>Set min/max constraints</strong> (e.g., 200-1000 tokens) to avoid extremes</li>
@@ -437,19 +391,63 @@
         <li><strong>Iterate based on failure cases</strong> — look at bad retrievals and adjust</li>
       </ol>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         Next week, I'm exploring retrieval re-ranking strategies. Subscribe to follow along!
       </p>
 
-      <div class="bg-gradient-to-br from-indigo-50 to-fuchsia-50 dark:from-indigo-950/30 dark:to-fuchsia-950/30 rounded-2xl p-8 my-12 border border-indigo-200 dark:border-indigo-800">
-        <p class="text-slate-700 dark:text-slate-300 text-lg italic mb-4">
+      <div class="p-8 my-12 border">
+        <p class="text-lg mb-4">
           "Chunking is where information retrieval meets linguistics. Get it right, and your RAG system sings. Get it wrong, and even the best embeddings can't save you."
         </p>
-        <p class="text-slate-600 dark:text-slate-400 text-sm">— My hard-earned wisdom on text chunking</p>
+        <p class="text-sm">— My hard-earned wisdom on text chunking</p>
       </div>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Resources & Code</h2>
+      <h2>Resources & Code</h2>
 
-      <ul class="text-slate-600 dark:text-slate-300">
+      <ul>
         <li>My GitHub repo with all chunking implementations (coming soon!)</li>
         <li>LangChain Text Splitters Documentation</li>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#quests">Quests</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      themeToggle.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

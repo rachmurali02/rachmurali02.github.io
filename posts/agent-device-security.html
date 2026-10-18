@@ -1,129 +1,84 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Security Chip That Says No to AI Agents | Side Quests 🧭</title>
+  <title>A Security Chip That Says No to AI Agents | Side Quests</title>
+  <meta name="description" content="AI agents are starting to sign payments, messages and installs on our behalf. I built a hardware security module in Rust that checks the agent&#x27;s rules itself, so a hacked computer can&#x27;t talk it into misusing a key." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { darkMode: 'class' };
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
   </script>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    * { font-family: 'Inter', sans-serif; transition: color 0.3s ease, background-color 0.3s ease; }
-    .gradient-text {
-      background: linear-gradient(135deg, #6366f1, #d946ef);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    article h2 { font-size: 2rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem; }
-    article h3 { font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
-    article p { margin-bottom: 1.5rem; line-height: 1.8; }
-    article ul, article ol { margin-bottom: 1.5rem; margin-left: 1.5rem; }
-    article li { margin-bottom: 0.5rem; line-height: 1.8; }
-    article code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
-    .dark article code { background: #1e293b; }
-    article pre { background: #f8fafc; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
-    .dark article pre { background: #0f172a; border-color: #334155; }
-  </style>
+  <link rel="stylesheet" href="../assets/css/post.css" />
+  <link rel="stylesheet" href="../assets/css/motion.css" />
 </head>
 
-<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+<body>
 
-  <!-- Navbar -->
-  <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 dark:bg-slate-900/80 dark:border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <a href="/" class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-600 flex items-center justify-center text-white font-bold text-xl">
-            🧭
-          </div>
-          <span class="text-2xl font-bold tracking-tight">Side Quests</span>
-        </a>
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Home</a>
-          <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">Posts</a>
-          <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-fuchsia-400">About</a>
-          
-          <!-- Theme Toggle -->
-          <button id="theme-toggle" aria-label="Toggle dark mode"
-            class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 2zM4.22 4.22a.75.75 0 011.06 0l1.06 1.06a.75.75 0 11-1.06 1.06L4.22 5.28a.75.75 0 010-1.06zm11.56 0a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zM10 16a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 16z" />
-            </svg>
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 0010.586 10.586z" clip-rule="evenodd" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Article Header -->
-  <header class="pt-32 pb-12 px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-950">
-    <div class="max-w-4xl mx-auto">
-      <a href="/" class="inline-flex items-center text-indigo-300 hover:text-indigo-200 mb-8 group">
-        <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-        Back to Home
-      </a>
-
-      <div class="flex flex-wrap items-center gap-3 mb-6">
-        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full text-sm font-semibold">Device Security</span>
-        <span class="text-slate-400 text-sm">Oct 16, 2026</span>
-        <span class="text-slate-400 text-sm">• 10 min read</span>
-      </div>
-
-      <h1 class="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-        A Security Chip That Says No to AI Agents
-      </h1>
-
-      <p class="text-xl text-slate-300 leading-relaxed">
-        AI agents are starting to sign payments, messages and installs on our behalf. I built a hardware security module in Rust that checks the agent's rules itself, so a hacked computer can't talk it into misusing a key.
-      </p>
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#quests" class="hide-sm">Quests</a>
+        <a href="/#journey" class="hide-sm">Journey</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+      </nav>
     </div>
   </header>
 
-  <!-- Article Content -->
-  <main class="max-w-4xl mx-auto px-6 lg:px-8 py-16">
-    <article class="prose prose-lg dark:prose-invert">
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/#quests" class="back">← All quests</a>
+        <p class="label red">Device Security</p>
+        <p class="label">Oct 16, 2026</p>
+        <p class="label muted">10 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>A Security Chip That Says No to AI Agents</h1>
+        <p class="standfirst">AI agents are starting to sign payments, messages and installs on our behalf. I built a hardware security module in Rust that checks the agent's rules itself, so a hacked computer can't talk it into misusing a key.</p>
+      </div>
+    </div>
+  </div>
 
-      <div class="rounded-2xl overflow-hidden mb-12 border border-slate-200 dark:border-slate-800">
+  <main>
+    <div class="grid">
+      <article class="post-body enter" style="--d:.5s">
+
+
+      <div class="overflow-hidden mb-12 border">
         <img src="../assets/images/agent-hsm.svg" alt="A security chip approving a $15 payment and refusing an $80 one" class="w-full">
       </div>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         When an agent on your phone or laptop does something that matters (sends an email, pays for something, installs an update), it proves the action is genuine with a digital signature. Whoever holds the secret key behind that signature can act as your device. So the question I kept coming back to was simple: <em>what stops the key from being used for the wrong thing?</em>
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">The Weak Spot in a Normal HSM</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>The Weak Spot in a Normal HSM</h2>
+      <p>
         Secret keys usually live in a Hardware Security Module (HSM). Think of a notary with an official stamp locked in a safe: you never get the stamp, you hand over a document and it comes back stamped. The stamp can't be copied out.
       </p>
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         The catch is that a normal HSM stamps <strong>anything</strong> the computer in front of it asks for. Any rules ("only payments", "at most $50") are checked by software on that computer. If the computer is compromised, or the agent misbehaves, the attacker just skips the checks and asks the notary directly.
       </p>
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         So I built a notary that checks the rules itself, inside the safe. The project is called <strong>quorum-hsm</strong>, it's written in Rust, and it runs on a $5 RP2350 board (Raspberry Pi Pico 2 or Seeed XIAO RP2350) or in an emulator on a laptop.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Rules That Travel With the Key</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Rules That Travel With the Key</h2>
+      <p>
         An agent key is created with its rules fixed: which kinds of action are allowed, the most a single payment can be, a total budget, and which actions need the user's OK. The agent doesn't hand over a blob of bytes to sign. It <em>describes</em> the action, and the HSM reads it, checks it, then writes and signs the statement itself, so what gets signed is always exactly what was checked.
       </p>
 
-      <pre class="text-slate-800 dark:text-slate-200"><code>Agent: "pay $35 to airline.example"
+      <pre><code>Agent: "pay $35 to airline.example"
    │
    ▼
 HSM checks, in order:  allowed kind? → under the per-payment limit? →
@@ -132,132 +87,110 @@ HSM checks, in order:  allowed kind? → under the per-payment limit? →
    ├─ any "no"  → DENIED (nothing signed, nothing charged)
    └─ all "yes" → record spending → sign the statement → APPROVED</code></pre>
 
-      <p class="text-slate-600 dark:text-slate-300">
+      <p>
         Two details matter more than they look. First, the HSM <strong>records the spending before it signs</strong>, so a crash or power cut can never produce a signature that wasn't counted. Second, the user's OK is real: their phone has its own key and signs a one-time code from the HSM together with the exact action, so an approval for $30 to the airline can't be replayed or moved to $49 for someone else.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Nobody Acts Alone</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Nobody Acts Alone</h2>
+      <p>
         Rules inside the chip only help if nobody can quietly create a key with no rules. So creating, changing or deleting an agent key needs a quorum: at setup the HSM is given a list of admins and a threshold like "any 2 of these 3". Each admin's tool shows the exact rules in plain English before they sign, and the HSM verifies the signatures itself. Knowing the PIN isn't enough, and an approval for a $100 budget can't be reused for a $1,000,000 one.
       </p>
-      <ul class="text-slate-600 dark:text-slate-300">
+      <ul>
         <li><strong>Birth certificates.</strong> Every agent key gets a certificate signed by the HSM's identity key: "key 1, with exactly these rules, was approved by Alice and Bob." A shop trusts the HSM once and can then check any agent key.</li>
         <li><strong>No replays.</strong> Shops hand the agent a one-time code with an expiry. The HSM signs both into the approval, and a key's rules can require one.</li>
         <li><strong>Rule changes can't reset a budget.</strong> Money already spent still counts, and every signed action carries a fingerprint of the rules it was approved under.</li>
       </ul>
 
-      <h2 class="text-slate-900 dark:text-slate-100">A Log Nobody Can Quietly Edit</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>A Log Nobody Can Quietly Edit</h2>
+      <p>
         The HSM keeps its own audit log: logins and wrong PINs, keys created and deleted, rule and admin changes, and every agent action, <em>approved or refused</em>, with the reason. Each entry is hashed into the next, and the HSM signs checkpoints of the chain. Edit, delete or reorder one entry and verification fails. A refused action is written down before the HSM answers "no", and if nobody collects the log the HSM stops working rather than lose evidence.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Attacking It on Purpose</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Attacking It on Purpose</h2>
+      <p>
         Most of the work went into trying to break it:
       </p>
-      <ul class="text-slate-600 dark:text-slate-300">
+      <ul>
         <li><strong>Glitches.</strong> Someone holding the device can disturb the chip's power or clock to flip one decision, like "over budget" becoming "fine". Every decision that leads to a signature, login or admin change is now made twice, by separate code; a test flips each of the nine decisions in turn to prove one glitch never gets a signature through.</li>
         <li><strong>Power cuts.</strong> Flash must be erased before it's written, so state is saved to two slots and read back. A test cuts the power after every single byte of erasing and writing. The board always restarts with a valid state.</li>
         <li><strong>Fuzzing.</strong> Six fuzz targets feed millions of random inputs and check invariants after every step. The fuzzer found a real bug within seconds: saved state with junk hidden in a label's padding was accepted. It's fixed and kept as a permanent regression test.</li>
       </ul>
 
-      <h2 class="text-slate-900 dark:text-slate-100">What It Costs</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>What It Costs</h2>
+      <p>
         I benchmarked it against SoftHSM2, the standard open-source HSM, used the conventional way with the same rules checked on the computer. Same signature scheme (Ed25519), same message, same rule code. The only difference is <em>where</em> the check runs.
       </p>
 
-      <div class="rounded-2xl overflow-hidden mb-8 border border-slate-200 dark:border-slate-800 bg-white">
+      <div class="overflow-hidden mb-8 border">
         <img src="../assets/images/hsm-benchmark-comparison.svg" alt="Benchmark comparison of quorum-hsm and SoftHSM2" class="w-full">
       </div>
 
-      <ul class="text-slate-600 dark:text-slate-300">
+      <ul>
         <li><strong>8 of 8 attacks blocked</strong>, against 1 of 8 for the conventional setup.</li>
         <li>A fully checked, double-checked, logged and safely saved agent action takes about <strong>0.24–0.29 ms</strong>.</li>
         <li>Under load from up to 64 clients it handles about <strong>3,500 saved payments a second</strong>. After 72,116 competing payments the spending counter was exact.</li>
         <li>Killed with <code>kill -9</code> mid-traffic 25 times, it never handed out a signature it hadn't counted.</li>
       </ul>
 
-      <h3 class="text-slate-900 dark:text-slate-100">What still gets through</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>What still gets through</h3>
+      <p>
         Of 20 further attacks, 15 were blocked, 2 were stopped by the receiving shop, 1 was detected, and 2 work. One is a known gap: restoring an old copy of the state undoes spending (rollback). The other was a new finding: someone with only the PIN can fill all 16 key slots so admins can't create agent keys. Flooding with the PIN also slows other clients 6–9x. These are on the to-do list, and the threat model says so plainly.
       </p>
 
-      <h3 class="text-slate-900 dark:text-slate-100">A lesson in measuring</h3>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h3>A lesson in measuring</h3>
+      <p>
         My first PIN-timing test "found" a timing leak. It turned out to be measuring the order of the guesses, not the PIN. With the guesses shuffled, the difference vanished. It was a good reminder to try to disprove a result before believing it.
       </p>
 
-      <h2 class="text-slate-900 dark:text-slate-100">Try It</h2>
-      <p class="text-slate-600 dark:text-slate-300">
+      <h2>Try It</h2>
+      <p>
         It speaks PKCS#11, so existing tools like <code>pkcs11-tool</code> work out of the box, and signatures verify with OpenSSL. The agent demo plays out a whole story (admins, rules, a shopping agent, shops and attacks) in one command:
       </p>
-      <pre class="text-slate-800 dark:text-slate-200"><code>./scripts/demo-agent.sh  # an AI shopping agent: admins, rules, shops, attacks
+      <pre><code>./scripts/demo-agent.sh  # an AI shopping agent: admins, rules, shops, attacks
 ./scripts/demo-board.sh  # a brand-new board: provision it, use it, unplug it
 ./scripts/bench.sh       # speed and attack comparison with SoftHSM2</code></pre>
-      <p class="text-slate-600 dark:text-slate-300">
-        The code, threat model and full benchmark write-up are on GitHub: <a href="https://github.com/rachmurali02/agent-device-security" class="text-indigo-600 dark:text-fuchsia-400 font-semibold hover:underline">rachmurali02/agent-device-security</a>.
+      <p>
+        The code, threat model and full benchmark write-up are on GitHub: <a href="https://github.com/rachmurali02/agent-device-security">rachmurali02/agent-device-security</a>.
       </p>
+      </article>
+    </div>
 
-    </article>
-
-    <!-- Author Section -->
-    <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
-      <div class="flex items-center space-x-4">
-        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 to-fuchsia-600 flex items-center justify-center text-white font-bold text-2xl">
-          🧭
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
         </div>
-        <div>
-          <h4 class="font-bold text-lg text-slate-900 dark:text-slate-100">Side Quests</h4>
-          <p class="text-slate-600 dark:text-slate-400">Hands-on experiments with things I find interesting.</p>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
         </div>
       </div>
-    </div>
-
-    <!-- Newsletter CTA -->
-    <div class="mt-16 bg-gradient-to-br from-indigo-600 to-fuchsia-600 rounded-2xl p-10 text-center text-white">
-      <h3 class="text-3xl font-bold mb-3">Enjoyed this post?</h3>
-      <p class="text-lg mb-6 opacity-90">Subscribe to get new side quests delivered to your inbox.</p>
-      <form class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-        <input type="email" placeholder="your@email.com"
-          class="flex-1 px-6 py-3 rounded-lg bg-white/10 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" />
-        <button class="px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-all">
-          Subscribe
-        </button>
-      </form>
-    </div>
-
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-300 mt-32 dark:bg-slate-950 dark:text-slate-400">
-    <div class="max-w-7xl mx-auto px-6 py-16 text-center">
-      <h4 class="text-white text-2xl font-bold mb-4">Side Quests 🧭</h4>
-      <p class="text-slate-400 mb-4">Hands-on experiments with things I find interesting.</p>
-      <p class="text-slate-500 text-sm">© 2025 Side Quests. All rights reserved.</p>
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#quests">Quests</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
     </div>
   </footer>
 
+  <script src="../assets/js/motion.js" defer></script>
   <script>
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
-
-    function updateThemeIcons() {
-      if (document.documentElement.classList.contains('dark')) {
-        darkIcon.classList.add('hidden');
-        lightIcon.classList.remove('hidden');
-      } else {
-        lightIcon.classList.add('hidden');
-        darkIcon.classList.remove('hidden');
-      }
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      themeToggle.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
     }
-    updateThemeIcons();
-
-    themeToggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      const isDark = document.documentElement.classList.contains('dark');
-      localStorage.theme = isDark ? 'dark' : 'light';
-      updateThemeIcons();
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
     });
   </script>
 
