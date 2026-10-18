@@ -16,6 +16,10 @@
   </script>
 
   <link rel="stylesheet" href="assets/css/motion.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=IBM+Plex+Mono:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" />
+  <link rel="stylesheet" href="assets/css/shelf.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -72,19 +76,6 @@
     .top nav button {
       font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0;
     }
-
-    /* Hero */
-    .hero .grid { padding-top: 72px; padding-bottom: 96px; row-gap: 40px; }
-    .hero h1 {
-      grid-column: 1 / 8;
-      font-size: clamp(56px, 9vw, 128px); font-weight: 700; line-height: .92; letter-spacing: -.045em;
-    }
-    .hero .photo { grid-column: 9 / 13; grid-row: 1 / 3; }
-    .hero .photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 20%; }
-    .hero .photo figcaption { margin-top: 10px; font-size: 12px; color: var(--muted); }
-    .hero .intro { grid-column: 1 / 6; align-self: end; }
-    .hero .intro p { font-size: 22px; line-height: 1.35; letter-spacing: -.01em; }
-    .hero .intro .label { margin-bottom: 16px; }
 
     /* Sections */
     section { border-top: 2px solid var(--rule); }
@@ -170,9 +161,6 @@
 
     @media (max-width: 900px) {
       .grid { padding: 0 24px; }
-      .hero h1 { grid-column: 1 / -1; }
-      .hero .photo { grid-column: 1 / 8; grid-row: auto; }
-      .hero .intro { grid-column: 1 / -1; }
       .sec-label { grid-column: 1 / -1; margin-bottom: 32px; display: flex; align-items: baseline; gap: 16px; }
       .sec-label .label { margin-top: 0; }
       .sec-body { grid-column: 1 / -1; }
@@ -186,10 +174,6 @@
       .wordmark { grid-column: 1 / 7; }
       .top nav { grid-column: 7 / 13; gap: 16px; }
       .top nav .hide-sm { display: none; }
-      .hero .grid { padding-top: 40px; padding-bottom: 64px; }
-      .hero .photo { grid-column: 1 / -1; }
-      .hero .photo img { aspect-ratio: 4 / 5; }
-      .hero .intro p { font-size: 19px; }
       section > .grid { padding-bottom: 64px; }
       .index a { grid-template-columns: 32px minmax(0, 1fr); }
       .index .thumb { grid-column: 2; width: 100%; margin-top: 16px; }
@@ -229,15 +213,80 @@
     </div>
   </header>
 
-  <div class="hero">
-    <div class="grid">
-      <h1><span class="line" style="--i:0"><span>Rachana</span></span><span class="line" style="--i:1"><span>Murali</span></span><span class="line" style="--i:2"><span>Narayanan</span></span></h1>
-      <figure class="photo wipe">
-        <img src="assets/images/rachana.jpg" alt="Rachana Murali Narayanan" width="750" height="1000">
-      </figure>
-      <div class="intro enter" style="--d:.75s">
-        <p class="label red">Side Quests</p>
-        <p>My experiments with things I find interesting, from security chips to news digests, and musings on cricket, music and everything in between.</p>
+  <div class="shelf-hero">
+    <div class="shelf-wrap">
+      <div class="stage-scroll">
+        <div class="stage" data-layout="shelf">
+          <button type="button" class="tidy" aria-label="Knock the shelf over"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v5h-5"/></svg><span>Knock over</span></button>
+
+          <div class="it spine s-name" style="--delay:.05s"><h1 class="title">Rachana Murali Narayanan <small>(v1)</small></h1></div>
+          <a class="it spine s-github" href="https://github.com/rachmurali02" aria-label="GitHub" style="--delay:.12s"><span class="rule"></span><svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+          <a class="it spine s-experiments" href="#experiments" style="--delay:0s"><span class="title">Experiments</span></a>
+          <a class="it spine s-musings" href="#musings" style="--delay:.08s"><span class="title">Musings</span></a>
+          <a class="it spine s-linkedin" href="https://www.linkedin.com/in/rachana-mn" style="--delay:.2s"><span class="title">LinkedIn / in</span></a>
+          <a class="it spine s-journey" href="#journey" style="--delay:.16s"><span class="title">Journey</span></a>
+          <a class="it spine s-newsletter" href="#subscribe" style="--delay:.1s"><span class="title">Newsletter</span><span class="rule"></span><span class="pill">Vol. I</span></a>
+
+          <figure class="it polaroid" style="--delay:.22s"><img src="assets/images/rachana.jpg" alt="Rachana Murali Narayanan" width="750" height="1000"><figcaption>hi, I'm Rachana</figcaption></figure>
+
+          <button type="button" class="it instrument shruti" aria-pressed="false" aria-label="Shruti box: play a drone" style="--delay:.04s"><svg viewBox="0 0 250 160" class="art" aria-hidden="true">
+  <g class="bellows"><path class="fill" d="M20 14 H230 V64 H20 Z"/><path d="M20 14 L12 18.5 L20 23 M230 14 L238 18.5 L230 23"/><line class="soft" x1="20" y1="18.5" x2="230" y2="18.5"/><path d="M20 23 L12 27.5 L20 32 M230 23 L238 27.5 L230 32"/><line class="soft" x1="20" y1="27.5" x2="230" y2="27.5"/><path d="M20 32 L12 36.5 L20 41 M230 32 L238 36.5 L230 41"/><line class="soft" x1="20" y1="36.5" x2="230" y2="36.5"/><path d="M20 41 L12 45.5 L20 50 M230 41 L238 45.5 L230 50"/><line class="soft" x1="20" y1="45.5" x2="230" y2="45.5"/><path d="M20 50 L12 54.5 L20 59 M230 50 L238 54.5 L230 59"/><line class="soft" x1="20" y1="54.5" x2="230" y2="54.5"/><path d="M20 14 V64 M230 14 V64"/></g>
+  <g class="lid"><rect class="fill" x="14" y="5" width="222" height="10" rx="2"/><rect x="14" y="5" width="222" height="10" rx="2"/><path d="M110 5 v-3 h30 v3"/></g>
+  <path d="M36 66 v-7 a3 3 0 0 1 3 -3 h10 a3 3 0 0 1 3 3 v7"/><path d="M66 66 v-7 a3 3 0 0 1 3 -3 h10 a3 3 0 0 1 3 3 v7"/><path d="M96 66 v-7 a3 3 0 0 1 3 -3 h10 a3 3 0 0 1 3 3 v7"/><path d="M126 66 v-7 a3 3 0 0 1 3 -3 h10 a3 3 0 0 1 3 3 v7"/><path d="M156 66 v-7 a3 3 0 0 1 3 -3 h10 a3 3 0 0 1 3 3 v7"/><path d="M186 66 v-7 a3 3 0 0 1 3 -3 h10 a3 3 0 0 1 3 3 v7"/>
+  <rect class="fill" x="6" y="64" width="238" height="86" rx="3"/>
+  <path class="soft" d="M8.0 71.9 Q23.0 71.7 38.0 71.8 Q53.0 70.0 68.0 71.3 Q83.0 71.2 98.0 71.5 Q113.0 73.3 128.0 71.4 Q143.0 69.8 158.0 72.5 Q173.0 72.0 188.0 71.3 Q203.0 72.0 218.0 71.2 Q230.0 72.0 242.0 72.6"/><path class="soft" d="M8.0 83.6 Q23.0 85.2 38.0 83.9 Q53.0 82.5 68.0 83.4 Q83.0 82.1 98.0 84.0 Q113.0 83.7 128.0 84.0 Q143.0 82.8 158.0 83.2 Q173.0 84.9 188.0 84.3 Q203.0 85.1 218.0 84.0 Q230.0 85.0 242.0 83.9"/><path class="soft" d="M8.0 95.3 Q23.0 94.1 38.0 95.3 Q53.0 94.7 68.0 94.6 Q83.0 93.2 98.0 95.0 Q113.0 94.2 128.0 95.6 Q143.0 97.3 158.0 95.2 Q173.0 97.2 188.0 96.0 Q203.0 97.3 218.0 95.1 Q230.0 94.1 242.0 94.9"/><path class="soft" d="M8.0 107.0 Q23.0 105.7 38.0 106.6 Q53.0 107.5 68.0 107.6 Q83.0 108.5 98.0 107.0 Q113.0 107.7 128.0 107.4 Q143.0 105.2 158.0 107.2 Q173.0 108.8 188.0 107.4 Q203.0 108.1 218.0 107.0 Q230.0 105.6 242.0 107.4"/><path class="soft" d="M8.0 118.7 Q23.0 118.0 38.0 119.2 Q53.0 120.8 68.0 118.6 Q83.0 118.3 98.0 119.4 Q113.0 119.7 128.0 118.2 Q143.0 117.1 158.0 118.2 Q173.0 120.5 188.0 119.2 Q203.0 117.2 218.0 119.2 Q230.0 120.8 242.0 118.9"/><path class="soft" d="M8.0 130.4 Q23.0 129.8 38.0 130.5 Q53.0 128.8 68.0 129.7 Q83.0 132.5 98.0 130.6 Q113.0 130.5 128.0 131.1 Q143.0 130.1 158.0 131.0 Q173.0 131.9 188.0 130.0 Q203.0 129.3 218.0 130.1 Q230.0 129.3 242.0 130.6"/><path class="soft" d="M8.0 142.1 Q23.0 141.1 38.0 142.0 Q53.0 140.5 68.0 142.7 Q83.0 141.5 98.0 142.1 Q113.0 142.5 128.0 142.7 Q143.0 141.8 158.0 142.8 Q173.0 142.2 188.0 142.2 Q203.0 142.2 218.0 141.4 Q230.0 141.9 242.0 141.7"/>
+  <rect x="6" y="64" width="238" height="86" rx="3"/>
+  <clipPath id="jali"><rect x="16" y="72" width="218" height="64" rx="2"/></clipPath>
+  <rect class="fill" x="16" y="72" width="218" height="64" rx="2"/>
+  <g clip-path="url(#jali)"><line class="soft" x1="-40" y1="72" x2="24" y2="136"/><line class="soft" x1="24" y1="72" x2="-40" y2="136"/><line class="soft" x1="-24" y1="72" x2="40" y2="136"/><line class="soft" x1="40" y1="72" x2="-24" y2="136"/><line class="soft" x1="-8" y1="72" x2="56" y2="136"/><line class="soft" x1="56" y1="72" x2="-8" y2="136"/><line class="soft" x1="8" y1="72" x2="72" y2="136"/><line class="soft" x1="72" y1="72" x2="8" y2="136"/><line class="soft" x1="24" y1="72" x2="88" y2="136"/><line class="soft" x1="88" y1="72" x2="24" y2="136"/><line class="soft" x1="40" y1="72" x2="104" y2="136"/><line class="soft" x1="104" y1="72" x2="40" y2="136"/><line class="soft" x1="56" y1="72" x2="120" y2="136"/><line class="soft" x1="120" y1="72" x2="56" y2="136"/><line class="soft" x1="72" y1="72" x2="136" y2="136"/><line class="soft" x1="136" y1="72" x2="72" y2="136"/><line class="soft" x1="88" y1="72" x2="152" y2="136"/><line class="soft" x1="152" y1="72" x2="88" y2="136"/><line class="soft" x1="104" y1="72" x2="168" y2="136"/><line class="soft" x1="168" y1="72" x2="104" y2="136"/><line class="soft" x1="120" y1="72" x2="184" y2="136"/><line class="soft" x1="184" y1="72" x2="120" y2="136"/><line class="soft" x1="136" y1="72" x2="200" y2="136"/><line class="soft" x1="200" y1="72" x2="136" y2="136"/><line class="soft" x1="152" y1="72" x2="216" y2="136"/><line class="soft" x1="216" y1="72" x2="152" y2="136"/><line class="soft" x1="168" y1="72" x2="232" y2="136"/><line class="soft" x1="232" y1="72" x2="168" y2="136"/><line class="soft" x1="184" y1="72" x2="248" y2="136"/><line class="soft" x1="248" y1="72" x2="184" y2="136"/><line class="soft" x1="200" y1="72" x2="264" y2="136"/><line class="soft" x1="264" y1="72" x2="200" y2="136"/><line class="soft" x1="216" y1="72" x2="280" y2="136"/><line class="soft" x1="280" y1="72" x2="216" y2="136"/><line class="soft" x1="232" y1="72" x2="296" y2="136"/><line class="soft" x1="296" y1="72" x2="232" y2="136"/><line class="soft" x1="248" y1="72" x2="312" y2="136"/><line class="soft" x1="312" y1="72" x2="248" y2="136"/></g>
+  <rect x="16" y="72" width="218" height="64" rx="2"/>
+  <circle class="fill" cx="125" cy="104" r="26"/><circle cx="125" cy="104" r="26"/><circle class="soft" cx="125" cy="104" r="20"/>
+  <ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(0 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(30 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(60 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(90 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(120 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(150 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(180 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(210 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(240 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(270 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(300 125 104)" class="soft"/><ellipse cx="125" cy="92" rx="4" ry="10" transform="rotate(330 125 104)" class="soft"/><circle cx="125" cy="104" r="4"/>
+  <path d="M14 150 v6 h14 v-6 M222 150 v6 h14 v-6"/>
+</svg></button>
+          <button type="button" class="it instrument big-note" aria-pressed="false" aria-label="Play Desh Thillana by Vittal Rangan" style="--delay:.14s"><svg viewBox="0 0 120 200" aria-hidden="true">
+  <path class="body" d="M44 158 L44 40 L114 18 L114 140 L104 140 L104 50 L54 66 L54 158 Z"/>
+  <path class="body" d="M44 40 L114 18 L114 40 L44 62 Z"/>
+  <ellipse class="body" cx="30" cy="164" rx="25" ry="18" transform="rotate(-20 30 164)"/>
+  <ellipse class="body" cx="90" cy="146" rx="25" ry="18" transform="rotate(-20 90 146)"/>
+  <path class="shade" d="M44 62 L114 40 M54 158 L54 66 M114 140 L114 40"/>
+  <path class="shine" d="M18 156 q8 -8 18 -8 M78 138 q8 -8 18 -8 M48 50 L106 32"/>
+</svg></button>
+          <button type="button" class="it instrument tambura" aria-label="Tambura: pluck the strings" style="--delay:.18s"><svg viewBox="0 0 120 465" class="art" aria-hidden="true">
+  <path class="fill" d="M60 316 C 116 316 118 352 118 386 C 118 430 92 452 60 452 C 28 452 2 430 2 386 C 2 352 4 316 60 316 Z"/>
+  <ellipse class="soft" cx="60" cy="384" rx="50" ry="54"/><ellipse class="soft" cx="60" cy="384" rx="44" ry="47"/><ellipse class="soft" cx="60" cy="384" rx="38" ry="41"/>
+  <path d="M60 316 C 116 316 118 352 118 386 C 118 430 92 452 60 452 C 28 452 2 430 2 386 C 2 352 4 316 60 316 Z"/>
+  <path d="M38 452 Q60 462 82 452"/>
+  <circle class="soft" cx="60" cy="352" r="11"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(0 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(30 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(60 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(90 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(120 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(150 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(180 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(210 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(240 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(270 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(300 60 352)"/><ellipse class="soft" cx="60" cy="343.0" rx="3" ry="7" transform="rotate(330 60 352)"/>
+  <rect class="fill" x="47" y="44" width="26" height="300" rx="3"/>
+  <path class="soft" d="M51.2 48.0 Q50.7 61.0 50.9 74.0 Q51.6 87.0 50.8 100.0 Q51.3 113.0 51.1 126.0 Q50.0 139.0 51.2 152.0 Q49.9 165.0 51.1 178.0 Q50.0 191.0 50.8 204.0 Q51.0 217.0 51.5 230.0 Q50.1 243.0 50.9 256.0 Q51.6 269.0 51.6 282.0 Q51.4 295.0 51.1 308.0 Q52.5 321.0 50.8 334.0 Q52.2 337.0 51.0 340.0"/><path class="soft" d="M55.6 48.0 Q54.6 61.0 55.2 74.0 Q55.1 87.0 55.9 100.0 Q54.7 113.0 55.7 126.0 Q56.0 139.0 55.5 152.0 Q55.7 165.0 55.2 178.0 Q54.4 191.0 55.3 204.0 Q56.1 217.0 55.5 230.0 Q55.1 243.0 55.7 256.0 Q55.5 269.0 55.4 282.0 Q56.4 295.0 55.8 308.0 Q54.9 321.0 55.7 334.0 Q55.7 337.0 56.0 340.0"/><path class="soft" d="M60.0 48.0 Q60.6 61.0 59.8 74.0 Q61.3 87.0 59.6 100.0 Q59.8 113.0 60.2 126.0 Q59.0 139.0 60.0 152.0 Q58.7 165.0 60.2 178.0 Q60.7 191.0 60.1 204.0 Q61.1 217.0 59.8 230.0 Q60.5 243.0 60.1 256.0 Q60.2 269.0 60.0 282.0 Q61.0 295.0 60.4 308.0 Q59.9 321.0 60.2 334.0 Q58.8 337.0 60.2 340.0"/><path class="soft" d="M64.4 48.0 Q64.8 61.0 64.9 74.0 Q65.3 87.0 64.2 100.0 Q64.1 113.0 64.6 126.0 Q63.1 139.0 64.4 152.0 Q63.5 165.0 64.0 178.0 Q63.2 191.0 64.7 204.0 Q63.4 217.0 64.2 230.0 Q64.1 243.0 64.7 256.0 Q63.2 269.0 64.4 282.0 Q64.5 295.0 64.8 308.0 Q65.3 321.0 64.7 334.0 Q63.8 337.0 64.3 340.0"/><path class="soft" d="M68.8 48.0 Q68.4 61.0 69.2 74.0 Q70.1 87.0 68.5 100.0 Q67.9 113.0 68.5 126.0 Q68.1 139.0 68.8 152.0 Q69.0 165.0 68.6 178.0 Q67.4 191.0 68.7 204.0 Q68.4 217.0 68.9 230.0 Q70.1 243.0 69.0 256.0 Q68.8 269.0 68.9 282.0 Q69.3 295.0 68.4 308.0 Q69.9 321.0 69.1 334.0 Q69.8 337.0 69.1 340.0"/>
+  <rect x="47" y="44" width="26" height="300" rx="3"/>
+  <path d="M44 344 Q60 336 76 344"/>
+  <rect class="fill" x="44" y="10" width="32" height="38" rx="5"/>
+  <path class="soft" d="M49.5 12.0 Q49.3 18.0 49.4 24.0 Q48.7 30.0 49.6 36.0 Q48.6 41.0 49.2 46.0"/><path class="soft" d="M56.5 12.0 Q55.9 18.0 56.3 24.0 Q56.2 30.0 56.2 36.0 Q55.5 41.0 56.3 46.0"/><path class="soft" d="M63.5 12.0 Q62.7 18.0 63.4 24.0 Q62.6 30.0 63.7 36.0 Q63.7 41.0 63.3 46.0"/><path class="soft" d="M70.5 12.0 Q70.0 18.0 70.4 24.0 Q70.2 30.0 70.2 36.0 Q71.2 41.0 70.8 46.0"/>
+  <rect x="44" y="10" width="32" height="38" rx="5"/>
+  <path d="M44 20 h-12 a3 3 0 0 1 0 -6 h12 M44 36 h-12 a3 3 0 0 1 0 -6 h12 M76 20 h12 a3 3 0 0 0 0 -6 h-12 M76 36 h12 a3 3 0 0 0 0 -6 h-12"/>
+  <circle cx="28" cy="17" r="4"/><circle cx="28" cy="33" r="4"/><circle cx="92" cy="17" r="4"/><circle cx="92" cy="33" r="4"/>
+  <path d="M60 4 q-6 3 0 6 q6 3 0 6" class="soft"/>
+  <line x1="47" y1="52" x2="73" y2="52"/>
+  <rect class="fill" x="45" y="390" width="30" height="5" rx="1"/>
+  <path d="M50 430 h20 l-3 8 h-14 z"/>
+  <line class="string" x1="54.5" y1="52" x2="51" y2="392"/><line class="hit" data-string="0" x1="54.5" y1="60" x2="51" y2="388"/><line class="string" x1="58.5" y1="52" x2="56.5" y2="392"/><line class="hit" data-string="1" x1="58.5" y1="60" x2="56.5" y2="388"/><line class="string" x1="61.5" y1="52" x2="63.5" y2="392"/><line class="hit" data-string="2" x1="61.5" y1="60" x2="63.5" y2="388"/><line class="string" x1="65.5" y1="52" x2="69" y2="392"/><line class="hit" data-string="3" x1="65.5" y1="60" x2="69" y2="388"/>
+</svg></button>
+
+          <span class="hint h-tambura" style="left:71cqw; top:9cqw">pluck the strings <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 8 C 18 8 28 16 30 32 M24 27 l6 6 l5 -7"/></svg></span>
+          <span class="hint h-shruti" style="left:44cqw; bottom:19cqw">press for a drone <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 8 C 18 8 28 16 30 32 M24 27 l6 6 l5 -7"/></svg></span>
+          <span class="hint h-note" style="left:74cqw; bottom:30cqw"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M34 20 C 24 12 14 14 6 22 M6 14 v9 h8"/></svg> my song</span>
+        </div>
+      </div>
+      <div class="shelf-foot">
+        <p class="shelf-intro"><strong>Side Quests.</strong> My experiments with things I find interesting, from security chips to news digests, and musings on cricket, music and everything in between.</p>
+        <div class="now-playing">
+          <div class="np-art" aria-hidden="true">♪</div>
+          <div class="np-text"><strong>Desh Thillana</strong><span>Vittal Rangan</span></div>
+          <div class="np-wave" role="presentation"><i style="--v:0.15"></i><i style="--v:0.41"></i><i style="--v:0.62"></i><i style="--v:0.79"></i><i style="--v:0.66"></i><i style="--v:0.74"></i><i style="--v:0.98"></i><i style="--v:0.92"></i><i style="--v:0.65"></i><i style="--v:0.83"></i><i style="--v:0.66"></i><i style="--v:0.8"></i><i style="--v:0.83"></i><i style="--v:0.65"></i><i style="--v:0.67"></i><i style="--v:0.6"></i><i style="--v:0.59"></i><i style="--v:0.76"></i><i style="--v:0.74"></i><i style="--v:0.47"></i><i style="--v:0.69"></i><i style="--v:0.71"></i><i style="--v:0.81"></i><i style="--v:0.7"></i><i style="--v:0.78"></i><i style="--v:0.68"></i><i style="--v:1.0"></i><i style="--v:0.7"></i><i style="--v:0.7"></i><i style="--v:0.75"></i><i style="--v:0.69"></i><i style="--v:0.78"></i><i style="--v:0.82"></i><i style="--v:0.78"></i><i style="--v:0.6"></i><i style="--v:0.45"></i><i style="--v:0.75"></i><i style="--v:0.71"></i><i style="--v:0.8"></i><i style="--v:0.47"></i><i style="--v:0.66"></i><i style="--v:0.68"></i><i style="--v:0.8"></i><i style="--v:0.68"></i><i style="--v:0.75"></i><i style="--v:0.88"></i><i style="--v:0.74"></i><i style="--v:0.79"></i><i style="--v:0.65"></i><i style="--v:0.81"></i><i style="--v:0.71"></i><i style="--v:0.71"></i><i style="--v:0.71"></i><i style="--v:0.64"></i><i style="--v:0.56"></i><i style="--v:0.76"></i><i style="--v:0.72"></i><i style="--v:0.79"></i><i style="--v:0.64"></i><i style="--v:0.44"></i><i style="--v:0.31"></i><i style="--v:0.34"></i><i style="--v:0.19"></i><i style="--v:0.1"></i></div>
+          <button type="button" class="np-play" aria-pressed="false" aria-label="Play Desh Thillana by Vittal Rangan"><span class="tri"></span></button>
+        </div>
       </div>
     </div>
   </div>
@@ -466,6 +515,7 @@
 
   <script src="assets/js/motion.js" defer></script>
   <script src="assets/js/music.js" defer></script>
+  <script src="assets/js/shelf.js" defer></script>
   <script>
     // Dark mode toggle
     const themeToggle = document.getElementById('theme-toggle');

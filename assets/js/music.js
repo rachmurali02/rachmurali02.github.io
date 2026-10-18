@@ -62,6 +62,9 @@
   });
   audio.addEventListener('play', sync);
   audio.addEventListener('pause', sync);
+  // Let other parts of the page (the shelf's note and now-playing bar) share this player
+  window.sideQuestsMusic = { audio, credit: CREDIT, toggle: () => button.click() };
+  document.dispatchEvent(new CustomEvent('sidequests:music'));
   window.addEventListener('pagehide', () => {
     if (!audio.paused) store.set('sessionStorage', 'musicTime', String(audio.currentTime));
   });
