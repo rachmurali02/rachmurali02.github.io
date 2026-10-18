@@ -98,7 +98,7 @@
     .sec-label .label { margin-top: 12px; }
     .sec-body { grid-column: 4 / 13; }
 
-    /* Index of experiments */
+    /* Index of experiments and musings */
     .index { list-style: none; }
     .index li { border-top: 1px solid var(--hair); }
     .index li:first-child { border-top: 1px solid var(--rule); }
@@ -116,6 +116,12 @@
     .index .thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: filter .2s ease; }
     .index a:hover h3 { color: var(--red); }
     .index a:hover .thumb img { filter: none; }
+
+    .all-link {
+      display: inline-block; margin-top: 24px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+      background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size .35s var(--ease-out), color .2s ease;
+    }
+    .all-link:hover { color: var(--red); background-size: 100% 2px; }
 
     /* Journey */
     .logos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
@@ -215,6 +221,7 @@
       <a href="/" class="wordmark">Side Quests</a>
       <nav>
         <a href="#experiments" class="hide-sm">Experiments</a>
+        <a href="#musings" class="hide-sm">Musings</a>
         <a href="#journey" class="hide-sm">Journey</a>
         <a href="#subscribe" class="subscribe-link">Subscribe</a>
         <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
@@ -230,7 +237,7 @@
       </figure>
       <div class="intro enter" style="--d:.75s">
         <p class="label red">Side Quests</p>
-        <p>My experiments with things I find interesting, from security chips to news digests to whatever catches my eye next.</p>
+        <p>My experiments with things I find interesting, from security chips to news digests, and musings on cricket, music and everything in between.</p>
       </div>
     </div>
   </div>
@@ -283,10 +290,90 @@
       </div>
     </section>
 
-    <section id="journey" data-rule>
+    <section id="musings" data-rule>
       <div class="grid">
         <div class="sec-label" data-reveal>
           <div class="num">02</div>
+          <p class="label">Musings</p>
+        </div>
+        <div class="sec-body">
+          <ol class="index">
+            <li data-reveal style="--d:0.0s">
+              <a href="posts/musings/shadows.html">
+                <span class="n">01</span>
+                <div>
+                  <h3>Shadows</h3>
+                  <p>There’s a furtive shadow at your feet. It follows you around. It doesn't block you. It stays hopeful / It sleeps in the dark just like you should…</p>
+                  <p class="meta"><span class="red">Poem</span><span>Apr 29, 2025</span><span>1 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/musings/shadows.svg" alt=""></div>
+              </a>
+            </li>
+            <li data-reveal style="--d:0.1s">
+              <a href="posts/musings/stones-and-throws.html">
+                <span class="n">02</span>
+                <div>
+                  <h3>Stones and throws</h3>
+                  <p>He flicks. It drowns. He scrambles to dig up another pebble. The five-year-old in him is furious. He needs it to bounce — at least once. Intuitively…</p>
+                  <p class="meta"><span class="red">Vignette</span><span>Apr 14, 2025</span><span>2 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/musings/stones-and-throws.svg" alt=""></div>
+              </a>
+            </li>
+            <li data-reveal style="--d:0.2s">
+              <a href="posts/musings/in-my-space.html">
+                <span class="n">03</span>
+                <div>
+                  <h3>In my space</h3>
+                  <p>It’s not a hush. It’s not a whimper. It’s not the drop of a pin. It’s vacuous. It’s hollow. It’s jarring. I hum, I type, I chatter / To forget that…</p>
+                  <p class="meta"><span class="red">Poem</span><span>Apr 10, 2025</span><span>1 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/musings/in-my-space.svg" alt=""></div>
+              </a>
+            </li>
+            <li data-reveal style="--d:0.3s">
+              <a href="posts/musings/reflecting-on-a-sound.html">
+                <span class="n">04</span>
+                <div>
+                  <h3>Reflecting on a sound</h3>
+                  <p>“Echo” is such a funny word. It's a repetition, but not the actual sound. You can ‘echo’ emotions, thoughts and feelings, but you can never be the…</p>
+                  <p class="meta"><span class="red">Vignette</span><span>Apr 9, 2025</span><span>1 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/musings/reflecting-on-a-sound.svg" alt=""></div>
+              </a>
+            </li>
+            <li data-reveal style="--d:0.4s">
+              <a href="posts/musings/shits-and-giggles.html">
+                <span class="n">05</span>
+                <div>
+                  <h3>Shits and Giggles</h3>
+                  <p>There’s a part of me that feels whole just hearing my friends and me laugh together. There’s no script, no structure — just chaos and connection.…</p>
+                  <p class="meta"><span class="red">Friendship</span><span>Apr 8, 2025</span><span>1 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/musings/shits-and-giggles.svg" alt=""></div>
+              </a>
+            </li>
+            <li data-reveal style="--d:0.5s">
+              <a href="posts/musings/witnesses.html">
+                <span class="n">06</span>
+                <div>
+                  <h3>Witnesses</h3>
+                  <p>Sometimes I feel like we live to find witnesses in our lives. A witness to see our groggy mornings, someone to notice the tangles in your hair, the…</p>
+                  <p class="meta"><span class="red">Vignette</span><span>Apr 8, 2025</span><span>1 min</span></p>
+                </div>
+                <div class="thumb"><img src="assets/images/musings/witnesses.svg" alt=""></div>
+              </a>
+            </li>
+          </ol>
+          <a href="musings.html" class="all-link" data-reveal>All 19 musings →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey" data-rule>
+      <div class="grid">
+        <div class="sec-label" data-reveal>
+          <div class="num">03</div>
           <p class="label">Journey &amp; Experience</p>
         </div>
         <div class="sec-body">
@@ -347,7 +434,7 @@
     <section id="subscribe" class="subscribe">
       <div class="grid">
         <div class="sec-label" data-reveal>
-          <div class="num">03</div>
+          <div class="num">04</div>
           <p class="label">Newsletter</p>
         </div>
         <div class="sec-body">
@@ -368,6 +455,7 @@
       <div class="links">
         <a href="https://github.com/rachmurali02">GitHub</a>
         <a href="#experiments">Experiments</a>
+        <a href="musings.html">Musings</a>
         <a href="#subscribe">Newsletter</a>
       </div>
       <span class="copy">© 2026 Rachana Murali Narayanan</span>

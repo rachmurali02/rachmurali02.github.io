@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Witnesses | Side Quests</title>
+  <meta name="description" content="Sometimes I feel like we live to find witnesses in our lives. A witness to see our groggy mornings, someone to notice the tangles in your hair, the…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Vignette</p>
+        <p class="label"><time datetime="2025-04-08">Apr 8, 2025</time></p>
+        <p class="label muted">1 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Witnesses</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>Sometimes I feel like we live to find witnesses in our lives. A witness to see our groggy mornings, someone to notice the tangles in your hair, the haphazard nature of your day. An odd friendship where they are not actively fiddling with the moment, but someone who surrenders themselves to the chaos of it. Someone who embarks on a journey with you to detangle every moment passively, remarking on the ludicrousness of it, not trying to change the course of it, but is blissfully present in its essence.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2025/04/witnesses.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

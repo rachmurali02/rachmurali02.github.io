@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test for me ! | Side Quests</title>
+  <meta name="description" content="&quot;Cricket fever&quot; has been prevalent for sometime now. The T20 format of the game has attracted fans from all over the world with its short &#x27;sweet&#x27;…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Cricket</p>
+        <p class="label"><time datetime="2014-12-13">Dec 13, 2014</time></p>
+        <p class="label muted">4 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Test for me !</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>"Cricket fever" has been prevalent for sometime now. The T20 format of the game has attracted fans from all over the world with its short 'sweet' games and hits around the park. The ODIs keep its share of limelight with its ICC World Cup that takes place quadrennially. It manages to hold on by keeping viewers with moderate tastes, glued to the intense matches of India and Pakistan.</p>
+        <p>But the oldest format of test on the other hand presents a sea of white with long and dreary games of five whole days filled with dot balls. At times those 'boring matches ' as I have heard many say so, end as draws. Definitely, a blow to fans like me who want to see a win or a loss. For example, I would never want to see India battling the Australian heat for five whole days of fearsome cricket just to see Kohli , getting out in the last few overs and have India 'drawing' the match! ( Adeilade Test- was a possibility!)</p>
+        <p>No doubt tests last for the longest duration. Fans who enjoy the speed and tension of sports such as Basketball and Athletics would be dissapointed by staring at the 22 yards just to see a run being hit in half an hour. On top of that to see the gentleman slow sport end as a draw discourages any viewer from even turning on Star Cricket! Such is the way Test Cricket does lose out on many viewers. Can you blame them for not wishing to watch another supposedly 'slow ' game of 11 ?</p>
+        <p>Personally I beg to differ with them on this point, For example, Why are we told to do long hours of mathematics or read classics of Jane Austen and Thomas Hardy? To make sure we retain something after that. That said, literature reading is much more than that. The reader acquires an individualistic style by flipping through the pages of Charlotte Bronte and R.L Stevenosn.The flare for writing from these evergreen classics polish the crude ideas of the reader and nurture the reader's innate sense of originality. The same way long tests do offer young budding talents an opportunity to learn the most from the game. It helps them build a characteristic style of game gaining them the ultimate title of 'class'! Side by side it teaches players and viewers the qualities of endurance and mental strength.</p>
+        <p>The games not only has something to offer to young cricketers but to all of us. At any point of the game, a fall in wicket could cost an entire innings and thus the entire match for a team. For example, Misbah Ul Haq for Pakistan and Kohli currently for India. Similarly a single bowler can vanquish an entire team. We have seen many a times how destructive the lights of Mitchell Johnson and Jimmy Andedson can be. Johnson's variation, Anderson's swing, Bhuvi's in swinger along with Steyn's pace against the stroke play of Watson and Devilliers are " must see" moments.To watch these prudently bowled deliveries flicked away on either sides of the ground for dots or stylish 4s is a sight that can be visualized only in the test format.</p>
+        <p>Certainly, there has been a lot of introspection, a whole lot written and a great deal spoken about the true meaning of the sport. But in my opinion I feel the test format not only satisfies the insatiable old spectators of the sport( my dad and mom!) but also has great spells to inspire the young generation. It does satisfy my thirst to learn and acquire, polishing my sense of originality. But along with that, the magnificent sport of cricket also lays down an idiosyncratic feeling that truly words itself can't explain.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2014/12/test-for-me.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

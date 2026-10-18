@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Never a Maybe with AB | Side Quests</title>
+  <meta name="description" content="I speak as one of his heartfelt admirers. I represent his heart-throbbing fan base. I represent the many Indians who support the Proteas because of…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Cricket</p>
+        <p class="label"><time datetime="2018-05-23">May 23, 2018</time></p>
+        <p class="label muted">2 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Never a Maybe with AB</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>I speak as one of his heartfelt admirers. I represent his heart-throbbing fan base. I represent the many Indians who support the Proteas because of his sublime presence in the South African side.</p>
+        <p>It began in 2007. It was a time when cricket was an excuse for my dad to snatch the TV from me as I was dreaming in an action-packed "Kim Possible" episode. It was a time when my mom was fearful that I might also be bed-ridden because of "Cricket-fever." Well, both excuses and fears played out in the forms of irresistible cricket and AB.</p>
+        <p>I am not sure if you all remember the time he scored a 100 for Delhi in the first season of IPL before Delhi foolishly did not retain him. 11 years later, as I watch the qualifier between two boring teams, Kolkata and Rajasthan (p.s Mumbai is the only wonderful team to exist), I was dumbfounded to hear my dad as he popped into my room: AB has retired from all forms of international cricket, and will only play for RCB.</p>
+        <p>I mean, I am glad that RCB, one of my least favourite teams, is still giving us a platform to enjoy AB’s stellar cricket. But, it is slightly disheartening to see that his boundless cricketing prowess will be limited to the four walls of an ever-aspiring team like them.</p>
+        <p>A star-batsman by profession, and everything phenomenal otherwise, he will always continue to be a beacon of light for all sports fans around the world. His innovative sweep shots shine golden with an ethereal glow. His relentless and agile fielding energize us. Even when he has an occasional blue-moon miss, there is an irreplaceable majesty to his resounding personality that makes him never a maybe. He brings life to the game with his astuteness and charitable benevolence towards people from all walks of life. He has empowered cricket with the hope that it will continue to remain a sophisticated and gentlemen sport in spite of the T-20 frenzy!</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2018/05/never-maybe-with-ab.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

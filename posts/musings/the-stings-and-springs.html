@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The stings and springs! | Side Quests</title>
+  <meta name="description" content="It was a loyalist. Everywhere I went, it followed me. For a while, I thought my skin was draped in honey, but it was just an unrequited love that I…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Travel</p>
+        <p class="label"><time datetime="2017-12-30">Dec 30, 2017</time></p>
+        <p class="label muted">3 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>The stings and springs!</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>It was a loyalist. Everywhere I went, it followed me. For a while, I thought my skin was draped in honey, but it was just an unrequited love that I could never satisfy. It pricked me. It itched. It buzzed. All outs, ODOMOS and white clothes, CHECKED! Ouch!! It still bit.....</p>
+        <p>Its hawk eye radar was quick enough to sense any purposeful movements I made to avoid it. When I sat, it cringed on my skin. When I cried in fear, it joyfully bounced towards me. This was pretty much my entire holiday. Be it the caressing aroma of meals in Kumbakonam or the packed lengthy and reiterative temple trips down South, it made every part of me blush in pain.</p>
+        <hr>
+        <p>We began with a jerky nauseatic car ride to Srirangam. It was a typical Indica experience, a car too immature for the gigantic threatening rocks and bumps at every turn. Despite the surreptitious traps at each bend, a vista of green paddy fields over the horizon managed to overturn my olfactory anguish into a sense of astonishment at the portrait. Strawhats created an interesting jigsaw puzzle and danced a silent tune to the tranquil wind that gently ruffled the hats out of place. The forbearing mountains in the background aroused a mystical form of curiosity, an eagerness towards where this regal power descended from.</p>
+        <p>I was also agonizingly distracted by the winding queues of noisy "Govindas" bellowed across the shrine. However majestic Ranganathaswamy looked, a powerful statue devoutly worshipped for over millennia, 4 hours was too much effort for 2 seconds of precious time. I felt the temple priests were far too stingy. I have heard Srirangam is famous for its traditional vatthakozhumbu, a delightful dish that can be served as Prasad instead of that meagre, bitter, 2 leaved tulsi that positively stung my throat!</p>
+        <hr>
+        <p>India, a land of diversity, a bay for enterprise, and a cloud where dust never seems to settle. The moment I step out, a hoar of dust collects under my foot. If it was soft, it may have seemed ingratiatingly relaxing. But it was filled with jutting pebbles and edged coarse grains that pricked me. It traversed with me. It collected unevenly. A more diluted form choked me when I went by auto to the dentist.</p>
+        <p>Even though it was dusty, and though the only meal in Music Academy I was bought was with the pepper rasam, the novelty of our ancient heritage never ceases to excite me. Be it the mellifluous concerts by Sanjay Subramanian or my quarantined days with fever, there was a fragile confluence of despicable and relishable elements that moulded this primordial beauty into an enlivening land of hope.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2017/12/stinging-rock-beds.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

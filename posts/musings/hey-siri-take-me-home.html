@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>"Hey Siri, Take me home" | Side Quests</title>
+  <meta name="description" content="Officially, she graduated from college last December, and life hasn&#x27;t been the same. There is something missing. Cut to when she was in college - she…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Essay</p>
+        <p class="label"><time datetime="2024-04-05">Apr 5, 2024</time></p>
+        <p class="label muted">2 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>"Hey Siri, Take me home"</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>Officially, she graduated from college last December, and life hasn't been the same. There is something missing.</p>
+        <p>Cut to when she was in college - she was looking forward to unlock a new level of adulthood. She had a world of dreams that she wanted to adopt once she was done with the laborious demands of college and classes. It had a lot to do with securing that financial independence,exploring a new city, and supplanting herself from the mundane comforts of knowing something too well.</p>
+        <p>I guess this is where she finds herself adrift in limitless possibilities, swimming in opportunities, but a little directionless in pursuit. She sees herself navigating uncertain waters, confused about her end goal, all while staying afloat mid sea.</p>
+        <p>Multiple forces are adept at determining her trajectory because the young sailor lost her map. She realized it didn't matter whether she had her compass or not because the blueprint engineer has it all set for her. But, she is a little stubborn to follow the map her fellow engineer gave her. She is drenched in water from the choppy waves, and she dithers as she hesitantly settles for a resting point. As she restlessly tries to adjust the temperature of her Model 3, she looks towards a lighthouse. It's quaint to the naked eye, but leaves you with an illuminated sense of purpose when you recognize it. The wave swept reefs hug its waist, and its eyes are warped by the clouds, giving it a mystical air. This is her green light. The enchanting green light that gets further and further away as you move towards it. Its a visceral fear that it will disappear, but it doesn't. It eggs her to come closer. She leaves the solace of her little car, and follows the ray of conviction to lead her home.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2024/04/hey-siri-take-me-home.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

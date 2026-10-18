@@ -102,6 +102,29 @@ main > .grid { border-top: 1px solid var(--hair); padding-top: 48px; padding-bot
 .post-body .border-l-4 > :last-child { margin-bottom: 0; }
 .post-body iframe { display: block; border: 1px solid var(--hair) !important; }
 
+/* Musings */
+.musing .verse { padding-left: 20px; border-left: 2px solid var(--red); line-height: 1.75; }
+.post-body hr { width: 48px; margin: 2.4em 0; border: 0; border-top: 2px solid var(--red); }
+.post-body .origin { margin-top: 3em; padding-top: 12px; border-top: 1px solid var(--hair); font-size: 14px; color: var(--muted); }
+.archive-body { grid-column: 4 / 13; }
+.archive-body .year {
+  margin: 0 0 .5em; padding-top: 0; border-top: 0;
+  font-size: 56px; line-height: 1; letter-spacing: -.04em; color: var(--red);
+}
+.archive-body .year ~ .year { margin-top: 1.4em; }
+.post-body .archive { list-style: none; margin: 0 0 1em; padding: 0; }
+.post-body .archive li { margin: 0; border-top: 1px solid var(--hair); }
+.post-body .archive li:first-child { border-top: 2px solid var(--rule); }
+.post-body .archive a {
+  display: grid; grid-template-columns: 96px minmax(0, 1fr) 120px; column-gap: 24px;
+  padding: 20px 0; color: inherit; border-bottom: 0; align-items: baseline;
+}
+.archive time { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.archive h3 { margin: 0; font-size: 24px; line-height: 1.15; transition: color .25s ease, transform .45s var(--ease-out); }
+.archive p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.archive .label { text-align: right; }
+.post-body .archive a:hover h3 { color: var(--red); transform: translateX(6px); }
+
 /* Subscribe */
 .subscribe { background: var(--red); color: var(--on-red); }
 .subscribe .grid { padding-top: 24px; padding-bottom: 72px; }
@@ -127,6 +150,7 @@ footer .copy { grid-column: 10 / 13; text-align: right; color: var(--muted); }
   .post-meta .back { width: 100%; margin-bottom: 8px; }
   .post-title, .post-body, .subscribe .sec-label, .subscribe .sec-body { grid-column: 1 / -1; }
   .post-body .split { grid-template-columns: 1fr; }
+  .archive-body { grid-column: 1 / -1; }
   .subscribe .sec-label { margin-bottom: 24px; }
 }
 @media (max-width: 640px) {
@@ -138,6 +162,8 @@ footer .copy { grid-column: 10 / 13; text-align: right; color: var(--muted); }
   .post-body { font-size: 17px; }
   .post-body h2 { font-size: 26px; }
   .post-body pre { margin-left: -16px; margin-right: -16px; padding: 16px; }
+  .post-body .archive a { grid-template-columns: minmax(0, 1fr); row-gap: 6px; }
+  .archive .label { text-align: left; }
   footer .wordmark, footer .links, footer .copy { grid-column: 1 / -1; text-align: left; }
   footer .links { margin: 12px 0; }
 }

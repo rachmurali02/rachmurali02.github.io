@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In my space | Side Quests</title>
+  <meta name="description" content="It’s not a hush. It’s not a whimper. It’s not the drop of a pin. It’s vacuous. It’s hollow. It’s jarring. I hum, I type, I chatter / To forget that…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Poem</p>
+        <p class="label"><time datetime="2025-04-10">Apr 10, 2025</time></p>
+        <p class="label muted">1 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>In my space</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p class="verse">It’s not a hush. It’s not a whimper. It’s not the drop of a pin.<br>
+It’s vacuous. It’s hollow. It’s jarring.<br>
+I hum, I type, I chatter<br>
+To forget that I’m alone.<br>
+My voice echoes back from digital walls,<br>
+Convincing me that I exist.<br>
+The glow of a screen—superior to any happy light—<br>
+And the vents huff and puff rhythmically.<br>
+The chair squeaks,<br>
+The floor remembers the anxious pat-pat.<br>
+Nothing waits to check on silence.<br>
+Breath halts to grieve a sigh,<br>
+A racing heartbeat in tandem with the clacking of keys.<br>
+Somewhere, I look around for a sound from my real space.<br>
+It was a knock at the other apartment.<br>
+I continue to clack away—unabated, almost wishful—<br>
+Hoping it might lead me away from my own stale voice</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2025/04/in-my-space.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shits and Giggles | Side Quests</title>
+  <meta name="description" content="There’s a part of me that feels whole just hearing my friends and me laugh together. There’s no script, no structure — just chaos and connection.…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Friendship</p>
+        <p class="label"><time datetime="2025-04-08">Apr 8, 2025</time></p>
+        <p class="label muted">1 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Shits and Giggles</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>There’s a part of me that feels whole just hearing my friends and me laugh together. There’s no script, no structure — just chaos and connection. Somehow, even as we poke fun at each other with no rhyme or reason, it feels deeply fulfilling.</p>
+        <p class="verse">We talk, we jab, we banter. We lose our balance and fall into fits of laughter.<br>
+It’s ruckus. It’s madness. It’s directionless — and yet, it’s complete.</p>
+        <p>Inside jokes, fossilized from midnight moments and old summers, bloom like wildflowers: untamed, unexplained, rooted in familiarity and comfort.</p>
+        <p>It’s competitive — a ping-pong match with many players, no scoreboard, and only laughter filling the room. The gaslighter stokes the fire just to see sparks fly. The martyr rotates, armed with fiery comebacks. And the rest of us hop between sharp one-liners, quick wit, and that disastrous mix of unhinged energy and specific knowledge</p>
+        <p class="verse">It’s playful. It’s affectionate.<br>
+It’s nostalgic. It's alive and loud.</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2025/04/friends.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

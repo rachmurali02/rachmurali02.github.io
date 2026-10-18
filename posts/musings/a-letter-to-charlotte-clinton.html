@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A letter to Charlotte Clinton! | Side Quests</title>
+  <meta name="description" content="Dear little Charlotte, / Grandma failed to make it this time as well! It was a hard-fought battle, but I could not score the winning basket ,though…" />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/musings.html" class="back">← All musings</a>
+        <p class="label red">Satire</p>
+        <p class="label"><time datetime="2016-11-24">Nov 24, 2016</time></p>
+        <p class="label muted">3 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>A letter to Charlotte Clinton!</h1>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body musing enter" style="--d:.5s">
+        <p>Dear little Charlotte,</p>
+        <p>Grandma failed to make it this time as well! It was a hard-fought battle, but I could not score the winning basket ,though the entire flock of spectators propelled me towards my victory stand. We lost the house;we lost the college; we lost everything dear charlotte!</p>
+        <p>Grandma was the pick of the candidates, but she heard whispers from her past. Grandma inflated stock markets, but FBI tempered it. Grandma was ready to break the glass, but a dramatic opponent trumped it. My heart lies in strengthening America's roots, but everyone pierces through my well- crafted and superficial speeches! Teleprompters worked for my rival- ally Obama, who broke barriers, when he was enthroned twice as an African- American. He ornamented his speeches with eloquence and rhetorical pathos. He was a refreshing and rejuvenating change for America, though I never saw it the first term. If it's the change that this ancient democracy wants, why does it cunningly work against me?</p>
+        <p>Grandma did everything she could. I portrayed myself as the symbol of Women Suffrage. I showcased myself as a strong proponent of integration of different cultural groups. From Hispanic populations to caring mothers, I even used my vice presidential candidate as a way of garnering minority votes. And with all the monetary support for my campaign, I was fueled to take on many more republican candidates! But, I felt the BERN. His youthful optimism and his revolutionary principles on health care revamps stung me. I crippled day after day under the heat of our nomination debates, but Grandma thought she could take more....</p>
+        <p>I likened this to my previous encounter with Obama, but this was my Achilles heel. I paid unwavering attention on healing the BERN. I expended and devoted hours on the primaries when my republican rival was cleverly manipulating the public. There were hard walls that I had to break through: the impenetrable minds of my dear Americans. In 2008, I was second to best in the primaries. In 2016, I was limping towards my nomination for my secondaries. So to gear up, I got the man in office to the cheering crowd. That was another unprecedented disaster as voters ,who were against the Obama administration, turned to initiate the construction of the USA-MEXICAN wall! Where was I to go? Though my tweaked news feeds and rational diplomats could never conjure even a dream of a Trump presidency, my heart pounded with every state that went red.... It was a grotesque nightmare of seeing the entire map blotched with red stains everywhere.</p>
+        <p>So Grandma told you this story, not to scare you from American Politics, but because its a "humbling feeling" that I now fall in line with Jackson, Tilden and Al Gore. My people are continuing to burst into rapturous applause and break into huge rallies for me. Dear charlotte, lets brace the day when Jill Stein succeeds in her recount call. America counts on you!</p>
+        <p class="verse">Your loving gran,<br>
+Hillary Diane Rodham Clinton</p>
+        <p class="origin">First published on <a href="https://rachcolumn.blogspot.com/2016/11/a-letter-to-charlotte-clinton.html">rachcolumn.blogspot.com</a>.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>
