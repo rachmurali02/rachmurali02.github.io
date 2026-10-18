@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="78" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">Never a Maybe</tspan><tspan x="28" dy="38">with AB</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">CRICKET</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2018</text>
+  <ellipse cx="200" cy="170" rx="170" ry="120" fill="#cfdcc4"/>
+  <ellipse cx="200" cy="170" rx="170" ry="120" fill="none" stroke="#fff" stroke-width="3"/>
+  <path d="M200 170 L330.0 170.0" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L312.6 225.0" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L265.0 265.3" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L200.0 280.0" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L135.0 265.3" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L87.4 225.0" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L70.0 170.0" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L87.4 115.0" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L135.0 74.7" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L200.0 60.0" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L265.0 74.7" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/><path d="M200 170 L312.6 115.0" stroke="#e2231a" stroke-width="2" stroke-dasharray="3 6" opacity=".8"/>
+  <rect x="190" y="110" width="20" height="120" fill="#e4d5a8"/>
+  <g transform="rotate(-50 200 170)"><rect x="196" y="100" width="12" height="70" rx="5" fill="#c9a46a"/><rect x="199" y="80" width="6" height="22" fill="#1a1a1a"/></g>
+  <text x="200" y="66" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="40" letter-spacing="-1" fill="#1a1a1a">360°</text>
+  <circle cx="318" cy="214" r="9" fill="#e2231a"/><path d="M315.75 205.27 q4.95 8.73 0 17.46" stroke="#fff" stroke-width="0.54" fill="none" stroke-dasharray="0.9 0.9"/><path d="M317.55 205.09 q4.95 8.91 0 17.82" stroke="#fff" stroke-width="0.54" fill="none" stroke-dasharray="0.9 0.9"/>
 </svg>

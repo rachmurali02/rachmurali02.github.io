@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="84" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">Shits and</tspan><tspan x="28" dy="44">Giggles</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">FRIENDSHIP</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2025</text>
+  <rect x="30" y="40" width="150" height="70" rx="35" fill="#e2231a"/><path d="M60 108 l-10 20 l26 -20 z" fill="#e2231a"/><text x="105" y="86" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="31" fill="#fff">HAHA</text>
+  <rect x="200" y="30" width="170" height="64" rx="32" fill="#1a1a1a"/><path d="M320 92 l14 20 l20 -20 z" fill="#1a1a1a"/><text x="285" y="72" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="28" fill="#fff">no way</text>
+  <rect x="120" y="120" width="180" height="76" rx="38" fill="#d9cfbb"/><path d="M180 194 l0 20 l26 -20 z" fill="#d9cfbb"/><text x="210" y="170" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="34" fill="#1a1a1a">HAHAHA</text>
+  <rect x="20" y="200" width="120" height="54" rx="27" fill="#1a1a1a"/><path d="M40 252 l-8 20 l22 -20 z" fill="#1a1a1a"/><text x="80" y="236" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="24" fill="#fff">lol</text>
+  <rect x="250" y="200" width="130" height="60" rx="30" fill="#e2231a"/><path d="M340 258 l14 20 l22 -20 z" fill="#e2231a"/><text x="315" y="240" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="27" fill="#fff">stop!</text>
 </svg>

@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="84" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">Stones and</tspan><tspan x="28" dy="44">throws</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">VIGNETTE</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2025</text>
+  <rect y="150" width="400" height="150" fill="#c8d3d6"/>
+  <path d="M0 150 h400" stroke="#1a1a1a" stroke-width="2"/>
+  <path d="M0 250 q30 -14 70 -10 q20 2 32 14 L102 300 L0 300 Z" fill="#d9cfbb"/>
+  <path d="M58 224.8 L50.0 252 M58 224.8 L66.0 252" stroke="#1a1a1a" stroke-width="5.6000000000000005" stroke-linecap="round"/><rect x="51.6" y="196.0" width="12.8" height="32.0" rx="5.6000000000000005" fill="#1a1a1a"/><circle cx="58" cy="186.39999999999998" r="8.0" fill="#1a1a1a"/>
+  <path d="M74 150 Q112 120 150 214 Q192 170 235 214 Q268 188 300 214 Q322 196 340 210" fill="none" stroke="#e2231a" stroke-width="2" stroke-dasharray="4 6"/>
+  <ellipse cx="150" cy="214" rx="26" ry="5" fill="none" stroke="#1a1a1a" stroke-width="2" opacity="0.90"/><ellipse cx="150" cy="214" rx="14" ry="3" fill="none" stroke="#1a1a1a" stroke-width="2" opacity="0.90"/><ellipse cx="235" cy="214" rx="20" ry="4" fill="none" stroke="#1a1a1a" stroke-width="2" opacity="0.75"/><ellipse cx="235" cy="214" rx="10" ry="2" fill="none" stroke="#1a1a1a" stroke-width="2" opacity="0.75"/><ellipse cx="300" cy="214" rx="14" ry="3" fill="none" stroke="#1a1a1a" stroke-width="2" opacity="0.60"/>
+  <ellipse cx="342" cy="208" rx="10" ry="4" fill="#1a1a1a"/>
 </svg>

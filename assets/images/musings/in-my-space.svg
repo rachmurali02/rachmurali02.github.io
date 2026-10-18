@@ -1,8 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
-  <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="84" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">In my space</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">POEM</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2025</text>
+  <rect width="400" height="300" fill="#14161c"/>
+  <path d="M150 300 L190 160 L300 160 L340 300 Z" fill="#9fd3ff" opacity=".18"/>
+  <rect x="40" y="40" width="70" height="90" fill="#1f2430" stroke="#2c3240" stroke-width="4"/>
+  <circle cx="88" cy="62" r="7" fill="#e9e3d6" opacity=".6"/>
+  <rect x="180" y="118" width="130" height="84" rx="4" fill="#cfe9ff"/>
+  <rect x="188" y="126" width="114" height="68" fill="#eaf6ff"/>
+  <rect x="196" y="134" width="80" height="4" fill="#9fb6c8"/><rect x="196" y="144" width="60" height="4" fill="#9fb6c8"/><rect x="196" y="154" width="90" height="4" fill="#e2231a"/><rect x="196" y="164" width="50" height="4" fill="#9fb6c8"/><rect x="196" y="174" width="70" height="4" fill="#9fb6c8"/>
+  <rect x="170" y="202" width="150" height="8" fill="#3a3f4a"/>
+  <rect x="120" y="210" width="260" height="10" fill="#2a2e38"/>
+  <rect x="140" y="220" width="8" height="80" fill="#2a2e38"/><rect x="350" y="220" width="8" height="80" fill="#2a2e38"/>
+  <rect x="96" y="166" width="22" height="70" rx="10" fill="#000"/>
+  <circle cx="110" cy="148" r="16" fill="#000"/>
+  <rect x="80" y="232" width="56" height="8" fill="#000"/><rect x="104" y="240" width="8" height="60" fill="#000"/>
 </svg>

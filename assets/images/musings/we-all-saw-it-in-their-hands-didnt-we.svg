@@ -1,8 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
-  <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="78" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">We all saw it</tspan><tspan x="28" dy="38">in their hands!</tspan><tspan x="28" dy="38">Didnt We?</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">CRICKET</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2019</text>
+  <rect width="400" height="300" fill="#111"/>
+  <rect width="400" height="300" fill="#111"/>
+  <circle cx="200" cy="110" r="100" fill="#fffbe0" opacity=".07"/>
+  <path d="M168 42 h64 v16 q0 40 -24 56 v18 h18 v14 h-60 v-14 h18 v-18 q-24 -16 -24 -56 z" fill="#d6b44a"/>
+  <path d="M168 50 q-22 0 -22 20 q0 18 24 26" fill="none" stroke="#d6b44a" stroke-width="6"/>
+  <path d="M232 50 q22 0 22 20 q0 18 -24 26" fill="none" stroke="#d6b44a" stroke-width="6"/>
+  <rect x="172" y="146" width="56" height="12" fill="#a8892f"/>
+  <g transform="translate(30 0) scale(1 1)"><path d="M0 230 L40 210 Q60 200 72 196 L104 190 Q112 189 112 196 Q112 202 104 203 L80 206 L108 206 Q116 206 116 213 Q116 220 108 220 L74 222 Q60 232 40 236 L0 250 Z" fill="#c48a62"/><rect x="-40" y="226" width="44" height="28" fill="#111"/></g>
+  <g transform="translate(370 0) scale(-1 1)"><path d="M0 230 L40 210 Q60 200 72 196 L104 190 Q112 189 112 196 Q112 202 104 203 L80 206 L108 206 Q116 206 116 213 Q116 220 108 220 L74 222 Q60 232 40 236 L0 250 Z" fill="#c48a62"/><rect x="-40" y="226" width="44" height="28" fill="#111"/></g>
+  <text x="200" y="196" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="16" letter-spacing="3" fill="#e2231a">TIE · TIE</text>
 </svg>

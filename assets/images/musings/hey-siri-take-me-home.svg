@@ -1,8 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="78" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">&quot;Hey Siri, Take</tspan><tspan x="28" dy="38">me home&quot;</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">ESSAY</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2024</text>
+  <rect y="200" width="400" height="100" fill="#c8d3d6"/>
+  <path d="M-20 210 q20 -14 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#1a1a1a" stroke-width="3" opacity="0.80"/><path d="M0 232 q20 -14 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#1a1a1a" stroke-width="3" opacity="0.65"/><path d="M-20 254 q20 -14 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#1a1a1a" stroke-width="3" opacity="0.50"/><path d="M0 276 q20 -14 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#1a1a1a" stroke-width="3" opacity="0.35"/>
+  <path d="M110 196 h90 l-14 22 h-62 z" fill="#e2231a"/>
+  <path d="M156 194 V110" stroke="#1a1a1a" stroke-width="4"/>
+  <path d="M160 112 L206 186 H160 Z" fill="#fff" stroke="#1a1a1a" stroke-width="2"/>
+  <path d="M152 120 L120 184 H152 Z" fill="#d9cfbb"/>
+  <path d="M312 46 a22 22 0 0 1 44 0 c0 18 -22 40 -22 40 s-22 -22 -22 -40 z" fill="#e2231a"/>
+  <circle cx="334" cy="46" r="8" fill="#f4f1ea"/>
+  <path d="M334 100 Q300 140 230 150" fill="none" stroke="#8a8578" stroke-width="3" stroke-dasharray="3 8"/>
+  <text x="50" y="70" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" fill="#8a8578">?</text>
+  <text x="80" y="52" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#8a8578">?</text>
 </svg>
