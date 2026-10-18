@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="78" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">Reflecting on a</tspan><tspan x="28" dy="38">sound</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">VIGNETTE</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2025</text>
+  <rect x="340" y="0" width="60" height="300" fill="#d9cfbb"/>
+  <path d="M340 0 V300" stroke="#1a1a1a" stroke-width="3"/>
+  <circle cx="70" cy="150" r="16" fill="#1a1a1a"/>
+  <path d="M113.0 130.7 A30.0 30.0 0 0 1 113.0 169.3" fill="none" stroke="#e2231a" stroke-width="5" stroke-linecap="round" opacity="1.00"/><path d="M136.0 111.4 A60.0 60.0 0 0 1 136.0 188.6" fill="none" stroke="#e2231a" stroke-width="5" stroke-linecap="round" opacity="0.88"/><path d="M158.9 92.1 A90.0 90.0 0 0 1 158.9 207.9" fill="none" stroke="#e2231a" stroke-width="5" stroke-linecap="round" opacity="0.76"/><path d="M181.9 72.9 A120.0 120.0 0 0 1 181.9 227.1" fill="none" stroke="#e2231a" stroke-width="5" stroke-linecap="round" opacity="0.64"/><path d="M204.9 53.6 A150.0 150.0 0 0 1 204.9 246.4" fill="none" stroke="#e2231a" stroke-width="5" stroke-linecap="round" opacity="0.52"/>
+  <path d="M359.4 175.7 A40.0 40.0 0 0 1 359.4 124.3" fill="none" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9" opacity="0.70"/><path d="M332.5 198.2 A75.0 75.0 0 0 1 332.5 101.8" fill="none" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9" opacity="0.56"/><path d="M305.7 220.7 A110.0 110.0 0 0 1 305.7 79.3" fill="none" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9" opacity="0.42"/><path d="M278.9 243.2 A145.0 145.0 0 0 1 278.9 56.8" fill="none" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9" opacity="0.28"/>
 </svg>

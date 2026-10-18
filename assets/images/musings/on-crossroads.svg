@@ -1,8 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="78" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">On crossroads</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">REFLECTION</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2019</text>
+  <path d="M150 300 L190 170 L210 170 L250 300 Z" fill="#d9cfbb"/>
+  <path d="M190 170 L60 120 L70 112 L200 160 Z" fill="#d9cfbb"/>
+  <path d="M210 170 L340 120 L330 112 L200 160 Z" fill="#d9cfbb"/>
+  <rect x="196" y="40" width="8" height="200" fill="#1a1a1a"/>
+  <path d="M204 60 h96 l16 16 l-16 16 h-96 z" fill="#e2231a"/>
+  <text x="256" y="82" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="15" fill="#fff">2018 →</text>
+  <path d="M196 104 h-96 l-16 16 l16 16 h96 z" fill="#1a1a1a"/>
+  <text x="144" y="126" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="15" fill="#fff">← 2017</text>
 </svg>

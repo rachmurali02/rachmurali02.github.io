@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="84" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">Witnesses</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">VIGNETTE</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2025</text>
+  <rect x="236" y="20" width="140" height="110" fill="#fff6d9" stroke="#1a1a1a" stroke-width="4"/>
+  <path d="M306 20 V130 M236 75 H376" stroke="#1a1a1a" stroke-width="4"/>
+  <circle cx="340" cy="52" r="14" fill="#ffd84a"/>
+  <path d="M236 130 L130 240 L300 240 L376 130 Z" fill="#fff6d9" opacity=".6"/>
+  <rect y="240" width="400" height="60" fill="#d9cfbb"/>
+  <rect x="80" y="160" width="70" height="80" rx="8" fill="#e2231a"/><path d="M150 176 a22 22 0 0 1 0 44" fill="none" stroke="#e2231a" stroke-width="10"/><path d="M102 150 q-10 -14 0 -28 q10 -14 0 -28" fill="none" stroke="#8a8578" stroke-width="3" stroke-linecap="round" opacity=".7"/><path d="M126 150 q-10 -14 0 -28 q10 -14 0 -28" fill="none" stroke="#8a8578" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+  <rect x="200" y="160" width="70" height="80" rx="8" fill="#1a1a1a"/><path d="M270 176 a22 22 0 0 1 0 44" fill="none" stroke="#1a1a1a" stroke-width="10"/><path d="M222 150 q-10 -14 0 -28 q10 -14 0 -28" fill="none" stroke="#8a8578" stroke-width="3" stroke-linecap="round" opacity=".7"/><path d="M246 150 q-10 -14 0 -28 q10 -14 0 -28" fill="none" stroke="#8a8578" stroke-width="3" stroke-linecap="round" opacity=".7"/>
 </svg>

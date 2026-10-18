@@ -1,8 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#f4f1ea"/>
-  <rect width="400" height="10" fill="#e2231a"/>
-  <text x="28" y="84" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5" fill="#000"><tspan x="28" dy="0">Shadows</tspan></text>
-  <line x1="28" y1="250" x2="372" y2="250" stroke="#000" stroke-width="2"/>
-  <text x="28" y="276" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#e2231a">POEM</text>
-  <text x="372" y="276" text-anchor="end" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="#000">2025</text>
+  <rect y="230" width="400" height="70" fill="#d9cfbb"/>
+  <path d="M232 70 L150 230 L330 230 Z" fill="#fff6c7" opacity=".7"/>
+  <rect x="226" y="40" width="8" height="190" fill="#1a1a1a"/>
+  <path d="M214 42 h40 a6 6 0 0 1 0 12 h-40 z" fill="#1a1a1a"/>
+  <circle cx="246" cy="58" r="6" fill="#ffd84a"/>
+  <path d="M182 230 L28 262 L40 272 L190 233 Z" fill="#1a1a1a" opacity=".55"/>
+  <path d="M186 190.9 L174.5 230 M186 190.9 L197.5 230" stroke="#1a1a1a" stroke-width="8.049999999999999" stroke-linecap="round"/><rect x="176.8" y="149.5" width="18.4" height="46.0" rx="8.049999999999999" fill="#1a1a1a"/><circle cx="186" cy="135.7" r="11.5" fill="#1a1a1a"/>
+  <path d="M232 230 L236 230 L120 300 L96 300 Z" fill="#1a1a1a" opacity=".35"/>
 </svg>
