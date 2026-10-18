@@ -54,9 +54,15 @@ html.js [data-rule].in::before { transform: scaleX(1); }
 html.dark .theme-emoji span { transform: rotate(180deg); }
 html.dark .theme-emoji:hover span { transform: rotate(160deg); }
 
+/* Music switch: the note sways while the clip is playing */
+.music-toggle span { display: inline-block; font-size: 26px; font-weight: 700; line-height: 0; vertical-align: -3px; transition: color .2s ease; }
+.music-toggle.playing span { color: var(--red); animation: sway 1.6s ease-in-out infinite; }
+footer .music-credit { display: block; margin-top: 4px; font-size: 12px; }
+
 @keyframes draw { from { transform: scaleX(0); } }
 @keyframes rise { from { transform: translateY(105%); } }
 @keyframes wipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sway { 0%, 100% { transform: rotate(-12deg) translateY(0); } 50% { transform: rotate(12deg) translateY(-2px); } }
 @keyframes settle { from { transform: scale(1.08); } }
 @keyframes enter { from { opacity: 0; transform: translateY(20px); } }
 
