@@ -16,6 +16,7 @@
   </script>
 
   <link rel="stylesheet" href="assets/css/motion.css" />
+  <link rel="stylesheet" href="assets/css/notes.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -230,16 +231,62 @@
   </header>
 
   <div class="hero">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="note-eighth" viewBox="0 0 40 60"><ellipse cx="13" cy="49" rx="11" ry="8" transform="rotate(-22 13 49)"/><rect x="21" y="6" width="3.4" height="44"/><path d="M24.4 6 c 2 8 12 12 12 22 c 0 5 -2 9 -4 12 c 1 -9 -3 -15 -8 -18 z"/></symbol>
+      <symbol id="note-quarter" viewBox="0 0 40 60"><ellipse cx="15" cy="49" rx="11" ry="8" transform="rotate(-22 15 49)"/><rect x="23" y="5" width="3.4" height="45"/></symbol>
+      <symbol id="note-beamed" viewBox="0 0 60 60"><ellipse cx="11" cy="50" rx="10" ry="7.5" transform="rotate(-22 11 50)"/><ellipse cx="45" cy="44" rx="10" ry="7.5" transform="rotate(-22 45 44)"/><rect x="18.5" y="10" width="3.2" height="40"/><rect x="52.5" y="4" width="3.2" height="40"/><path d="M18.5 10 L55.7 4 L55.7 11 L18.5 17 Z"/></symbol>
+      <symbol id="note-sixteenth" viewBox="0 0 60 60"><ellipse cx="11" cy="50" rx="10" ry="7.5" transform="rotate(-22 11 50)"/><ellipse cx="45" cy="44" rx="10" ry="7.5" transform="rotate(-22 45 44)"/><rect x="18.5" y="10" width="3.2" height="40"/><rect x="52.5" y="4" width="3.2" height="40"/><path d="M18.5 10 L55.7 4 L55.7 10 L18.5 16 Z M18.5 20 L55.7 14 L55.7 20 L18.5 26 Z"/></symbol>
+    </svg>
+    <div class="sky" aria-hidden="true"></div>
     <div class="grid">
       <h1><span class="line" style="--i:0"><span>Rachana</span></span><span class="line" style="--i:1"><span>Murali</span></span><span class="line" style="--i:2"><span>Narayanan</span></span></h1>
-      <figure class="photo wipe">
-        <img src="assets/images/rachana.jpg" alt="Rachana Murali Narayanan" width="750" height="1000">
+      <figure class="tambura-wrap wipe">
+        <button type="button" class="tambura" aria-label="Tambura: pluck the strings to release a note"><svg viewBox="-20 0 160 465" class="art" aria-hidden="true">
+  <path class="fill" d="M60 316 C 116 316 118 352 118 386 C 118 430 92 452 60 452 C 28 452 2 430 2 386 C 2 352 4 316 60 316 Z"/>
+  <ellipse class="soft" cx="60" cy="384" rx="50" ry="54.0"/><ellipse class="soft" cx="60" cy="384" rx="44" ry="47.5"/><ellipse class="soft" cx="60" cy="384" rx="38" ry="41.0"/>
+  <path d="M60 316 C 116 316 118 352 118 386 C 118 430 92 452 60 452 C 28 452 2 430 2 386 C 2 352 4 316 60 316 Z"/>
+  <path d="M38 452 Q60 462 82 452"/>
+  <circle class="soft" cx="60" cy="352" r="11"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(0 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(30 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(60 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(90 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(120 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(150 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(180 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(210 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(240 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(270 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(300 60 352)"/><ellipse class="soft" cx="60" cy="343" rx="3" ry="7" transform="rotate(330 60 352)"/>
+  <rect class="fill" x="47" y="44" width="26" height="300" rx="3"/><path class="soft" d="M51.2 48.0 Q50.7 61.0 50.9 74.0 Q51.6 87.0 50.8 100.0 Q51.3 113.0 51.1 126.0 Q50.0 139.0 51.2 152.0 Q49.9 165.0 51.1 178.0 Q50.0 191.0 50.8 204.0 Q51.0 217.0 51.5 230.0 Q50.1 243.0 50.9 256.0 Q51.6 269.0 51.6 282.0 Q51.4 295.0 51.1 308.0 Q52.5 321.0 50.8 334.0 Q52.2 337.0 51.0 340.0"/><path class="soft" d="M55.6 48.0 Q54.6 61.0 55.2 74.0 Q55.1 87.0 55.9 100.0 Q54.7 113.0 55.7 126.0 Q56.0 139.0 55.5 152.0 Q55.7 165.0 55.2 178.0 Q54.4 191.0 55.3 204.0 Q56.1 217.0 55.5 230.0 Q55.1 243.0 55.7 256.0 Q55.5 269.0 55.4 282.0 Q56.4 295.0 55.8 308.0 Q54.9 321.0 55.7 334.0 Q55.7 337.0 56.0 340.0"/><path class="soft" d="M60.0 48.0 Q60.6 61.0 59.8 74.0 Q61.3 87.0 59.6 100.0 Q59.8 113.0 60.2 126.0 Q59.0 139.0 60.0 152.0 Q58.7 165.0 60.2 178.0 Q60.7 191.0 60.1 204.0 Q61.1 217.0 59.8 230.0 Q60.5 243.0 60.1 256.0 Q60.2 269.0 60.0 282.0 Q61.0 295.0 60.4 308.0 Q59.9 321.0 60.2 334.0 Q58.8 337.0 60.2 340.0"/><path class="soft" d="M64.4 48.0 Q64.8 61.0 64.9 74.0 Q65.3 87.0 64.2 100.0 Q64.1 113.0 64.6 126.0 Q63.1 139.0 64.4 152.0 Q63.5 165.0 64.0 178.0 Q63.2 191.0 64.7 204.0 Q63.4 217.0 64.2 230.0 Q64.1 243.0 64.7 256.0 Q63.2 269.0 64.4 282.0 Q64.5 295.0 64.8 308.0 Q65.3 321.0 64.7 334.0 Q63.8 337.0 64.3 340.0"/><path class="soft" d="M68.8 48.0 Q68.4 61.0 69.2 74.0 Q70.1 87.0 68.5 100.0 Q67.9 113.0 68.5 126.0 Q68.1 139.0 68.8 152.0 Q69.0 165.0 68.6 178.0 Q67.4 191.0 68.7 204.0 Q68.4 217.0 68.9 230.0 Q70.1 243.0 69.0 256.0 Q68.8 269.0 68.9 282.0 Q69.3 295.0 68.4 308.0 Q69.9 321.0 69.1 334.0 Q69.8 337.0 69.1 340.0"/><rect x="47" y="44" width="26" height="300" rx="3"/>
+  <path d="M44 344 Q60 336 76 344"/>
+  <rect class="fill" x="44" y="10" width="32" height="38" rx="5"/><path class="soft" d="M49.5 12.0 Q49.3 18.0 49.4 24.0 Q48.7 30.0 49.6 36.0 Q48.6 41.0 49.2 46.0"/><path class="soft" d="M56.5 12.0 Q55.9 18.0 56.3 24.0 Q56.2 30.0 56.2 36.0 Q55.5 41.0 56.3 46.0"/><path class="soft" d="M63.5 12.0 Q62.7 18.0 63.4 24.0 Q62.6 30.0 63.7 36.0 Q63.7 41.0 63.3 46.0"/><path class="soft" d="M70.5 12.0 Q70.0 18.0 70.4 24.0 Q70.2 30.0 70.2 36.0 Q71.2 41.0 70.8 46.0"/><rect x="44" y="10" width="32" height="38" rx="5"/>
+  <path d="M44 20 h-12 a3 3 0 0 1 0 -6 h12 M44 36 h-12 a3 3 0 0 1 0 -6 h12 M76 20 h12 a3 3 0 0 0 0 -6 h-12 M76 36 h12 a3 3 0 0 0 0 -6 h-12"/>
+  <circle cx="28" cy="17" r="4"/><circle cx="28" cy="33" r="4"/><circle cx="92" cy="17" r="4"/><circle cx="92" cy="33" r="4"/>
+  <path d="M60 4 q-6 3 0 6 q6 3 0 6" class="soft"/>
+  <line x1="47" y1="52" x2="73" y2="52"/>
+  <rect class="fill" x="45" y="390" width="30" height="5" rx="1"/>
+  <path d="M50 430 h20 l-3 8 h-14 z"/>
+  <line class="string" x1="54.5" y1="52" x2="51" y2="392"/><line class="hit" data-string="0" x1="54.5" y1="60" x2="51" y2="388"/><line class="string" x1="58.5" y1="52" x2="56.5" y2="392"/><line class="hit" data-string="1" x1="58.5" y1="60" x2="56.5" y2="388"/><line class="string" x1="61.5" y1="52" x2="63.5" y2="392"/><line class="hit" data-string="2" x1="61.5" y1="60" x2="63.5" y2="388"/><line class="string" x1="65.5" y1="52" x2="69" y2="392"/><line class="hit" data-string="3" x1="65.5" y1="60" x2="69" y2="388"/>
+</svg></button>
+        <figcaption class="pluck-hint">pluck the strings</figcaption>
       </figure>
       <div class="intro enter" style="--d:.75s">
-        <p class="label red">Side Quests</p>
+        <div class="intro-head">
+          <img class="avatar" src="assets/images/rachana.jpg" alt="Rachana Murali Narayanan" width="750" height="1000">
+          <p class="label red">Side Quests</p>
+        </div>
         <p>My experiments with things I find interesting, from security chips to news digests, and musings on cricket, music and everything in between.</p>
+        <p class="themes-label label">Catch a note, or pick a theme</p>
+        <ul class="themes">
+          <li><button type="button" class="theme-chip" data-theme="cricket" style="--c:#e2231a"><svg aria-hidden="true"><use href="#note-eighth"/></svg>Cricket <span>5</span></button></li>
+          <li><button type="button" class="theme-chip" data-theme="poetry" style="--c:#3b4cc0"><svg aria-hidden="true"><use href="#note-beamed"/></svg>Poetry <span>2</span></button></li>
+          <li><button type="button" class="theme-chip" data-theme="moments" style="--c:#d98e04"><svg aria-hidden="true"><use href="#note-quarter"/></svg>Little moments <span>5</span></button></li>
+          <li><button type="button" class="theme-chip" data-theme="travel" style="--c:#2f8f5b"><svg aria-hidden="true"><use href="#note-sixteenth"/></svg>Life &amp; travel <span>3</span></button></li>
+          <li><button type="button" class="theme-chip" data-theme="music" style="--c:#8a3ffc"><svg aria-hidden="true"><use href="#note-beamed"/></svg>Music &amp; film <span>2</span></button></li>
+          <li><button type="button" class="theme-chip" data-theme="satire" style="--c:#c2410c"><svg aria-hidden="true"><use href="#note-eighth"/></svg>Satire &amp; the world <span>2</span></button></li>
+          <li><button type="button" class="theme-chip" data-theme="ai" style="--c:#0f6cbd"><svg aria-hidden="true"><use href="#note-sixteenth"/></svg>AI &amp; building <span>3</span></button></li>
+          <li><button type="button" class="theme-chip" data-theme="security" style="--c:#1a1a1a"><svg aria-hidden="true"><use href="#note-quarter"/></svg>Security <span>1</span></button></li>
+        </ul>
       </div>
     </div>
+    <div class="theme-card" role="dialog" aria-modal="false" aria-labelledby="theme-card-title" hidden>
+      <button type="button" class="theme-card-close" aria-label="Close">×</button>
+      <p class="theme-card-kicker label"><svg aria-hidden="true"><use href="#note-eighth"/></svg><span>Theme</span></p>
+      <h2 id="theme-card-title"></h2>
+      <p class="theme-card-blurb"></p>
+      <ol class="theme-card-list"></ol>
+    </div>
+    <script type="application/json" id="themes-data">[{"id": "cricket", "name": "Cricket", "shape": "eighth", "color": "#e2231a", "blurb": "Pink balls, rain gods, AB and a final I am still not over.", "items": [{"t": "The enchanting pink ball", "u": "posts/musings/the-enchanting-pink-ball.html", "d": "Dec 4, 2024"}, {"t": "The Rain Gods' Verdict : ICC World Test Championship Final", "u": "posts/musings/the-rain-gods-verdict-icc-world-test-championship-final.html", "d": "Jun 26, 2021"}, {"t": "We all saw it in their hands! Didnt We?", "u": "posts/musings/we-all-saw-it-in-their-hands-didnt-we.html", "d": "Jul 14, 2019"}, {"t": "Never a Maybe with AB", "u": "posts/musings/never-a-maybe-with-ab.html", "d": "May 23, 2018"}, {"t": "Test for me !", "u": "posts/musings/test-for-me.html", "d": "Dec 13, 2014"}]}, {"id": "poetry", "name": "Poetry", "shape": "beamed", "color": "#3b4cc0", "blurb": "Short poems about shadows and silence.", "items": [{"t": "Shadows", "u": "posts/musings/shadows.html", "d": "Apr 29, 2025"}, {"t": "In my space", "u": "posts/musings/in-my-space.html", "d": "Apr 10, 2025"}]}, {"id": "moments", "name": "Little moments", "shape": "quarter", "color": "#d98e04", "blurb": "Echoes, skipping stones and the friends who witness it all.", "items": [{"t": "Stones and throws", "u": "posts/musings/stones-and-throws.html", "d": "Apr 14, 2025"}, {"t": "Reflecting on a sound", "u": "posts/musings/reflecting-on-a-sound.html", "d": "Apr 9, 2025"}, {"t": "Witnesses", "u": "posts/musings/witnesses.html", "d": "Apr 8, 2025"}, {"t": "Shits and Giggles", "u": "posts/musings/shits-and-giggles.html", "d": "Apr 8, 2025"}, {"t": "On crossroads", "u": "posts/musings/on-crossroads.html", "d": "Jan 4, 2019"}]}, {"id": "travel", "name": "Life & travel", "shape": "sixteenth", "color": "#2f8f5b", "blurb": "Mosquitoes down south, a trip to the RTO, and finding my way after college.", "items": [{"t": "The stings and springs!", "u": "posts/musings/the-stings-and-springs.html", "d": "Dec 30, 2017"}, {"t": "My trip to the R.T.O ( Regional Transport Office )", "u": "posts/musings/my-trip-to-the-r-t-o-regional-transport-office.html", "d": "Dec 12, 2016"}, {"t": "\"Hey Siri, Take me home\"", "u": "posts/musings/hey-siri-take-me-home.html", "d": "Apr 5, 2024"}]}, {"id": "music", "name": "Music & film", "shape": "beamed", "color": "#8a3ffc", "blurb": "Songs on repeat and the Rani of Jhansi on screen.", "items": [{"t": "My latest Spotify favourites", "u": "posts/musings/my-latest-spotify-favourites.html", "d": "Apr 6, 2024"}, {"t": "The Queens of our world", "u": "posts/musings/the-queens-of-our-world.html", "d": "Feb 3, 2019"}]}, {"id": "satire", "name": "Satire & the world", "shape": "eighth", "color": "#c2410c", "blurb": "A letter from a grandmother, and the Olympics in a pandemic.", "items": [{"t": "A letter to Charlotte Clinton!", "u": "posts/musings/a-letter-to-charlotte-clinton.html", "d": "Nov 24, 2016"}, {"t": "Rio a no go?", "u": "posts/musings/rio-a-no-go.html", "d": "Feb 2, 2016"}]}, {"id": "ai", "name": "AI & building", "shape": "sixteenth", "color": "#0f6cbd", "blurb": "RAG, chunking and a newspaper that learns what I like.", "items": [{"t": "Building My Own Morning Newspaper", "u": "posts/news-aggregator.html", "d": "Oct 17, 2026"}, {"t": "My Experiments with RAG", "u": "posts/my-experiments-with-rag.html", "d": "Oct 25, 2025"}, {"t": "Deep Dive into Text Chunking Strategies", "u": "posts/chunking_experiments.html", "d": "Nov 1, 2025"}]}, {"id": "security", "name": "Security", "shape": "quarter", "color": "#1a1a1a", "blurb": "A chip that says no to AI agents.", "items": [{"t": "A Security Chip That Says No to AI Agents", "u": "posts/agent-device-security.html", "d": "Oct 16, 2026"}]}]</script>
   </div>
 
   <main>
@@ -466,6 +513,7 @@
 
   <script src="assets/js/motion.js" defer></script>
   <script src="assets/js/music.js" defer></script>
+  <script src="assets/js/notes.js" defer></script>
   <script>
     // Dark mode toggle
     const themeToggle = document.getElementById('theme-toggle');

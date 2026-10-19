@@ -1,0 +1,89 @@
+/* Home page hero: a tambura that sends up musical notes, one per theme (see assets/js/notes.js) */
+.hero { position: relative; overflow: hidden; }
+.hero > .grid { position: relative; z-index: 1; }
+
+/* The tambura takes the photo's place */
+.hero .tambura-wrap { grid-column: 9 / 13; grid-row: 1 / 3; align-self: end; position: relative; margin: 0; height: min(600px, 72vh); }
+.hero .tambura { display: block; height: 100%; margin: 0 auto; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; }
+.hero .tambura svg { display: block; height: 100%; width: auto; overflow: visible; }
+.hero .tambura:focus-visible { outline: 2px dashed var(--red); outline-offset: 6px; }
+.art { fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.art .soft { stroke: var(--muted); stroke-width: .7; opacity: .7; }
+.art .fill { fill: var(--bg); }
+.tambura .string { stroke-width: .9; transform-box: fill-box; transform-origin: center; }
+.tambura .string.ring { animation: ring .7s ease-out; stroke: var(--red); }
+.tambura .hit { stroke: transparent; stroke-width: 9; pointer-events: stroke; cursor: crosshair; }
+@keyframes ring { 0%, 100% { transform: none; } 10% { transform: translateX(1.4px); } 25% { transform: translateX(-1.1px); } 40% { transform: translateX(.8px); } 55% { transform: translateX(-.5px); } 70% { transform: translateX(.3px); } }
+.pluck-hint {
+  position: absolute; right: 0; top: 8%; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted);
+}
+.pluck-hint::before { content: '↙ '; color: var(--red); }
+
+/* Intro with a small portrait and the theme buttons */
+.hero .intro-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.hero .intro-head .label { margin: 0; }
+.hero .avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center 18%; }
+.themes-label { margin-top: 28px; color: var(--muted); }
+.themes { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.theme-chip {
+  display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 9px; cursor: pointer;
+  font: inherit; font-size: 13px; font-weight: 600; color: var(--ink); background: var(--bg);
+  border: 1px solid var(--hair); border-radius: 999px; transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+.theme-chip svg { width: 16px; height: 16px; fill: var(--c); }
+.theme-chip span { font-size: 11px; color: var(--muted); }
+.theme-chip:hover, .theme-chip[aria-expanded="true"] { border-color: var(--c); background: var(--c); color: #fff; }
+.theme-chip:hover svg, .theme-chip[aria-expanded="true"] svg { fill: #fff; }
+.theme-chip:hover span, .theme-chip[aria-expanded="true"] span { color: rgba(255, 255, 255, .8); }
+
+/* Floating notes */
+.sky { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.float-note {
+  position: absolute; left: 0; top: 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 0; border: 0; background: none; color: var(--c); cursor: pointer; pointer-events: auto; will-change: transform, opacity;
+}
+.float-note svg { width: 46px; height: 46px; fill: currentColor; transition: transform .25s ease; filter: drop-shadow(0 2px 0 rgba(0, 0, 0, .08)); }
+.float-note .tag {
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap;
+  padding: 2px 8px; color: var(--c); background: var(--bg); border: 1px solid currentColor; border-radius: 999px;
+  transition: background .2s ease, color .2s ease;
+}
+.float-note:hover svg, .float-note.held svg { transform: scale(1.25) rotate(-8deg); }
+.float-note:hover .tag, .float-note.held .tag { background: var(--c); color: #fff; border-color: var(--c); }
+html.dark .float-note[data-theme="security"] { --c: #e8e8e8 !important; }
+html.dark .float-note[data-theme="security"]:hover .tag, html.dark .float-note[data-theme="security"].held .tag { color: #000; }
+html.dark .theme-chip[data-theme="security"] { --c: #e8e8e8 !important; }
+html.dark .theme-chip[data-theme="security"]:hover, html.dark .theme-chip[data-theme="security"][aria-expanded="true"] { color: #000; }
+html.dark .theme-chip[data-theme="security"]:hover svg, html.dark .theme-chip[data-theme="security"][aria-expanded="true"] svg { fill: #000; }
+
+/* The card a note opens */
+.theme-card {
+  position: absolute; z-index: 5; width: min(360px, calc(100% - 32px)); padding: 20px 22px 18px;
+  background: var(--bg); color: var(--ink); border: 2px solid var(--c, var(--ink)); border-top-width: 8px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .16); animation: card-in .25s var(--ease-out, ease);
+}
+.theme-card[hidden] { display: none; }
+@keyframes card-in { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+.theme-card-close { position: absolute; top: 8px; right: 10px; width: 32px; height: 32px; font-size: 24px; line-height: 1; color: var(--muted); background: none; border: 0; cursor: pointer; }
+.theme-card-close:hover { color: var(--ink); }
+.theme-card-kicker { display: flex; align-items: center; gap: 6px; color: var(--c); }
+.theme-card-kicker svg { width: 18px; height: 18px; fill: currentColor; }
+.theme-card h2 { margin: 6px 0 6px; font-size: 28px; font-weight: 700; letter-spacing: -.025em; line-height: 1.05; }
+.theme-card-blurb { color: var(--muted); font-size: 15px; line-height: 1.45; }
+.theme-card-list { list-style: none; margin: 14px 0 0; padding: 0; counter-reset: piece; }
+.theme-card-list li { border-top: 1px solid var(--hair); }
+.theme-card-list a { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; }
+.theme-card-list a strong { font-size: 16px; font-weight: 600; line-height: 1.25; transition: color .2s ease; }
+.theme-card-list a span { flex: none; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.theme-card-list a:hover strong { color: var(--c); }
+
+@media (max-width: 900px) {
+  .hero .tambura-wrap { grid-column: 1 / -1; grid-row: auto; height: 420px; }
+  .pluck-hint { right: auto; left: calc(50% + 70px); }
+}
+@media (max-width: 640px) {
+  .hero .tambura-wrap { height: 340px; }
+  .float-note svg { width: 36px; height: 36px; }
+  .float-note .tag { font-size: 10px; padding: 1px 6px; }
+  .pluck-hint { left: calc(50% + 56px); }
+}
