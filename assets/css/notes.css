@@ -1,5 +1,6 @@
-/* Home page hero: "Hi, I'm Rachana", a wooden tambura that sends up musical notes (one per
-   theme of writing), and the blurb beneath it. Behaviour lives in assets/js/notes.js. */
+/* Home page hero: "Hi, I'm Rachana" and a wooden tambura that sends up three musical notes
+   (Experiments, Musings, Journey), with the blurb in its own band further down.
+   Behaviour lives in assets/js/notes.js. */
 .hero {
   --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
   --glow: rgba(226, 164, 86, .2);
@@ -7,7 +8,10 @@
   background: radial-gradient(ellipse 46% 52% at 50% 60%, var(--glow), transparent 70%), var(--bg);
 }
 html.dark .hero { --glow: rgba(226, 164, 86, .13); }
-.hero-inner { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 64px 24px 80px; text-align: center; }
+.hero-inner {
+  position: relative; z-index: 1; max-width: 880px; min-height: calc(100svh - 82px); margin: 0 auto; padding: 56px 24px 40px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
 
 /* Hello */
 .hello {
@@ -24,8 +28,8 @@ html.dark .hero { --glow: rgba(226, 164, 86, .13); }
 .hello-sub .sq > span { margin: 0 .6em; color: var(--red); }
 
 /* Tambura */
-.tambura-wrap { position: relative; margin: 34px auto 0; height: clamp(360px, 54vh, 500px); }
-.tambura { display: block; height: 100%; margin: 0 auto; padding: 0; border: 0; background: none; cursor: pointer; }
+.tambura-wrap { position: relative; margin: 34px auto 0; height: clamp(380px, calc(100svh - 400px), 560px); }
+.tambura { display: block; height: calc(100% - 40px); margin: 0 auto; padding: 0; border: 0; background: none; cursor: pointer; }
 .tambura svg { display: block; height: 100%; width: auto; overflow: visible; filter: drop-shadow(0 14px 18px rgba(80, 40, 10, .18)); }
 .tambura:focus-visible { outline: 2px dashed var(--red); outline-offset: 8px; border-radius: 8px; }
 .t-shadow { fill: rgba(60, 30, 10, .16); }
@@ -43,28 +47,11 @@ html.dark .t-shadow { fill: rgba(0, 0, 0, .5); }
 .tambura .hit { stroke: transparent; stroke-width: 10; pointer-events: stroke; cursor: crosshair; }
 @keyframes ring { 0%, 100% { transform: none; } 10% { transform: translateX(1.4px); } 25% { transform: translateX(-1.1px); } 40% { transform: translateX(.8px); } 55% { transform: translateX(-.5px); } 70% { transform: translateX(.3px); } }
 
-.pluck-hint {
-  position: absolute; left: calc(50% + 74px); top: 30%; display: flex; flex-direction: column; align-items: flex-start;
-  font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--muted); white-space: nowrap; pointer-events: none;
-}
-.pluck-hint svg { width: 46px; height: 30px; margin-bottom: 2px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.pluck-hint { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--muted); pointer-events: none; }
 
-/* Blurb and themes */
-.blurb { max-width: 30ch; margin: 30px auto 0; font-family: var(--serif); font-size: clamp(22px, 2.4vw, 28px); line-height: 1.3; color: var(--ink); }
-.themes-label { margin-top: 30px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.themes { list-style: none; margin: 14px auto 0; padding: 0; max-width: 720px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-.theme-chip {
-  display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px 7px 10px; cursor: pointer;
-  font: inherit; font-size: 14px; font-weight: 500; color: var(--ink);
-  background: color-mix(in srgb, var(--c) 9%, var(--bg)); border: 1px solid color-mix(in srgb, var(--c) 28%, transparent); border-radius: 999px;
-  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
-}
-.theme-chip svg { width: 15px; height: 15px; fill: var(--c); transition: fill .2s ease; }
-.theme-chip span { font-size: 11px; color: var(--muted); }
-.theme-chip:hover, .theme-chip[aria-expanded="true"] { background: var(--c); border-color: var(--c); color: #fff; transform: translateY(-1px); }
-.theme-chip:hover svg, .theme-chip[aria-expanded="true"] svg { fill: #fff; }
-.theme-chip:hover span, .theme-chip[aria-expanded="true"] span { color: rgba(255, 255, 255, .85); }
-html.dark .theme-chip[data-theme="security"], html.dark .float-note[data-theme="security"] { --c: #b8ab9a !important; }
+/* The blurb, in its own band below the first screen */
+.blurb-band { padding: 120px 24px 140px; text-align: center; }
+.blurb { max-width: 24ch; margin: 0 auto; font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-size: clamp(30px, 4.2vw, 52px); line-height: 1.18; letter-spacing: -.01em; color: var(--ink); }
 
 /* Floating notes */
 .sky { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
@@ -73,43 +60,23 @@ html.dark .theme-chip[data-theme="security"], html.dark .float-note[data-theme="
   padding: 0; border: 0; background: none; color: var(--c); cursor: pointer; pointer-events: auto; will-change: transform, opacity;
 }
 .float-note svg {
-  width: 40px; height: 40px; fill: currentColor; transition: transform .3s ease;
+  width: 46px; height: 46px; fill: currentColor; transition: transform .3s ease;
   filter: drop-shadow(0 0 10px color-mix(in srgb, var(--c) 45%, transparent));
 }
 .float-note .tag {
-  font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.1; white-space: nowrap; color: var(--c);
+  font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.1; white-space: nowrap; color: var(--c);
   text-shadow: 0 0 6px var(--bg), 0 0 2px var(--bg);
 }
 .float-note:hover svg, .float-note.held svg { transform: scale(1.3) rotate(-10deg); }
 .float-note:hover .tag, .float-note.held .tag { text-decoration: underline; text-underline-offset: 3px; }
 
-/* The card a note opens */
-.theme-card {
-  position: absolute; z-index: 5; width: min(360px, calc(100% - 32px)); padding: 22px 24px 18px; text-align: left;
-  background: var(--bg); color: var(--ink); border: 1px solid color-mix(in srgb, var(--c, var(--ink)) 30%, transparent); border-radius: 16px;
-  box-shadow: 0 24px 60px rgba(40, 20, 5, .16), 0 2px 6px rgba(40, 20, 5, .06); animation: card-in .28s var(--ease-out, ease);
-}
-.theme-card[hidden] { display: none; }
-@keyframes card-in { from { opacity: 0; transform: translateY(8px) scale(.98); } }
-.theme-card-close { position: absolute; top: 10px; right: 12px; width: 32px; height: 32px; font-size: 24px; line-height: 1; color: var(--muted); background: none; border: 0; cursor: pointer; border-radius: 50%; }
-.theme-card-close:hover { color: var(--ink); background: color-mix(in srgb, var(--c) 10%, transparent); }
-.theme-card-kicker { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--c); }
-.theme-card-kicker svg { width: 18px; height: 18px; fill: currentColor; }
-.theme-card h2 { margin: 6px 0 6px; font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; letter-spacing: -.01em; line-height: 1; }
-.theme-card-blurb { color: var(--muted); font-size: 15px; line-height: 1.45; }
-.theme-card-list { list-style: none; margin: 14px 0 0; padding: 0; }
-.theme-card-list li { border-top: 1px solid color-mix(in srgb, var(--c) 20%, transparent); }
-.theme-card-list a { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; }
-.theme-card-list a strong { font-size: 15px; font-weight: 600; line-height: 1.3; transition: color .2s ease; }
-.theme-card-list a span { flex: none; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-.theme-card-list a:hover strong { color: var(--c); }
-
 @media (max-width: 640px) {
   .hero-inner { padding: 44px 16px 60px; }
   .hello { font-size: 15vw; }
-  .tambura-wrap { height: 380px; margin-top: 26px; }
-  .pluck-hint, .hello-sub .sq { display: none; }
-  .float-note svg { width: 32px; height: 32px; }
-  .float-note .tag { font-size: 15px; }
-  .theme-chip { font-size: 13px; }
+  .tambura-wrap { height: 420px; margin-top: 26px; }
+  .hello-sub .sq { display: none; }
+  .pluck-hint { font-size: 16px; }
+  .blurb-band { padding: 80px 16px 96px; }
+  .float-note svg { width: 36px; height: 36px; }
+  .float-note .tag { font-size: 17px; }
 }

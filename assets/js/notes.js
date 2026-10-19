@@ -1,14 +1,16 @@
-/* The tambura sends up musical notes, one per theme of writing. Catch a note (or pick a theme
-   button) to see what's in it. Plucking a string releases a note on the spot. */
+/* The tambura sends up three musical notes: Experiments, Musings and Journey. Click one to jump
+   to that section. Notes rise in two lanes either side of the tambura at one steady speed, and a
+   new note waits until the lane is clear, so they never overlap each other or the heading.
+   Plucking a string sounds it and releases a note when there's room. */
 (function () {
   const hero = document.querySelector('.hero');
   const sky = hero && hero.querySelector('.sky');
-  const dataEl = document.getElementById('themes-data');
+  const dataEl = document.getElementById('notes-data');
   if (!sky || !dataEl) return;
-  const themes = JSON.parse(dataEl.textContent);
-  const byId = Object.fromEntries(themes.map((t) => [t.id, t]));
+  const kinds = JSON.parse(dataEl.textContent);
   const tambura = hero.querySelector('.tambura');
-  const card = hero.querySelector('.theme-card');
+  const svg = tambura.querySelector('svg');
+  const heading = hero.querySelector('.hello-sub');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---- Sound: a plucked string (Karplus-Strong) tuned Pa-Sa-Sa-Sa in C# ----
@@ -34,94 +36,100 @@
     src.connect(g); g.connect(ctx.destination); src.start();
   }
 
-  // ---- Where notes come from: the tambura, mapped from its drawing into hero coordinates ----
-  const svg = tambura.querySelector('svg');
+  // ---- Geometry: two lanes beside the tambura, from the gourd up to just below the heading ----
   function toHero(x, y) {
     const m = svg.getScreenCTM(), h = hero.getBoundingClientRect();
     return { x: m.a * x + m.c * y + m.e - h.left, y: m.b * x + m.d * y + m.f - h.top };
   }
-  const STRING_X = [93, 98, 102, 107];
-  function fromTambura(stringIndex) {
-    if (stringIndex == null) return toHero(100 + (Math.random() - .5) * 50, 470 + Math.random() * 30);
-    return toHero(STRING_X[stringIndex], 150 + Math.random() * 260);
+  let lanes = [], startY = 0, endY = 0;
+  function measure() {
+    const h = hero.getBoundingClientRect(), r = svg.getBoundingClientRect();
+    const mid = r.left - h.left + r.width / 2, gap = Math.max(110, Math.min(200, h.width * .16));
+    lanes = [mid - gap, mid + gap].map((x, i) => ({ x, i, notes: [] }));
+    startY = toHero(100, 470).y;
+    endY = heading.getBoundingClientRect().bottom - h.top + 60;
   }
+  const SPEED = 36, SPACING = 200; // px per second, and the clear space a lane needs before a new note
 
-  // ---- Floating notes ----
-  const notes = [];
-  let order = [], next = 0;
-  function nextTheme() {
-    if (next >= order.length) { order = themes.map((t) => t.id).sort(() => Math.random() - .5); next = 0; }
-    return byId[order[next++]];
-  }
-  function makeNote(theme) {
-    const el = document.createElement('button');
-    el.type = 'button';
+  // ---- Notes ----
+  let next = 0;
+  function makeNote(kind) {
+    const el = document.createElement('a');
+    el.href = kind.href;
     el.className = 'float-note';
-    el.tabIndex = -1; // the theme buttons are the keyboard route
-    el.dataset.theme = theme.id;
-    el.style.setProperty('--c', theme.color);
-    el.innerHTML = '<svg><use href="#note-' + theme.shape + '"/></svg><span class="tag"></span>';
-    el.querySelector('.tag').textContent = theme.name;
+    el.tabIndex = -1; // the header menu is the keyboard route to these sections
+    el.style.setProperty('--c', kind.color);
+    el.innerHTML = '<svg><use href="#note-' + kind.shape + '"/></svg><span class="tag"></span>';
+    el.querySelector('.tag').textContent = kind.name;
     sky.appendChild(el);
     return el;
   }
-  function spawn(theme, at) {
-    const max = hero.clientWidth < 640 ? 6 : 10;
-    if (notes.filter((n) => !n.held).length >= max) return;
-    const el = makeNote(theme);
-    const n = {
-      el, theme, x: at.x, y: at.y, age: 0, held: false,
-      vy: -(32 + Math.random() * 22), vx: (Math.random() < .5 ? -1 : 1) * (14 + Math.random() * 56), // drift up and out to either side
-      amp: 10 + Math.random() * 16, freq: .6 + Math.random() * .6, phase: Math.random() * 6.3, spin: (Math.random() - .5) * 20,
-    };
-    el.addEventListener('pointerenter', () => { n.held = true; el.classList.add('held'); });
-    el.addEventListener('pointerleave', () => { if (openNote !== n) { n.held = false; el.classList.remove('held'); } });
-    el.addEventListener('click', (e) => { e.stopPropagation(); openCard(theme, n); });
-    notes.push(n);
+  function laneFree(lane) {
+    const last = lane.notes[lane.notes.length - 1];
+    return !last || startY - last.y >= SPACING;
+  }
+  function spawn(laneIndex) {
+    const free = lanes.filter(laneFree);
+    if (!free.length) return null;
+    const lane = free.find((l) => l.i === laneIndex) || free[Math.floor(Math.random() * free.length)];
+    const kind = kinds[next++ % kinds.length];
+    const n = { el: makeNote(kind), lane, y: startY, age: 0, held: false, phase: Math.random() * 6.3 };
+    n.el.addEventListener('pointerenter', () => { n.held = true; n.el.classList.add('held'); });
+    n.el.addEventListener('pointerleave', () => { n.held = false; n.el.classList.remove('held'); });
+    lane.notes.push(n);
     place(n);
     return n;
   }
   function place(n) {
-    const sway = Math.sin(n.phase + n.age * n.freq) * n.amp;
-    const fadeIn = Math.min(1, n.age / .6), fadeOut = Math.min(1, Math.max(0, (n.y + 40) / 140));
-    n.el.style.transform = `translate(${n.x + sway}px, ${n.y}px) translate(-50%, -50%) rotate(${Math.sin(n.phase + n.age * .8) * n.spin}deg)`;
+    const sway = Math.sin(n.phase + n.age * .9) * 6;
+    const fadeIn = Math.min(1, n.age / .8), fadeOut = Math.min(1, Math.max(0, (n.y - endY) / 90));
+    n.el.style.transform = `translate(${n.lane.x + sway}px, ${n.y}px) translate(-50%, -50%) rotate(${Math.sin(n.phase + n.age * .7) * 6}deg)`;
     n.el.style.opacity = n.held ? 1 : Math.min(fadeIn, fadeOut);
   }
 
-  let last = 0, sinceSpawn = 0, running = true;
+  let last = 0, running = true, sinceSpawn = 0;
   function frame(t) {
     const dt = Math.min(.05, (t - (last || t)) / 1000);
     last = t;
     if (running) {
       sinceSpawn += dt;
-      if (sinceSpawn > 1.3) { sinceSpawn = 0; spawn(nextTheme(), fromTambura()); }
-      for (let i = notes.length - 1; i >= 0; i--) {
-        const n = notes[i];
-        if (!n.held) { n.age += dt; n.y += n.vy * dt; n.x += n.vx * dt; }
-        if (n.y < -80 || n.x < -160 || n.x > hero.clientWidth + 160) { n.el.remove(); notes.splice(i, 1); continue; }
-        place(n);
-      }
+      if (sinceSpawn > 2.6 && spawn()) sinceSpawn = 0;
+      lanes.forEach((lane) => {
+        // A held note pauses its whole lane, so the notes behind it never catch up
+        const paused = lane.notes.some((n) => n.held);
+        for (let i = lane.notes.length - 1; i >= 0; i--) {
+          const n = lane.notes[i];
+          if (!paused) { n.age += dt; n.y -= SPEED * dt; }
+          if (n.y < endY - 10) { n.el.remove(); lane.notes.splice(i, 1); continue; }
+          place(n);
+        }
+      });
     }
     requestAnimationFrame(frame);
   }
 
+  function reset() {
+    lanes.forEach((l) => l.notes.forEach((n) => n.el.remove()));
+    measure();
+  }
   if (reduced) {
-    // No floating: lay one note per theme in an arc around the tambura
+    // No floating: one still note per section beside the tambura
     const lay = () => {
-      notes.splice(0).forEach((n) => n.el.remove());
-      // Four notes either side of the tambura
-      const r = svg.getBoundingClientRect(), hr = hero.getBoundingClientRect();
-      const top = r.top - hr.top + r.height * .14, span = r.height * .6;
-      themes.forEach((t, i) => {
-        const side = i % 2 ? 1 : -1, row = Math.floor(i / 2);
-        const x = (side < 0 ? r.left - hr.left - 90 - (row % 2) * 40 : r.right - hr.left + 90 + (row % 2) * 40);
-        const n = spawn(t, { x, y: top + row * span / 3 });
-        if (n) { n.held = true; n.el.style.opacity = 1; }
+      reset();
+      const rows = [[0, .25], [1, .45], [0, .65]];
+      kinds.forEach((kind, i) => {
+        const [lane, f] = rows[i];
+        const el = makeNote(kind);
+        lanes[lane].notes.push({ el });
+        el.style.transform = `translate(${lanes[lane].x}px, ${endY + (startY - endY) * f}px) translate(-50%, -50%)`;
       });
     };
     window.addEventListener('load', lay);
     window.addEventListener('resize', lay);
   } else {
+    measure();
+    window.addEventListener('load', measure);
+    window.addEventListener('resize', reset);
     requestAnimationFrame(frame);
     // Rest when the hero is off screen or the tab is hidden
     new IntersectionObserver(([e]) => { running = e.isIntersecting; last = 0; }).observe(hero);
@@ -131,14 +139,14 @@
   // ---- Plucking ----
   const strings = [...tambura.querySelectorAll('.string')];
   const lastPluck = [0, 0, 0, 0];
-  function sound(i, release = true) {
+  function sound(i) {
     const now = performance.now();
     if (now - lastPluck[i] < 220) return;
     lastPluck[i] = now;
     pluck(STRINGS[i]);
     const s = strings[i];
     s.classList.remove('ring'); void s.getBBox(); s.classList.add('ring');
-    if (release && !reduced) spawn(nextTheme(), fromTambura(i));
+    if (!reduced && spawn(i < 2 ? 0 : 1)) sinceSpawn = 0;
   }
   tambura.querySelectorAll('.hit').forEach((hit) => {
     const i = +hit.dataset.string;
@@ -150,51 +158,4 @@
     wake();
     [0, 1, 2, 3].forEach((i, k) => setTimeout(() => sound(i), k * 420));
   });
-
-  // ---- Theme card ----
-  let openNote = null, openChip = null;
-  const chips = [...hero.querySelectorAll('.theme-chip')];
-  chips.forEach((chip) => chip.setAttribute('aria-expanded', 'false'));
-  function openCard(theme, note, chip) {
-    closeCard(false);
-    card.style.setProperty('--c', getComputedStyle(note ? note.el : chip).getPropertyValue('--c') || theme.color);
-    card.querySelector('.theme-card-kicker use').setAttribute('href', '#note-' + theme.shape);
-    card.querySelector('.theme-card-kicker span').textContent = theme.items.length + (theme.items.length === 1 ? ' piece' : ' pieces');
-    card.querySelector('h2').textContent = theme.name;
-    card.querySelector('.theme-card-blurb').textContent = theme.blurb;
-    const list = card.querySelector('.theme-card-list');
-    list.innerHTML = '';
-    theme.items.forEach((it) => {
-      const li = document.createElement('li'), a = document.createElement('a'), t = document.createElement('strong'), d = document.createElement('span');
-      a.href = it.u; t.textContent = it.t; d.textContent = it.d;
-      a.append(t, d); li.appendChild(a); list.appendChild(li);
-    });
-    card.hidden = false;
-    // Sit the card next to whatever opened it, kept inside the hero
-    const h = hero.getBoundingClientRect(), anchor = (note ? note.el : chip).getBoundingClientRect();
-    const w = card.offsetWidth, ch = card.offsetHeight;
-    let left = anchor.left - h.left + anchor.width / 2 - w / 2;
-    left = Math.max(16, Math.min(left, h.width - w - 16));
-    let top = anchor.bottom - h.top + 12;
-    if (top + ch > h.height - 16) top = anchor.top - h.top - ch - 12;
-    card.style.left = left + 'px';
-    card.style.top = Math.max(16, top) + 'px';
-    if (note) { openNote = note; note.held = true; note.el.classList.add('held'); }
-    if (chip) { openChip = chip; chip.setAttribute('aria-expanded', 'true'); card.querySelector('.theme-card-close').focus(); }
-  }
-  function closeCard(restoreFocus = true) {
-    if (card.hidden) return;
-    card.hidden = true;
-    if (openNote) { openNote.held = false; openNote.el.classList.remove('held'); openNote = null; }
-    if (openChip) { openChip.setAttribute('aria-expanded', 'false'); if (restoreFocus) openChip.focus(); openChip = null; }
-  }
-  chips.forEach((chip) => chip.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (openChip === chip) return closeCard();
-    openCard(byId[chip.dataset.theme], null, chip);
-  }));
-  card.querySelector('.theme-card-close').addEventListener('click', () => closeCard());
-  card.addEventListener('click', (e) => e.stopPropagation());
-  document.addEventListener('click', () => closeCard(false));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCard(); });
 })();
