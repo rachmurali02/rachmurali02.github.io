@@ -34,14 +34,16 @@
     src.connect(g); g.connect(ctx.destination); src.start();
   }
 
-  // ---- Where notes come from: the tambura's gourd, in hero coordinates ----
+  // ---- Where notes come from: the tambura, mapped from its drawing into hero coordinates ----
   const svg = tambura.querySelector('svg');
+  function toHero(x, y) {
+    const m = svg.getScreenCTM(), h = hero.getBoundingClientRect();
+    return { x: m.a * x + m.c * y + m.e - h.left, y: m.b * x + m.d * y + m.f - h.top };
+  }
+  const STRING_X = [93, 98, 102, 107];
   function fromTambura(stringIndex) {
-    const r = svg.getBoundingClientRect(), h = hero.getBoundingClientRect();
-    const vx = (x) => r.left - h.left + (x + 20) / 160 * r.width;
-    const vy = (y) => r.top - h.top + y / 465 * r.height;
-    if (stringIndex == null) return { x: vx(60 + (Math.random() - .5) * 30), y: vy(330) };
-    return { x: vx(51 + stringIndex * 6) - Math.random() * 60, y: vy(120 + Math.random() * 200) };
+    if (stringIndex == null) return toHero(100 + (Math.random() - .5) * 50, 470 + Math.random() * 30);
+    return toHero(STRING_X[stringIndex], 150 + Math.random() * 260);
   }
 
   // ---- Floating notes ----
@@ -69,7 +71,7 @@
     const el = makeNote(theme);
     const n = {
       el, theme, x: at.x, y: at.y, age: 0, held: false,
-      vy: -(34 + Math.random() * 22), vx: -(10 + Math.random() * 50), // drift up and towards the text
+      vy: -(32 + Math.random() * 22), vx: (Math.random() < .5 ? -1 : 1) * (14 + Math.random() * 56), // drift up and out to either side
       amp: 10 + Math.random() * 16, freq: .6 + Math.random() * .6, phase: Math.random() * 6.3, spin: (Math.random() - .5) * 20,
     };
     el.addEventListener('pointerenter', () => { n.held = true; el.classList.add('held'); });
@@ -82,7 +84,7 @@
   function place(n) {
     const sway = Math.sin(n.phase + n.age * n.freq) * n.amp;
     const fadeIn = Math.min(1, n.age / .6), fadeOut = Math.min(1, Math.max(0, (n.y + 40) / 140));
-    n.el.style.transform = `translate(${n.x + sway - 23}px, ${n.y - 23}px) rotate(${Math.sin(n.phase + n.age * .8) * n.spin}deg)`;
+    n.el.style.transform = `translate(${n.x + sway}px, ${n.y}px) translate(-50%, -50%) rotate(${Math.sin(n.phase + n.age * .8) * n.spin}deg)`;
     n.el.style.opacity = n.held ? 1 : Math.min(fadeIn, fadeOut);
   }
 
@@ -96,7 +98,7 @@
       for (let i = notes.length - 1; i >= 0; i--) {
         const n = notes[i];
         if (!n.held) { n.age += dt; n.y += n.vy * dt; n.x += n.vx * dt; }
-        if (n.y < -80 || n.x < -120) { n.el.remove(); notes.splice(i, 1); continue; }
+        if (n.y < -80 || n.x < -160 || n.x > hero.clientWidth + 160) { n.el.remove(); notes.splice(i, 1); continue; }
         place(n);
       }
     }
@@ -107,13 +109,13 @@
     // No floating: lay one note per theme in an arc around the tambura
     const lay = () => {
       notes.splice(0).forEach((n) => n.el.remove());
-      // Two staggered columns beside the tambura's neck
+      // Four notes either side of the tambura
       const r = svg.getBoundingClientRect(), hr = hero.getBoundingClientRect();
-      const neckX = r.left - hr.left + r.width / 2, top = r.top - hr.top + r.height * .12, span = r.height * .62;
-      const rows = Math.ceil(themes.length / 2);
+      const top = r.top - hr.top + r.height * .14, span = r.height * .6;
       themes.forEach((t, i) => {
-        const col = i % 2, row = Math.floor(i / 2);
-        const n = spawn(t, { x: neckX - 120 - col * 120, y: top + (row + col * .5) * span / rows });
+        const side = i % 2 ? 1 : -1, row = Math.floor(i / 2);
+        const x = (side < 0 ? r.left - hr.left - 90 - (row % 2) * 40 : r.right - hr.left + 90 + (row % 2) * 40);
+        const n = spawn(t, { x, y: top + row * span / 3 });
         if (n) { n.held = true; n.el.style.opacity = 1; }
       });
     };
