@@ -10,7 +10,7 @@
   const kinds = JSON.parse(dataEl.textContent);
   const tambura = hero.querySelector('.tambura');
   const svg = tambura.querySelector('svg');
-  const heading = hero.querySelector('.hello-sub');
+  const heading = hero.querySelector('.hello');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---- Sound: a plucked string (Karplus-Strong) tuned Pa-Sa-Sa-Sa in C# ----
@@ -20,7 +20,8 @@
     if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
     if (ctx.state === 'suspended') ctx.resume();
   };
-  ['pointerdown', 'keydown'].forEach((type) => hero.addEventListener(type, wake, { once: true }));
+  // Browsers only allow sound after the visitor clicks, taps or presses a key, so wake on the first one anywhere
+  ['pointerdown', 'keydown', 'touchstart'].forEach((type) => document.addEventListener(type, wake, { once: true, passive: true }));
   function pluck(freq) {
     if (!ctx || ctx.state !== 'running') return;
     const rate = ctx.sampleRate, len = Math.floor(rate * 3), buf = ctx.createBuffer(1, len, rate), out = buf.getChannelData(0);
@@ -47,7 +48,7 @@
     const mid = r.left - h.left + r.width / 2, gap = Math.max(110, Math.min(200, h.width * .16));
     lanes = [mid - gap, mid + gap].map((x, i) => ({ x, i, notes: [] }));
     startY = toHero(100, 470).y;
-    endY = heading.getBoundingClientRect().bottom - h.top + 60;
+    endY = heading.getBoundingClientRect().bottom - h.top + 70;
   }
   const SPEED = 36, SPACING = 200; // px per second, and the clear space a lane needs before a new note
 
