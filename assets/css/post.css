@@ -90,6 +90,9 @@ main > .grid { border-top: 1px solid var(--hair); padding-top: 48px; padding-bot
 }
 .post-body pre code { background: none; padding: 0; font-size: inherit; }
 .post-body img { margin: 0; }
+.post-body figure { margin: 2em 0; }
+.post-body figure img { width: 100%; }
+.post-body figcaption { margin-top: 10px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 .post-body > div:has(> img), .post-body div:has(> img) { margin: 0 0 2em; border: 1px solid var(--hair); }
 .post-body table { width: 100%; border-collapse: collapse; margin: 0 0 1.5em; font-size: 15px; }
 .post-body th, .post-body td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--hair); text-align: left; vertical-align: top; }
