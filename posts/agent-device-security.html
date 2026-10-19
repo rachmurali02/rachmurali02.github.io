@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Security Chip That Says No to AI Agents | Side Quests</title>
-  <meta name="description" content="AI agents are starting to sign payments, messages and installs on our behalf. I built a hardware security module in Rust that checks the agent&#x27;s rules itself, so a hacked computer can&#x27;t talk it into misusing a key." />
+  <meta name="description" content="AI agents are starting to sign payments and sign off on messages on our behalf. I built a hardware security module in Rust that checks the agent's rules itself, so a computer that's hacked can't misuse a key." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     if (window.tailwind) tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
@@ -44,7 +44,7 @@
       </div>
       <div class="post-title enter" style="--d:.25s">
         <h1>A Security Chip That Says No to AI Agents</h1>
-        <p class="standfirst">AI agents are starting to sign payments, messages and installs on our behalf. I built a hardware security module in Rust that checks the agent's rules itself, so a hacked computer can't talk it into misusing a key.</p>
+        <p class="standfirst">AI agents are starting to sign payments and sign off on messages on our behalf. I built a hardware security module in Rust that checks the agent's rules itself, so a computer that's hacked can't misuse a key.</p>
       </div>
     </div>
   </div>
@@ -59,8 +59,7 @@
       </div>
 
       <p>
-        When an agent on your phone or laptop does something that matters (sends an email, pays for something, installs an update), it proves the action is genuine with a digital signature. Whoever holds the secret key behind that signature can act as your device. So the question I kept coming back to was simple: <em>what stops the key from being used for the wrong thing?</em>
-      </p>
+        When an agent on your phone or laptop does something that matters (sends an email, pays for something, installs an update), it proves the action is genuine with a digital signature. Whoever holds the secret key behind that signature can act as your device. So the question I kept coming back to was simple: <em>what stops the key from being used for the wrong thing?</em></p>
 
       <h2>The Weak Spot in a Normal HSM</h2>
       <p>
