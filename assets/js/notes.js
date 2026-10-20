@@ -1,7 +1,7 @@
 /* The tambura sends up three musical notes: Experiments, Musings and Journey. Click one to jump
    to that section. Notes rise in two lanes either side of the tambura at one steady speed, and a
    new note waits until the lane is clear, so they never overlap each other or the heading.
-   Plucking a string sounds it and releases a note when there's room. */
+   Running across a string makes it shimmer and releases a note when there's room. It's silent. */
 (function () {
   const hero = document.querySelector('.hero');
   const sky = hero && hero.querySelector('.sky');
@@ -12,30 +12,6 @@
   const svg = tambura.querySelector('svg');
   const heading = hero.querySelector('.hello');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ---- Sound: a plucked string (Karplus-Strong) tuned Pa-Sa-Sa-Sa in C# ----
-  const SA = 138.59, STRINGS = [SA * 0.75, SA, SA, SA / 2];
-  let ctx = null;
-  const wake = () => {
-    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
-    if (ctx.state === 'suspended') ctx.resume();
-  };
-  // Browsers only allow sound after the visitor clicks, taps or presses a key, so wake on the first one anywhere
-  ['pointerdown', 'keydown', 'touchstart'].forEach((type) => document.addEventListener(type, wake, { once: true, passive: true }));
-  function pluck(freq) {
-    if (!ctx || ctx.state !== 'running') return;
-    const rate = ctx.sampleRate, len = Math.floor(rate * 3), buf = ctx.createBuffer(1, len, rate), out = buf.getChannelData(0);
-    const period = Math.round(rate / freq), ring = new Float32Array(period);
-    for (let i = 0; i < period; i++) ring[i] = Math.random() * 2 - 1;
-    for (let i = 0; i < len; i++) {
-      const j = i % period, next = (ring[j] + ring[(j + 1) % period]) * 0.4985;
-      ring[j] = next;
-      out[i] = next + 0.08 * Math.tanh(next * 6); // a little buzz, like the jawari bridge
-    }
-    const src = ctx.createBufferSource(), g = ctx.createGain();
-    src.buffer = buf; g.gain.value = .45;
-    src.connect(g); g.connect(ctx.destination); src.start();
-  }
 
   // ---- Geometry: two lanes beside the tambura, from the gourd up to just below the heading ----
   function toHero(x, y) {
@@ -137,26 +113,24 @@
     document.addEventListener('visibilitychange', () => { running = !document.hidden; last = 0; });
   }
 
-  // ---- Plucking ----
+  // ---- Plucking (visual only) ----
   const strings = [...tambura.querySelectorAll('.string')];
   const lastPluck = [0, 0, 0, 0];
-  function sound(i) {
+  function pluck(i) {
     const now = performance.now();
     if (now - lastPluck[i] < 220) return;
     lastPluck[i] = now;
-    pluck(STRINGS[i]);
     const s = strings[i];
     s.classList.remove('ring'); void s.getBBox(); s.classList.add('ring');
     if (!reduced && spawn(i < 2 ? 0 : 1)) sinceSpawn = 0;
   }
   tambura.querySelectorAll('.hit').forEach((hit) => {
     const i = +hit.dataset.string;
-    hit.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') sound(i); });
-    hit.addEventListener('pointerdown', (e) => { wake(); sound(i); e.stopPropagation(); });
+    hit.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') pluck(i); });
+    hit.addEventListener('pointerdown', (e) => { pluck(i); e.stopPropagation(); });
   });
   tambura.addEventListener('click', (e) => {
     if (e.target.closest('.hit')) return;
-    wake();
-    [0, 1, 2, 3].forEach((i, k) => setTimeout(() => sound(i), k * 420));
+    [0, 1, 2, 3].forEach((i, k) => setTimeout(() => pluck(i), k * 420));
   });
 })();
