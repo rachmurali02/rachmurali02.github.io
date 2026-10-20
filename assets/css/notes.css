@@ -27,7 +27,7 @@ html.dark .hero { --glow: rgba(226, 164, 86, .13); }
 
 /* Tambura */
 .tambura-wrap { position: relative; margin: 44px auto 0; height: clamp(380px, calc(100svh - 400px), 560px); }
-.tambura { display: block; height: calc(100% - 40px); margin: 0 auto; padding: 0; border: 0; background: none; cursor: pointer; }
+.tambura { display: block; height: 100%; margin: 0 auto; padding: 0; border: 0; background: none; cursor: pointer; }
 .tambura svg { display: block; height: 100%; width: auto; overflow: visible; filter: drop-shadow(0 14px 18px rgba(80, 40, 10, .18)); }
 .tambura:focus-visible { outline: 2px dashed var(--red); outline-offset: 8px; border-radius: 8px; }
 .t-shadow { fill: rgba(60, 30, 10, .16); }
@@ -44,8 +44,6 @@ html.dark .t-shadow { fill: rgba(0, 0, 0, .5); }
 .tambura .string.ring .s-wire { stroke: #ffe7a6; }
 .tambura .hit { stroke: transparent; stroke-width: 10; pointer-events: stroke; cursor: crosshair; }
 @keyframes ring { 0%, 100% { transform: none; } 10% { transform: translateX(1.4px); } 25% { transform: translateX(-1.1px); } 40% { transform: translateX(.8px); } 55% { transform: translateX(-.5px); } 70% { transform: translateX(.3px); } }
-
-.pluck-hint { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--muted); pointer-events: none; }
 
 /* The blurb, in its own band below the first screen */
 .blurb-band { padding: 120px 24px 140px; text-align: center; }
@@ -72,8 +70,7 @@ html.dark .t-shadow { fill: rgba(0, 0, 0, .5); }
   .hero-inner { padding: 44px 16px 60px; }
   .hello { font-size: 15vw; }
   .tambura-wrap { height: 420px; margin-top: 26px; }
-  .pluck-hint { font-size: 16px; }
-  .blurb-band { padding: 80px 16px 96px; }
+    .blurb-band { padding: 80px 16px 96px; }
   .float-note svg { width: 36px; height: 36px; }
   .float-note .tag { font-size: 17px; }
 }
