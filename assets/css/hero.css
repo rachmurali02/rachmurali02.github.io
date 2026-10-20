@@ -1,0 +1,27 @@
+/* Home page hero: "Hi, I'm Rachana" over my work desk (assets/css/scene.css), then the blurb. */
+.hero { position: relative; overflow: hidden; background: var(--bg); }
+.hero-inner { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 52px 24px 0; text-align: center; }
+
+.hello {
+  margin: 0; font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-weight: 400;
+  font-size: clamp(54px, 8.6vw, 116px); line-height: 1; letter-spacing: -.02em; color: var(--ink);
+}
+.hello em { font-style: italic; color: var(--red); padding-right: .04em; }
+.hello .avatar {
+  display: inline-block; width: 1.1em; height: .8em; margin: 0 .14em 0 .1em; vertical-align: -.04em;
+  object-fit: cover; object-position: center 18%; border-radius: 999px;
+  box-shadow: 0 0 0 .05em var(--bg), 0 .08em .3em rgba(0, 0, 0, .18); transform: rotate(-4deg);
+}
+
+/* The blurb, in its own band under the desk */
+.blurb-band { padding: 90px 24px 130px; text-align: center; }
+.blurb {
+  max-width: 24ch; margin: 0 auto; font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  font-size: clamp(30px, 4.2vw, 52px); line-height: 1.18; letter-spacing: -.01em; color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .hero-inner { padding: 40px 16px 0; }
+  .hello { font-size: 15vw; }
+  .blurb-band { padding: 60px 16px 90px; }
+}
