@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Security Chip That Says No to AI Agents | Side Quests</title>
+  <title>A Security Chip Denies an AI Agent | Side Quests</title>
   <meta name="description" content="AI agents are starting to sign payments and sign off on messages on our behalf. I built a hardware security module in Rust that checks the agent's rules itself, so a computer that's hacked can't misuse a key." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -43,7 +43,7 @@
         <p class="label muted">10 min read</p>
       </div>
       <div class="post-title enter" style="--d:.25s">
-        <h1>A Security Chip That Says No to AI Agents</h1>
+        <h1>A Security Chip Denies an AI Agent</h1>
         <p class="standfirst">AI agents are starting to sign payments and sign off on messages on our behalf. I built a hardware security module in Rust that checks the agent's rules itself, so a computer that's hacked can't misuse a key.</p>
       </div>
     </div>
@@ -59,22 +59,22 @@
       </div>
 
       <p>
-        When an agent on your phone or laptop does something that matters (sends an email, pays for something, installs an update), it wants to prove that this action is genuine. If anything that holds the secret key can act as the authorizer, then what stops the key from being used for the wrong thing</p>
+        When an agent on your phone or laptop does something that matters (sends an email, pays for something, installs an update), it wants to prove that this action is genuine. If anything that holds the secret key can act as the authorizer, then what stops the key from being used for the wrong thing?</p>
 
       <h2>The Weak Spot in a Normal HSM</h2>
       <p>
         Secret keys usually live in a Hardware Security Module (HSM). Think of a notary with an official stamp locked in a safe: you never get the stamp, you hand over a document and it comes back stamped. The stamp can't be copied out.
       </p>
       <p>
-        The catch is that a normal HSM stamps <strong>anything</strong> the computer in front of it asks for. Any rules ("only payments", "at most $50") are checked by software on that computer. If the computer is compromised, or the agent misbehaves, the attacker just skips the checks and asks the notary directly.
+        The catch is that a normal HSM stamps <strong>anything</strong> the computer in front of it asks for. Any rules ("below 50", "till a certain time") are checked by software on that computer. If the computer is compromised, or the agent misbehaves, the attacker just skips the checks and asks the notary directly.
       </p>
       <p>
-        So I built a notary that checks the rules itself, inside the safe. The project is called <strong>quorum-hsm</strong>, it's written in Rust, and it runs on a $5 RP2350 board (Raspberry Pi Pico 2 or Seeed XIAO RP2350) or in an emulator on a laptop.
+        So I built the notary part of the system that checks the rules itself. The project is called <strong>quorum-hsm</strong>, it's written in Rust, and it runs on a $5 RP2350 board (Raspberry Pi Pico 2 or Seeed XIAO RP2350) or in an emulator on a laptop.
       </p>
 
-      <h2>Rules That Travel With the Key</h2>
+      <h2>A Key with Rules</h2>
       <p>
-        An agent key is created with its rules fixed: which kinds of action are allowed, the most a single payment can be, a total budget, and which actions need the user's OK. The agent doesn't hand over a blob of bytes to sign. It <em>describes</em> the action, and the HSM reads it, checks it, then writes and signs the statement itself, so what gets signed is always exactly what was checked.
+        An agent key is created with a certain set of rules: what kinds of action are allowed, the upper bound for a single payment, a total budget, and which actions need the user's permission. The agent describes the action, and the HSM reads it, checks it, then writes and signs the statement itself, so what gets signed is always exactly what was checked.
       </p>
 
       <pre><code>Agent: "pay $35 to airline.example"
@@ -86,8 +86,7 @@ HSM checks, in order:  allowed kind? → under the per-payment limit? →
    ├─ any "no"  → DENIED (nothing signed, nothing charged)
    └─ all "yes" → record spending → sign the statement → APPROVED</code></pre>
 
-      <p>
-        Two details matter more than they look. First, the HSM <strong>records the spending before it signs</strong>, so a crash or power cut can never produce a signature that wasn't counted. Second, the user's OK is real: their phone has its own key and signs a one-time code from the HSM together with the exact action, so an approval for $30 to the airline can't be replayed or moved to $49 for someone else.
+      <p>The HSM <strong>records the spending before it signs</strong>, so a crash or power cut can never produce a signature that wasn't counted. Second, the user's OK is real: their phone has its own key and signs a one-time code from the HSM together with the exact action, so an approval for $30 to the airline can't be replayed or moved to $49 for someone else.
       </p>
 
       <h2>Nobody Acts Alone</h2>
