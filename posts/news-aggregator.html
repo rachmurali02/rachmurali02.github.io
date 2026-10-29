@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Building My Own Morning Newspaper | Side Quests</title>
-  <meta name="description" content="A personalised news digest that reads free publications, ranks what matters to me, follows developing stories, learns from a thumbs up or down, and lands in my inbox at 7am. It costs nothing to run." />
+  <meta name="description" content="A personalised news digest that reads free publications, ranks stuff I am following for the week, follows developing stories, learns from my likes and dislikes, and lands in my inbox at 7am. Its totally free to run, and you should try it too!" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     if (window.tailwind) tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } };
@@ -44,7 +44,7 @@
       </div>
       <div class="post-title enter" style="--d:.25s">
         <h1>Building My Own Morning Newspaper</h1>
-        <p class="standfirst">A personalised news digest that reads free publications, ranks what matters to me, follows developing stories, learns from a thumbs up or down, and lands in my inbox at 7am. It costs nothing to run.</p>
+        <p class="standfirst">A personalised news digest that reads free publications, ranks stuff I am following for the week, follows developing stories, learns from my likes and dislikes, and lands in my inbox at 7am. Its totally free to run, and you should try it too!</p>
       </div>
     </div>
   </div>
@@ -55,7 +55,7 @@
 
 
       <p>
-        I wanted a morning read that felt like a good newspaper: sharp opinion columns and analysis rather than breaking-news churn, on the three things I actually follow (global affairs, science and technology, and real estate). Every app I tried either wanted a subscription, buried the good pieces under paywalls, or optimised for engagement rather than for me. So I built <strong>The Morning Column</strong>.
+        I wanted a morning read that felt like a good newspaper: sharp opinion columns and analysis rather than breaking-news headlines that don't mean alot to me, on the three things I actually follow right now. Definitely subject to change later (global affairs, science and technology, and real estate). Every app I tried either required a subscription, and buried astute content under paywalls, or optimised for global engagement, and I had very little to do with it. So, I built <strong>The Morning Column</strong>.
       </p>
 
       <h2>What Lands in the Inbox</h2>
@@ -85,23 +85,22 @@ RSS feeds ──► fetch ──► skip already-sent ──► score (keywords,
 
       <h2>Ranking Without a Model</h2>
       <p>
-        The core ranking is deliberately simple and works with no LLM at all. Each story is matched to a section by keyword hits, then scored by relevance, section weight, freshness (which halves after a day) and a boost for opinion pieces, so columns float above straight news:
+        The core ranking is simple and works with no LLMs at all. Each story is matched to a section by keyword hits, then scored by relevance, section weight, freshness (which halves after a day, so its very unlikely you will chance upon previous day reads) and a boost for opinion pieces, so columns float above straight news:
       </p>
       <pre><code>relevance = base + hits.get(s.section, 0)
 weight = sections[s.section].get("weight", 1.0)
 freshness = 1.0 / (1.0 + age_h / 24)  # halves after a day
 s.score = relevance * weight * freshness * (opinion_boost if s.opinion else 1.0)</code></pre>
       <p>
-        Picking the top stories per section also prefers a mix of publications, so one prolific feed can't take over a section.
-      </p>
+        Picking the top stories per section also prefers a mix of publications, so one prolific feed can't dominate a section</p>
 
       <h2>Following a Story Across Days</h2>
       <p>
-        The part I'm happiest with is developing stories. Each headline is reduced to its distinctive words (four letters or more, minus a stopword list), and today's headlines are compared with everything sent in the last 21 days. Two headlines belong to the same thread if they share at least two distinctive words, covering at least 40% of the shorter one:
+        The part I'm most excited about Each headline is reduced to its distinctive words (four letters or more, minus a stopword list), and today's headlines are compared with everything sent in the last 21 days. Two headlines belong to the same thread if they share at least two distinctive words, covering at least 40% of the shorter one:
       </p>
-      <pre><code>def similar(a: set[str], b: set[str]) -> bool:
-    shared = a & b
-    return len(shared) >= 2 and len(shared) / max(min(len(a), len(b)), 1) >= 0.4</code></pre>
+      <pre><code>def similar(a: set[str], b: set[str]) -&gt; bool:
+    shared = a &amp; b
+    return len(shared) &gt;= 2 and len(shared) / max(min(len(a), len(b)), 1) &gt;= 0.4</code></pre>
       <p>
         A match joins the most recent matching thread, so the timeline stays coherent, and continuing stories get a score boost. It's crude next to embeddings, but it's transparent, needs no API, and it's surprisingly good at catching "the same story, a day later".
       </p>
