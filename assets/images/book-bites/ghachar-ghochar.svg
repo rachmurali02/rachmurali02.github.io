@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#f4f1ea"/>
+  <rect y="230" width="400" height="70" fill="#d9cfbb"/>
+  <!-- closed book, lying flat -->
+  <path d="M70 230 L236 230 L236 206 L70 206 Z" fill="#1a1a1a"/>
+  <path d="M78 206 L232 206 L232 196 L78 196 Z" fill="#fbf6ea" stroke="#1a1a1a" stroke-width="2"/>
+  <path d="M84 201 H228" stroke="#c9bfa8" stroke-width="1.5"/>
+  <path d="M70 196 L236 196 L236 186 L70 186 Z" fill="#e2231a"/>
+  <rect x="92" y="189" width="56" height="4" fill="#fbf6ea"/>
+  <!-- a tangle of thread spilling off the book -->
+  <path d="M286 214 c-30 -4 -34 -40 -6 -48 c26 -7 44 18 30 36 c-14 18 -46 4 -40 -18 c6 -22 40 -24 46 -2 c6 22 -22 34 -36 20 c-14 -14 4 -36 22 -28 c14 6 10 26 -4 28" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M290 216 c-12 6 -30 10 -54 -12" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M306 226 c16 2 30 -2 40 4" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+</svg>

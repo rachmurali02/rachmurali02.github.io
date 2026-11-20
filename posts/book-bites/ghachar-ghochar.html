@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ghachar Ghochar | Book Bites | Side Quests</title>
+  <meta name="description" content="Rags and riches can harbour so much more than just wealth: a short take on Ghachar Ghochar by Vivek Shanbhag." />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#book-bites" class="hide-sm">Book Bites</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/#book-bites" class="back">← All book bites</a>
+        <p class="label red">Book Bite</p>
+        <p class="label"><time datetime="2026-11-20">Nov 20, 2026</time></p>
+        <p class="label muted">1 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>Ghachar Ghochar</h1>
+        <p class="standfirst">Vivek Shanbhag &middot; translated from Kannada by Srinath Perur</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body book-bite enter" style="--d:.5s">
+        <p>It's fascinating how <em>Ghachar Ghochar</em> explores the idea that rags and riches can harbour so much more than just wealth. What begins as an ordinary household's journey into newfound prosperity slowly unfolds into a story of deep-seated dysfunction, conservatism and familial knots. There's an almost suffocating claustrophobia that comes with their growing wealth, where even the expanses of a larger home feel far more confining than the smaller, humbler house they once lived in. The narrator almost reminisces about poverty with a strange sense of nostalgia, perhaps because having less also meant wanting less.</p>
+        <blockquote><p>&ldquo;When you have no choice, you have no discontent either.&rdquo;</p></blockquote>
+        <p>And perhaps that's the most interesting contradiction in the book: money brings choices, but not necessarily freedom. The family holds itself together through selective acts of blindness and deafness, learning to live with the very things that their newfound wealth has brought upon them.</p>
+        <blockquote><p>&ldquo;It's true what they say &mdash; it's not we who control money, it's the money that controls us.&rdquo;</p></blockquote>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="https://www.linkedin.com/in/rachana-mn">LinkedIn</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#book-bites">Book Bites</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script src="../../assets/js/music.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>

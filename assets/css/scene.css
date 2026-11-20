@@ -40,6 +40,9 @@ html.dark .scene-art .shadow { fill: rgba(0, 0, 0, .45); }
 .scene-label.l-musings, .scene-label.l-cricket { flex-direction: column; align-items: center; }
 .scene-label.l-musings svg, .scene-label.l-cricket svg { margin: 2px 0 0; }
 .scene-label.l-music { flex-direction: row; align-items: center; }
+.scene-label.l-books { flex-direction: row; align-items: center; color: #fbf3e0; }
+.scene-label.l-books svg { margin: 0 0 0 2px; stroke: #fbf3e0; }
+.scene-label.l-books:hover { color: #ffd9a8; }
 .scene-label.l-music svg { margin: 0 0 0 2px; }
 .scene-label:hover { color: var(--red); }
 
