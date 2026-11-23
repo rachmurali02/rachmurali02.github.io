@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Indian Girl | Book Bites | Side Quests</title>
+  <meta name="description" content="Radhika's inner voice, and the desire to soar and to have a nest: a short take on One Indian Girl by Chetan Bhagat." />
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      if (localStorage.theme === 'dark' ||
+          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/css/post.css" />
+  <link rel="stylesheet" href="../../assets/css/motion.css" />
+</head>
+
+<body>
+
+  <header class="top">
+    <div class="grid">
+      <a href="/" class="wordmark">Side Quests</a>
+      <nav>
+        <a href="/#experiments" class="hide-sm">Experiments</a>
+        <a href="/#musings" class="hide-sm">Musings</a>
+        <a href="/#book-bites" class="hide-sm">Book Bites</a>
+        <a href="/#subscribe">Subscribe</a>
+        <button id="theme-toggle" class="theme-emoji" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🧭</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="post-head">
+    <div class="grid">
+      <div class="post-meta enter" style="--d:.15s">
+        <a href="/#book-bites" class="back">← All book bites</a>
+        <p class="label red">Book Bite</p>
+        <p class="label"><time datetime="2026-11-23">Nov 23, 2026</time></p>
+        <p class="label muted">2 min read</p>
+      </div>
+      <div class="post-title enter" style="--d:.25s">
+        <h1>One Indian Girl</h1>
+        <p class="standfirst">Chetan Bhagat</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <article class="post-body book-bite enter" style="--d:.5s">
+        <p>What I really enjoyed about <em>One Indian Girl</em> was Radhika's inner voice - her constant negotiation between the desire to soar and the desire to have a nest to return to. Her internal monologue felt incredibly real, almost like a <em>mini-me</em> association, reflecting the many contradictions that working women are found navigating because they want it all.</p>
+        <p>I particularly enjoyed how the two exes had such poor, inauthentic, interpretations of feminism. They seemed to embrace feminist ideals selectively, often only when those ideals served their own interests and kinda toyed with Radhika to meet their own needs, and they weren't necessarily willing to accommodate the same independence and agency in their partners.</p>
+        <p>The extramarital workplace affair did disturb me. Yet, I thought it was an important depiction of Radhika's mental state following her first breakup. It showed her as someone deeply flawed, impulsive and morally imperfect. I thought it was nice that the narrative didn't try to portray her as an infallible feminist protagonist. She was allowed to be controversial, make questionable decisions and be imperfect till the very end.</p>
+        <p>And then there's Brijesh. The quintessential, seemingly ordinary IT man. I found him to be more of a humanist than a feminist, and though Radhika might have initially preferred a proponent of feminism, he demonstrated that he might not have the vocabulary for it, but he showed it through human ideals. That empathy, respect and the ability to see another person as an individual aren't necessarily products of education, social positioning or exposure to progressive ideals. Sometimes, these values are simply innate, regardless of which walk of life someone comes from.</p>
+        <blockquote><p>&ldquo;We don't want to choose. We want to fly and we also want a beautiful nest. We want both.&rdquo;</p></blockquote>
+        <p>Ultimately, what resonated with me was Radhika's inner monologue. It felt so familiar, parts of which I thought I was reading my own inner conscience in a novel - the constant calculations, the ambition, the self-doubt, the desire for independence, companionship and validation. The struggle of wanting a career and a fulfilling personal life without having to convince yourself that one must come at the expense of the other.</p>
+      </article>
+    </div>
+
+    <section class="subscribe">
+      <div class="grid">
+        <div class="sec-label">
+          <p class="label">Newsletter</p>
+        </div>
+        <div class="sec-body">
+          <h2 data-reveal>Get the next quest<br>in your inbox.</h2>
+          <a href="/#subscribe" class="btn">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="grid">
+      <span class="wordmark">Side Quests</span>
+      <div class="links">
+        <a href="https://github.com/rachmurali02">GitHub</a>
+        <a href="https://www.linkedin.com/in/rachana-mn">LinkedIn</a>
+        <a href="/#experiments">Experiments</a>
+        <a href="/musings.html">Musings</a>
+        <a href="/#book-bites">Book Bites</a>
+        <a href="/#subscribe">Newsletter</a>
+      </div>
+      <span class="copy">© 2026 Rachana Murali Narayanan</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/motion.js" defer></script>
+  <script src="../../assets/js/music.js" defer></script>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    function syncToggle() {
+      const label = document.documentElement.classList.contains('dark') ? 'Switch to light mode' : 'Switch to dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.theme = isDark ? 'dark' : 'light'; } catch (e) {}
+      syncToggle();
+    });
+  </script>
+
+</body>
+</html>
